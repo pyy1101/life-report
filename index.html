@@ -739,10 +739,14 @@ function unlock(){
   window.location.href=mbd+'?callback='+encodeURIComponent(location.origin+location.pathname+'?paid=1');
 }
 function verifyCode(){
-  if(document.getElementById('unlockCode').value.trim().length>=6){
-    document.querySelectorAll('.locked').forEach(el=>el.classList.replace('locked','unlocked'));
-    document.getElementById('unlockBox').innerHTML='<p style="color:rgba(200,190,170,.5);font-size:14px">✨ 完整报告已解锁</p>';
-  }else{alert('解锁码无效，请确认已付款并输入正确的订单号')}
+	  var code=document.getElementById('unlockCode').value.trim();
+	  if(code.length<6){alert('invalid code');return}
+	  var used=JSON.parse(localStorage.getItem('used_codes')||'[]');
+	  if(used.indexOf(code)!==-1){alert('code already used');return}
+	  document.querySelectorAll('.locked').forEach(function(el){el.classList.replace('locked','unlocked')});
+	  document.getElementById('unlockBox').innerHTML='<p style="color:rgba(200,190,170,.5);font-size:14px">unlocked</p>';
+	  used.push(code);localStorage.setItem('used_codes',JSON.stringify(used));
+	}else{alert('解锁码无效，请确认已付款并输入正确的订单号')}
 }
 
 function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
