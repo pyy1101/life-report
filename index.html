@@ -275,7 +275,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer>
 </div>
 
-<div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 截图分享</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
+<div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 生成分享图</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
 
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 
@@ -467,12 +467,66 @@ function fakeUnlock(){
 function verifyCode(){
   let code=document.getElementById('unlockCode').value.trim();
   if(code==='888888'){
-    document.getElementById('rContent').innerHTML=_r.pre+_r.ext+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁 — 截图保存并分享</p><button class="share-btn" onclick="shareIt()">📸 分享到朋友圈</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';
+    document.getElementById('rContent').innerHTML=_r.pre+_r.ext+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁</p><button class="share-btn" onclick="shareIt()">📸 生成分享图</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';
     window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
   }else{
     alert('解锁码错误，请检查后重试');
   }
 }
 function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
-function shareIt(){alert('请截图当前页面分享~\n\n推荐配文：\n"测完惊呆了，原来我的隐藏天赋是这个..."')}
+function shareIt(){
+  // Create share card
+  let card=document.createElement('div');
+  card.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(5,5,10,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';
+  card.id='shareCard';
+  card.onclick=function(){this.remove()};
+
+  let rpt=document.getElementById('rTitle')?.textContent||'隐藏人生剧本';
+  let meta=document.getElementById('rMeta')?.textContent||'';
+  // Extract first talent line from the full report
+  let el=document.getElementById('rContent');
+  let talentLine='';
+  if(el){
+    let txt=el.innerText||'';
+    let m=txt.match(/1\.\s*(.+?：.+?)(?:\n|2\.)/);
+    if(m)talentLine=m[1].replace(/：.*/,'');
+  }
+
+  let t=new Date();
+  let moonPhase='🌗';
+  let h=t.getHours();
+  if(h>=5&&h<7)moonPhase='🌅';else if(h>=7&&h<17)moonPhase='☀️';else if(h>=17&&h<20)moonPhase='🌆';else if(h>=20||h<5)moonPhase='🌙';
+
+  card.innerHTML=`
+    <div style="max-width:420px;width:100%;background:linear-gradient(180deg,#0c0a20,#1a1040 40%,#0e0c2a 70%,#0a0a1a);border:1px solid rgba(180,140,220,.2);border-radius:24px;overflow:hidden;text-align:center;box-shadow:0 0 80px rgba(100,60,160,.3)">
+      <!-- 顶部装饰 -->
+      <div style="padding:32px 24px 0;position:relative">
+        <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35%35%,#f5e6d3,#d4b896 40%,#8b6c9a 72%,transparent 74%);box-shadow:0 0 40px rgba(200,160,120,.3)"></div>
+        <div style="font-size:11px;color:rgba(200,190,170,.4);letter-spacing:4px;margin-bottom:20px;margin-top:52px">DESTINY EXPLORER</div>
+        <div style="font-size:28px;font-weight:900;background:linear-gradient(180deg,#f0e0cc,#d4b896 40%,#c4a080 70%,#8b6c9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;letter-spacing:2px">${rpt.replace(/[🔮💘📅🎭💼]/g,'').trim()}</div>
+        <div style="font-size:13px;color:rgba(200,190,170,.45);margin-bottom:24px;letter-spacing:1px">${meta}</div>
+        <!-- 分隔线 -->
+        <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.4),transparent);margin:0 auto 24px"></div>
+        <!-- 关键发现 -->
+        <div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:16px;margin-bottom:24px">
+          <div style="font-size:12px;color:rgba(200,190,170,.4);letter-spacing:2px;margin-bottom:8px">🔮 命运线索</div>
+          <div style="font-size:16px;color:rgba(220,210,190,.8);line-height:1.6">${talentLine||'你拥有连自己都未曾察觉的隐藏天赋'}</div>
+        </div>
+        <!-- 底部 -->
+        <div style="display:flex;justify-content:center;gap:24px;margin-bottom:12px">
+          <div style="text-align:center"><div style="font-size:24px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${Math.floor(Math.random()*80)+20}%</div><div style="font-size:11px;color:rgba(200,190,170,.3)">命中率</div></div>
+          <div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">${moonPhase}</div><div style="font-size:11px;color:rgba(200,190,170,.3)">观测时</div></div>
+          <div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">🔮</div><div style="font-size:11px;color:rgba(200,190,170,.3)">已验证</div></div>
+        </div>
+      </div>
+      <!-- 底部 CTA -->
+      <div style="background:rgba(10,5,20,.6);padding:20px;border-top:1px solid rgba(180,140,220,.08)">
+        <div style="font-size:14px;color:#d4b8f0;letter-spacing:2px;margin-bottom:6px">发现你的隐藏人生剧本</div>
+        <div style="font-size:12px;color:rgba(200,190,170,.35)">life.devshells.com</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;color:rgba(200,190,170,.35);font-size:13px">📸 长按截图保存 → 分享到朋友圈</div>
+  `;
+  document.body.appendChild(card);
+}
 </script></body></html>
