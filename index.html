@@ -277,19 +277,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 
 <div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 截图分享</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
 
-<div class="modal" id="modal"><div class="modal-box">
-  <h2>🔮 生成你的报告</h2>
-  <div style="display:flex;gap:8px">
-    <select id="fYear" style="flex:1"><option value="">年</option></select>
-    <select id="fMonth" style="flex:1"><option value="">月</option></select>
-    <select id="fDay" style="flex:1"><option value="">日</option></select>
-  </div>
-  <select id="fGender"><option value="">性别 (选填)</option><option value="female">女性</option><option value="male">男性</option></select>
-  <select id="fMbti"><option value="">MBTI (选填)</option></select>
-  <select id="fType"><option value="life">🔮 隐藏人生剧本</option><option value="couple">💘 双人合盘报告</option><option value="yearly">📅 年度运势</option><option value="personality">🎭 隐藏人格解码</option><option value="career">💼 职业天命</option></select>
-  <button class="submit-btn" onclick="generate()">✨ 生成预览</button>
-  <div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>
-</div></div>
+<div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 
 <script>
 // ============ ALIASES from templates.js ============
@@ -298,23 +286,7 @@ const P=PAST_LIVES,G=TALENTS,A=ADVENTURES,B=BUGS;
 const LC=LUCKY_COLORS,LN=LUCKY_NUMBERS,LI=LUCKY_ITEMS,LA=LUCKY_ACTIONS;
 const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
 
-// ============ POPULATE DROPDOWNS ============
-(function(){
-  // Year (up to current year, back to 1960)
-  let now=new Date(),thisYear=now.getFullYear();
-  let ys=document.getElementById('fYear');
-  for(let i=thisYear;i>=1960;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';ys.appendChild(o)}
-  // Month
-  let ms=document.getElementById('fMonth');
-  for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';ms.appendChild(o)}
-  // Day
-  let ds=document.getElementById('fDay');
-  for(let i=1;i<=31;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'日';ds.appendChild(o)}
-  // MBTI
-  let mbti=document.getElementById('fMbti');
-  let mbtiNames={'INTJ':'建筑师','INTP':'逻辑学家','ENTJ':'指挥官','ENTP':'辩论家','INFJ':'提倡者','INFP':'调停者','ENFJ':'主人公','ENFP':'竞选者','ISTJ':'物流师','ISFJ':'守卫者','ESTJ':'总经理','ESFJ':'执政官','ISTP':'鉴赏家','ISFP':'探险家','ESTP':'企业家','ESFP':'表演者'};
-  Object.entries(mbtiNames).forEach(([k,v])=>{let o=document.createElement('option');o.value=k;o.textContent=k+' - '+v;mbti.appendChild(o)});
-})();
+// Dropdowns now populated dynamically per modal type via popBday() / popMBTI()
 
 // ============ MYSTICAL CLOCK ============
 (function tick(){
@@ -345,21 +317,66 @@ function pk(a,r){return a[Math.floor(r()*a.length)]}
 function pks(a,n,r){let u=new Set(),res=[];while(res.length<n){let x=pk(a,r);if(!u.has(x[0])){u.add(x[0]);res.push(x)}}return res}
 
 // ============ FLOW ============
-function start(t){document.getElementById('fType').value=t;document.getElementById('modal').classList.add('active')}
+let _r=null,_type=null;
+
+function bdayHTML(prefix,yid,mid,did){
+  return`<div style="display:flex;gap:8px"><select id="${yid}"><option value="">年</option></select><select id="${mid}"><option value="">月</option></select><select id="${did}"><option value="">日</option></select></div>`;
+}
+function popBday(yid,mid,did){let n=new Date(),ty=n.getFullYear();for(let i=ty;i>=1960;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';document.getElementById(yid).appendChild(o)}for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';document.getElementById(mid).appendChild(o)}for(let i=1;i<=31;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'日';document.getElementById(did).appendChild(o)}}
+function popMBTI(id){
+  let n={'INTJ':'建筑师','INTP':'逻辑学家','ENTJ':'指挥官','ENTP':'辩论家','INFJ':'提倡者','INFP':'调停者','ENFJ':'主人公','ENFP':'竞选者','ISTJ':'物流师','ISFJ':'守卫者','ESTJ':'总经理','ESFJ':'执政官','ISTP':'鉴赏家','ISFP':'探险家','ESTP':'企业家','ESFP':'表演者'};
+  Object.entries(n).forEach(([k,v])=>{let o=document.createElement('option');o.value=k;o.textContent=k+' - '+v;document.getElementById(id).appendChild(o)});
+}
+
+function start(t){
+  _type=t;
+  let box=document.getElementById('modalBox');
+  let h='',b='';
+  if(t==='life'){
+    h='🔮 隐藏人生剧本';b='解锁前世今生';
+    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
+    popBday('fYear','fMonth','fDay');popMBTI('fMbti');
+  }else if(t==='couple'){
+    h='💘 双人合盘报告';b='查看你们的羁绊';
+    box.innerHTML=`<h2>${h}</h2><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px">你的信息</p>${bdayHTML('你','c1Year','c1Month','c1Day')}<select id="c1Gender"><option value="">你的性别</option><option value="female">女性</option><option value="male">男性</option></select><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px;margin-top:12px">对方的信息</p>${bdayHTML('TA','c2Year','c2Month','c2Day')}<select id="c2Gender"><option value="">TA的性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
+    popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day');
+  }else if(t==='yearly'){
+    h='📅 年度运势';b='预览你的2026';
+    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
+    popBday('fYear','fMonth','fDay');
+  }else if(t==='personality'){
+    h='🎭 隐藏人格解码';b='发现真正的你';
+    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
+    popBday('fYear','fMonth','fDay');popMBTI('fMbti');
+  }else if(t==='career'){
+    h='💼 职业天命';b='找到你的赛道';
+    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
+    popBday('fYear','fMonth','fDay');popMBTI('fMbti');
+  }
+  document.getElementById('modal').classList.add('active');
+}
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active')});
-let _r=null;
 
 function generate(){
-  let yr=parseInt(document.getElementById('fYear').value),mo=parseInt(document.getElementById('fMonth').value),da=document.getElementById('fDay').value;
-  if(!yr||!mo||!da){alert('请选择完整的年月日');return}
-  let bd=yr+'.'+mo+'.'+da;
-  let gd=document.getElementById('fGender').value;
-  let mbRaw=document.getElementById('fMbti').value||'';
-  let mb=mbRaw?mbRaw.split(' - ')[0]:'未知';
-  let mbName=mbRaw?mbRaw.split(' - ')[1]||'':'';
-  let jb='探索者';
-  let tp=document.getElementById('fType').value;
-  let r=sd((yr*10000+mo*100+parseInt(da)).toString());
+  let tp=_type;
+  let yr,mo,da,gd,mb='未知',mbName='',bd='',jb='探索者',r;
+
+  if(tp==='couple'){
+    let y1=parseInt(document.getElementById('c1Year').value),m1=parseInt(document.getElementById('c1Month').value),d1=document.getElementById('c1Day').value;
+    let y2=parseInt(document.getElementById('c2Year').value),m2=parseInt(document.getElementById('c2Month').value),d2=document.getElementById('c2Day').value;
+    if(!y1||!m1||!d1||!y2||!m2||!d2){alert('请填写两人的完整生日');return}
+    bd=y1+'.'+m1+'.'+d1+' & '+y2+'.'+m2+'.'+d2;
+    gd=document.getElementById('c1Gender').value;
+    r=sd((y1*10000+m1*100+parseInt(d1)+y2*10000+m2*100+parseInt(d2)).toString());
+  }else{
+    yr=parseInt(document.getElementById('fYear').value);mo=parseInt(document.getElementById('fMonth').value);da=document.getElementById('fDay').value;
+    if(!yr||!mo||!da){alert('请选择完整的年月日');return}
+    bd=yr+'.'+mo+'.'+da;
+    gd=document.getElementById('fGender')?.value||'';
+    let mbEl=document.getElementById('fMbti');
+    if(mbEl){let mbRaw=mbEl.value||'';mb=mbRaw?mbRaw.split(' - ')[0]:'未知';mbName=mbRaw?mbRaw.split(' - ')[1]||'':''}
+    r=sd((yr*10000+mo*100+parseInt(da)).toString());
+  }
 
   // Gender-filtered template pool
   let filterGender=function(arr){
