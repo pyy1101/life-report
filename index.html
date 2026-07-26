@@ -300,10 +300,10 @@ const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
 
 // ============ POPULATE DROPDOWNS ============
 (function(){
-  // Year (min age 14, max age 66)
+  // Year (up to current year, back to 1960)
   let now=new Date(),thisYear=now.getFullYear();
   let ys=document.getElementById('fYear');
-  for(let i=thisYear-14;i>=thisYear-66;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';ys.appendChild(o)}
+  for(let i=thisYear;i>=1960;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';ys.appendChild(o)}
   // Month
   let ms=document.getElementById('fMonth');
   for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';ms.appendChild(o)}
