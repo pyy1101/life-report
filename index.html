@@ -934,8 +934,6 @@ window.genReport=function(){
   }catch(e){alert(e.message)}
 };
 function unlock(){
-  var s=document.querySelectorAll("#rContent .rs");for(var i=0;i<s.length;i++){s[i].style.filter="";s[i].style.pointerEvents="auto"}
-  document.querySelector(".unlock-box").innerHTML="<p>已解锁 - 感谢支持</p>"
   var mbd='https://mbd.pub/o/bread/YZaUlplxaA==';
   window.location.href=mbd+'?callback='+encodeURIComponent(location.origin+location.pathname+'?paid=1');
 }
