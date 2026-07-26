@@ -117,7 +117,6 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
   </div>
   <select id="fGender"><option value="">性别 (选填)</option><option value="female">女性</option><option value="male">男性</option></select>
   <select id="fMbti"><option value="">MBTI (选填)</option></select>
-  <input type="text" id="fJob" placeholder="职业 (选填)">
   <select id="fType"><option value="life">🔮 隐藏人生剧本</option><option value="couple">💘 双人合盘报告</option><option value="yearly">📅 年度运势</option><option value="personality">🎭 隐藏人格解码</option><option value="career">💼 职业天命</option></select>
   <button class="submit-btn" onclick="generate()">✨ 生成预览</button>
   <div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>
@@ -162,7 +161,7 @@ function generate(){
   let bd=mo+'.'+da;
   let gd=document.getElementById('fGender').value;
   let mb=document.getElementById('fMbti').value||'未知';
-  let jb=document.getElementById('fJob').value.trim()||'探索者';
+  let jb='探索者';
   let tp=document.getElementById('fType').value;
   let r=sd((parseInt(mo)*100+parseInt(da)).toString());
 
