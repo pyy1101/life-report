@@ -259,18 +259,10 @@ function shareIt(){
         <div style="font-size:11px;color:rgba(200,190,170,.3)">life.devshells.com</div>
       </div>
     </div>
-    <div style="margin-top:20px;display:flex;gap:12px"><button onclick="downloadShareImg()" style="padding:12px 32px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">⬇ 下载图片</button><button onclick="document.getElementById('shareCard').remove()" style="padding:12px 32px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:16px;cursor:pointer;font-family:inherit">关闭</button></div><div style="display:none"> → 分享到朋友圈</div>
+    <div style="margin-top:20px;display:flex;gap:12px"><button onclick="var w=window.open('','_blank','width=460,height=700');var c=document.querySelector('#shareCard>div');w.document.write('<!DOCTYPE html><html><head><meta charset=UTF-8><style>body{margin:0;padding:0;display:flex;justify-content:center;background:#0a0a0f;font-family:serif}</style></head><body>'+c.outerHTML+'</body></html>');w.document.close()" style="padding:12px 32px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">⬇ 下载图片</button><button onclick="document.getElementById('shareCard').remove()" style="padding:12px 32px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:16px;cursor:pointer;font-family:inherit">关闭</button></div><div style="display:none"> → 分享到朋友圈</div>
   `;
   document.body.appendChild(card);
 }
 
-	function downloadShareImg(){
-	  var inner=document.querySelector('#shareCard > div');if(!inner)return;
-	  if(typeof html2canvas!=='undefined'){html2canvas(inner,{backgroundColor:'#0c0a20',scale:2}).then(function(c){var a=document.createElement('a');a.download='life-script.png';a.href=c.toDataURL('image/png');a.click()});return}
-	  var s=document.createElement('script');
-	  s.src='https://unpkg.zhimg.com/html2canvas@1.4.1/dist/html2canvas.min.js';
-	  s.onload=function(){html2canvas(inner,{backgroundColor:'#0c0a20',scale:2}).then(function(c){var a=document.createElement('a');a.download='life-script.png';a.href=c.toDataURL('image/png');a.click()})};
-	  s.onerror=function(){s.src='https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'};
-	  document.head.appendChild(s);
-	}
+
 </script></body></html>
