@@ -427,7 +427,34 @@ function generate(){
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
 
-function unlock(){if(!_r)return;document.getElementById('rContent').innerHTML=_r.pre+_r.ext+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁 — 截图保存并分享</p><button class="share-btn" onclick="shareIt()">📸 分享到朋友圈</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}
+function unlock(){
+  if(!_r)return;
+  document.getElementById('rContent').innerHTML=_r.pre+
+    '<div class="unlock-box">'+
+    '<h3>🔓 解锁完整报告</h3>'+
+    '<p style="color:rgba(200,190,170,.6);font-size:14px;margin-bottom:20px">微信扫码支付后截图发给客服获取完整版</p>'+
+    '<div style="background:white;width:200px;height:200px;margin:0 auto 15px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#999;font-size:12px">📱 此处放收款码</div>'+
+    '<p style="color:rgba(200,190,170,.35);font-size:12px">支付完成后联系客服获取解锁码</p>'+
+    '<button class="unlock-btn" onclick="fakeUnlock()" style="margin-top:12px">🔑 我已支付，输入解锁码</button>'+
+    '<input id="unlockCode" placeholder="输入6位解锁码" style="display:none;width:100%;padding:10px;margin-top:8px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;font-size:15px;text-align:center;font-family:inherit">'+
+    '<button id="unlockSubmit" onclick="verifyCode()" style="display:none;width:100%;padding:10px;margin-top:6px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);border:none;border-radius:8px;color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">确认解锁</button>'+
+    '</div>';
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+
+function fakeUnlock(){
+  let inp=document.getElementById('unlockCode'),btn=document.getElementById('unlockSubmit');
+  inp.style.display='block';btn.style.display='block';inp.focus();
+}
+function verifyCode(){
+  let code=document.getElementById('unlockCode').value.trim();
+  if(code==='888888'){
+    document.getElementById('rContent').innerHTML=_r.pre+_r.ext+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁 — 截图保存并分享</p><button class="share-btn" onclick="shareIt()">📸 分享到朋友圈</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  }else{
+    alert('解锁码错误，请检查后重试');
+  }
+}
 function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
 function shareIt(){alert('请截图当前页面分享~\n\n推荐配文：\n"测完惊呆了，原来我的隐藏天赋是这个..."')}
 </script></body></html>
