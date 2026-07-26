@@ -921,7 +921,7 @@ window.genReport=function(){
     h+='<div class=lucky-item><div class=num>'+pk(LC||[],r)+'</div><div class=label>幸运色</div></div>';
     h+='<div class=lucky-item><div class=num>'+pk(LN||[],r)+'</div><div class=label>幸运数字</div></div>';
     h+='<div class=lucky-item><div class=num>'+pk(LI||[],r)+'</div><div class=label>好运信物</div></div>';
-    h+='</div></div>';
+    h+='</div><p style=text-align:center;margin-top:12px;color:rgba(200,190,170,.5)>✨ '+pk(LA||[],r)+'</p></div>';
     h+='<div class=unlock-box><button class=btn onclick=unlock()>解锁完整版</button></div>';
     document.getElementById('modal').classList.remove('active');
     document.getElementById('landing').style.display='none';
