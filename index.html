@@ -942,7 +942,7 @@ function verifyCode(){
 	  if(code.length<30){alert('订单号格式不正确，请检查后重试');return}
 	  var used=JSON.parse(localStorage.getItem('used_codes')||'[]');
 	  if(used.indexOf(code)!==-1){alert('code already used');return}
-	  document.querySelectorAll('.locked').forEach(function(el){el.classList.replace('locked','unlocked')});document.getElementById('shareBar').style.display='';
+	  document.querySelectorAll('#rContent .rs').forEach(function(el){el.style.filter='';el.style.pointerEvents='auto'});document.getElementById('shareBar').style.display='';
 	  document.getElementById('unlockBox').innerHTML='<p style="color:rgba(200,190,170,.5);font-size:14px">unlocked</p>';
 	  used.push(code);localStorage.setItem('used_codes',JSON.stringify(used));
 }
