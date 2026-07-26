@@ -112,6 +112,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <div class="modal" id="modal"><div class="modal-box">
   <h2>🔮 生成你的报告</h2>
   <input type="text" id="fBday" placeholder="生日 (如 10.20)">
+  <select id="fGender"><option value="">性别 (选填)</option><option value="female">女性</option><option value="male">男性</option></select>
   <input type="text" id="fMbti" placeholder="MBTI (选填)">
   <input type="text" id="fJob" placeholder="职业 (选填)">
   <select id="fType"><option value="life">🔮 隐藏人生剧本</option><option value="couple">💘 双人合盘报告</option><option value="yearly">📅 年度运势</option><option value="personality">🎭 隐藏人格解码</option><option value="career">💼 职业天命</option></select>
@@ -141,18 +142,28 @@ let _r=null;
 
 function generate(){
   let bd=document.getElementById('fBday').value.trim();if(!bd){alert('请输入生日');return}
+  let gd=document.getElementById('fGender').value;
   let mb=(document.getElementById('fMbti').value.trim()||'未知').toUpperCase();
   let jb=document.getElementById('fJob').value.trim()||'探索者';
   let tp=document.getElementById('fType').value;
   let r=sd(bd.replace(/[^0-9]/g,'')||'1020');
+
+  // Gender-filtered template pool
+  function filterGender(arr){
+    if(!gd) return arr;
+    let preferred=arr.filter(x=>x.g===gd), neutral=arr.filter(x=>!x.g||x.g==='u');
+    let pool=[...preferred,...preferred,...neutral]; // 2:1 bias toward preferred gender
+    return pool.length>0?pool:arr;
+  }
+  let PL=filterGender(P), GL=filterGender(G);
   let mo=parseInt(bd.split(/[.\-/]/)[0])||10,moN=MN[Math.min(11,Math.max(0,mo-1))];
   let pre='',ext='',tt='';
 
   if(tp==='life'||tp==='couple'){
     tt=tp==='couple'?'💘 双人合盘报告':'🔮 隐藏人生剧本';
-    let pl=pk(P,r);
+    let pl=pk(PL,r);
     pre+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
-    let ts=pks(G,3,r);
+    let ts=pks(GL,3,r);
     pre+=`<div class="rs"><h2>二、今生隐藏天赋</h2><p><b>1. ${ts[0][0]}：</b>${ts[0][1]}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:8px">🔒 解锁查看另外 2 项隐藏天赋</p></div>`;
     let ad=pk(A,r);
     pre+=`<div class="rs"><h2>三、年度关键线索</h2><p>✅ <b>${ad[0]}：</b>${ad[1].substring(0,30)}…</p><p style="color:rgba(200,190,170,.25);text-align:center">🔒 解锁完整奇遇 + Bug修复指南 + 幸运密码</p></div>`;
