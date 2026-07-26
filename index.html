@@ -641,6 +641,21 @@ function pks(a,n,r){let u=new Set(),res=[];while(res.length<n){let x=pk(a,r);if(
 // ============ LIVE CLOCK ============
 (function tick(){let n=new Date(),shichen=['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'],idx=Math.floor(((n.getHours()+1)%24)/2),s='<span style="color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)">'+shichen[idx]+'</span><span style="color:rgba(200,190,170,.2);font-size:11px"> ✦ </span><span style="color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)">'+n.getFullYear()+'年'+String(n.getMonth()+1).padStart(2,'0')+'月'+String(n.getDate()).padStart(2,'0')+'日</span><span style="color:rgba(200,190,170,.2);font-size:11px"> ✦ </span><span style="color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)">'+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')+'</span>';document.getElementById('liveClock').innerHTML=s;setTimeout(tick,1000)})();
 
+// ============ AUTO-UNLOCK FROM PAYMENT ============
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  if(p.get('paid')==='1'){
+    setTimeout(function(){
+      var els=document.querySelectorAll('.locked');
+      if(els.length>0){
+        els.forEach(function(x){x.classList.replace('locked','unlocked')});
+        var box=document.getElementById('unlockBox');
+        if(box) box.innerHTML='<p style="color:rgba(200,190,170,.5);font-size:14px">Pay success - full report unlocked</p>';
+      }
+    },500);
+  }
+})();
+
 // ============ STARS ============
 (function(){let c=document.getElementById('stars'),s=[1,1,1,1.5,1.5,2,2.5,3];for(let i=0;i<130;i++){let e=document.createElement('div'),z=s[Math.floor(Math.random()*s.length)];e.style.cssText=`position:absolute;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${z>2?'.5':z>1.5?'.3':'.15'};animation:tw${Math.random()*4+2}s infinite alternate;animation-delay:${Math.random()*5}s`;c.appendChild(e)}for(let i=0;i<3;i++){let e=document.createElement('div');e.style.cssText=`position:absolute;width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);left:${Math.random()*100}%;top:${Math.random()*80}%;animation:sh${Math.random()*4+4}s linear infinite;animation-delay:${Math.random()*8}s`;c.appendChild(e)}let st=document.createElement('style');st.textContent=`@keyframes tw{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}@keyframes sh{0%{transform:translateX(0)translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px)translateY(80px);opacity:0}100%{opacity:0}}`;document.head.appendChild(st)})();
 document.getElementById('uc').textContent=(13000+Math.floor(Math.random()*500)).toLocaleString();
@@ -719,12 +734,9 @@ function generate(){
 }
 
 function unlock(){
-  document.getElementById('unlockBox').innerHTML=
-    '<h3>🔓 解锁完整报告</h3><p style="color:rgba(200,190,170,.6);font-size:14px;margin-bottom:20px">微信扫码支付后获取解锁码</p>'+
-    '<div style="background:white;width:200px;height:200px;margin:0 auto 15px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#999;font-size:12px">📱 此处放收款码</div>'+
-    '<p style="color:rgba(200,190,170,.35);font-size:12px;margin-bottom:12px">支付后联系客服获取解锁码</p>'+
-    '<input id="unlockCode" placeholder="输入6位解锁码" style="width:100%;padding:10px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;font-size:15px;text-align:center;font-family:inherit;margin-bottom:8px">'+
-    '<button onclick="verifyCode()" style="width:100%;padding:10px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);border:none;border-radius:8px;color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">确认解锁</button>';
+  if(!_r)return;
+  var mbd='https://mbd.pub/YOUR_PRODUCT_LINK';
+  window.location.href=mbd+'?callback='+encodeURIComponent(location.origin+location.pathname+'?paid=1');
 }
 function verifyCode(){
   if(document.getElementById('unlockCode').value.trim()==='888888'){
