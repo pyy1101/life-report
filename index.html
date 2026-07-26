@@ -746,7 +746,6 @@ function verifyCode(){
 	  document.querySelectorAll('.locked').forEach(function(el){el.classList.replace('locked','unlocked')});
 	  document.getElementById('unlockBox').innerHTML='<p style="color:rgba(200,190,170,.5);font-size:14px">unlocked</p>';
 	  used.push(code);localStorage.setItem('used_codes',JSON.stringify(used));
-	}else{alert('解锁码无效，请确认已付款并输入正确的订单号')}
 }
 
 function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
