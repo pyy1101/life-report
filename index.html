@@ -54,7 +54,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 .back-btn{padding:14px 36px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:17px;cursor:pointer;font-family:inherit}
 .unlock-box{text-align:center;padding:36px 20px;background:linear-gradient(135deg,rgba(107,76,154,.15),rgba(30,20,50,.8));border:1px solid rgba(180,140,220,.18);border-radius:16px;margin:20px 0}
 .unlock-btn{padding:13px 36px;background:linear-gradient(135deg,#e8a850,#d4883a);color:white;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
-.locked{display:none}.unlocked{display:block}
+.locked{display:none!important}.unlocked{display:block!important}
 .footer{text-align:center;padding:50px 20px 36px;color:rgba(200,190,170,.25);font-size:12px;border-top:1px solid rgba(180,140,220,.06)}
 @media(max-width:600px){.hero h1{font-size:32px}.cta-btn{padding:14px 36px;font-size:17px}.report-grid{grid-template-columns:1fr}}
 </style></head><body>
@@ -924,11 +924,7 @@ window.scrollTo(0,0);
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
 
-function unlock(){var mbd="https://mbd.pub/o/bread/YZaUlplxaA==";window.location.href=mbd;return;
-  if(!_r)return;
-  var mbd='https://mbd.pub/o/bread/YZaUlplxaA==';
-  window.location.href=mbd+'?callback='+encodeURIComponent(location.origin+location.pathname+'?paid=1');
-}
+function unlock(){document.querySelectorAll(".locked").forEach(function(el){el.classList.replace("locked","unlocked")});document.querySelector(".unlock-box").innerHTML="<p style=color:#aaa>已解锁</p>"}
 function verifyCode(){
 	  var code=document.getElementById('unlockCode').value.trim();
 	  if(code.length<6){alert('invalid code');return}
