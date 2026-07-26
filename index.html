@@ -674,11 +674,39 @@ function start(t){
   if(t==='life'){h='🔮 隐藏人生剧本';b='解锁前世今生';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   else if(t==='couple'){h='💘 双人合盘报告';b='查看你们的羁绊';box.innerHTML=`<h2>${h}</h2><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px">你的信息</p>${bdayHTML('c1Year','c1Month','c1Day')}<select id="c1Gender"><option value="">你的性别</option><option value="female">女性</option><option value="male">男性</option></select><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px;margin-top:12px">对方的信息</p>${bdayHTML('c2Year','c2Month','c2Day')}<select id="c2Gender"><option value="">TA的性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day')}
   else if(t==='yearly'){h='📅 年度运势';b='预览你的2026';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay')}
-  else if(t==='personality'){h='🎭 隐藏人格解码';b='发现真正的你';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
+  else if(t==='personality'){
+  h='🎭 隐藏人格解码 - 免费MBTI测试';
+  box.innerHTML='<h2>'+h+'</h2><p style="color:rgba(200,190,170,.5);font-size:14px;margin-bottom:16px">4道题快速测出你的MBTI类型</p><div id="quizBox"><p style="text-align:left;color:rgba(200,190,170,.7);margin-bottom:8px">1. 周末你更喜欢怎么过？</p><button onclick="answerQuiz(0,\'E\')" style="width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px">和朋友出去玩，人多才热闹</button><button onclick="answerQuiz(0,\'I\')" style="width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px">在家待着，一个人或跟最亲近的人</button></div><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>';
+  window._quizAnswers=[];window._quizStep=0;
+}
   else if(t==='career'){h='💼 职业天命';b='找到你的赛道';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   document.getElementById('modal').classList.add('active');
 }
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active')});
+
+function answerQuiz(step,val){
+  window._quizAnswers[step]=val;
+  window._quizStep++;
+  var box=document.getElementById("quizBox");
+  var questions=[
+    {q:"2. 读一本书时，你更关注？",a:[["📖 具体情节和细节描写","S"],["🔮 背后的寓意和可能性","N"]]},
+    {q:"3. 做决定时你更依赖？",a:[["🧠 逻辑分析和客观事实","T"],["💝 个人感受和他人处境","F"]]},
+    {q:"4. 你更喜欢的生活方式？",a:[["📋 有计划有安排，按部就班","J"],["🌊 随性而为，享受意外惊喜","P"]]}
+  ];
+  if(window._quizStep<3){
+    var q=questions[window._quizStep-1];
+    box.innerHTML="<p style='text-align:left;color:rgba(200,190,170,.7);margin-bottom:8px'>"+q.q+"</p>"+
+      "<button onclick=\"answerQuiz("+(window._quizStep)+",'"+q.a[0][1]+"')\" style='width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px'>"+q.a[0][0]+"</button>"+
+      "<button onclick=\"answerQuiz("+(window._quizStep)+",'"+q.a[1][1]+"')\" style='width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px'>"+q.a[1][0]+"</button>";
+  }else{
+    var ei=window._quizAnswers[0],sn=window._quizAnswers[1],tf=window._quizAnswers[2],jp=window._quizAnswers[3];
+    var mbti=ei+sn+tf+jp;
+    var names={INTJ:"建筑师",INTP:"逻辑学家",ENTJ:"指挥官",ENTP:"辩论家",INFJ:"提倡者",INFP:"调停者",ENFJ:"主人公",ENFP:"竞选者",ISTJ:"物流师",ISFJ:"守卫者",ESTJ:"总经理",ESFJ:"执政官",ISTP:"鉴赏家",ISFP:"探险家",ESTP:"企业家",ESFP:"表演者"};
+    _type="personality_quiz";window._quizMbti=mbti;window._quizMbtiName=names[mbti]||"";
+    document.getElementById("modal").classList.remove("active");
+    generate();
+  }
+}
 
 // ============ GENERATE ============
 function generate(){
@@ -729,7 +757,7 @@ function generate(){
   document.getElementById('rTitle').textContent=tt;
   document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''}`;
   document.getElementById('rContent').innerHTML=html+'<div class="unlock-box" id="unlockBox"><h3>🔮 解锁完整报告</h3><p>全部隐藏天赋 · 完整奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
-  document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');
+  document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');if(isFree){setTimeout(function(){document.querySelectorAll('.locked').forEach(function(el){el.classList.replace('locked','unlocked')})},100);}
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
 
