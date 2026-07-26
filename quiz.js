@@ -1,23 +1,5 @@
-function answerQuiz(step,val){
-  window._quizAnswers[step]=val;
-  window._quizStep++;
-  var box=document.getElementById("quizBox");
-  var questions=[
-    {q:"2. 读一本书时，你更关注？",a:[["📖 具体情节和细节描写","S"],["🔮 背后的寓意和可能性","N"]]},
-    {q:"3. 做决定时你更依赖？",a:[["🧠 逻辑分析和客观事实","T"],["💝 个人感受和他人处境","F"]]},
-    {q:"4. 你更喜欢的生活方式？",a:[["📋 有计划有安排，按部就班","J"],["🌊 随性而为，享受意外惊喜","P"]]}
-  ];
-  if(window._quizStep<3){
-    var q=questions[window._quizStep-1];
-    box.innerHTML="<p style='text-align:left;color:rgba(200,190,170,.7);margin-bottom:8px'>"+q.q+"</p>"+
-      "<button onclick=\"answerQuiz("+(window._quizStep)+",'"+q.a[0][1]+"')\" style='width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px'>"+q.a[0][0]+"</button>"+
-      "<button onclick=\"answerQuiz("+(window._quizStep)+",'"+q.a[1][1]+"')\" style='width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px'>"+q.a[1][0]+"</button>";
-  }else{
-    var ei=window._quizAnswers[0],sn=window._quizAnswers[1],tf=window._quizAnswers[2],jp=window._quizAnswers[3];
-    var mbti=ei+sn+tf+jp;
-    var names={INTJ:"建筑师",INTP:"逻辑学家",ENTJ:"指挥官",ENTP:"辩论家",INFJ:"提倡者",INFP:"调停者",ENFJ:"主人公",ENFP:"竞选者",ISTJ:"物流师",ISFJ:"守卫者",ESTJ:"总经理",ESFJ:"执政官",ISTP:"鉴赏家",ISFP:"探险家",ESTP:"企业家",ESFP:"表演者"};
-    _type="personality_quiz";window._quizMbti=mbti;window._quizMbtiName=names[mbti]||"";
-    document.getElementById("modal").classList.remove("active");
-    generate();
-  }
-}
+var _quizQ=[{q:"周末你更想怎么过？",a:[["约朋友聚会，人多热闹","E"],["在家宅着，享受独处","I"]]},{q:"在聚会上你通常？",a:[["认识新朋友，聊到停不下来","E"],["和熟人待在一起，偶尔插几句","I"]]},{q:"同事约你下班后聚餐，你？",a:[["太好了正想去","E"],["好累想回家躺平","I"]]},{q:"学习新东西时你更喜欢？",a:[["看具体步骤和实操案例","S"],["先理解背后的理论和框架","N"]]},{q:"你更相信哪种说法？",a:[["眼见为实，数据说话","S"],["直觉告诉我答案","N"]]},{q:"朋友说你更偏向？",a:[["脚踏实地，注重当下","S"],["天马行空，充满想象","N"]]},{q:"同事工作中出了错，你第一反应？",a:[["分析原因，找出解决方案","T"],["先安慰ta，情绪比问题重要","F"]]},{q:"做重要决策时你更依赖？",a:[["利弊分析表和客观数据","T"],["内心感受和对他人的影响","F"]]},{q:"别人说你更？",a:[["理性冷静，就事论事","T"],["感性温暖，顾及人情","F"]]},{q:"对于旅游计划你？",a:[["提前做好攻略和行程表","J"],["买张票就出发，随遇而安","P"]]},{q:"工作上你喜欢？",a:[["有明确的截止日期和计划","J"],["灵活安排，随时调整","P"]]},{q:"房间书桌的状态通常是？",a:[["整理得井井有条","J"],["有点乱但我知道东西在哪","P"]]}];
+function answerQuiz(step,val){window._quizAnswers[step]=val;window._quizStep++;
+  var box=document.getElementById("quizBox");var n=window._quizStep;
+  if(n<12){var q=_quizQ[n];box.innerHTML="<p style='color:rgba(200,190,170,.4);font-size:12px;margin-bottom:4px'>"+(n+1)+"/12</p><p style='text-align:left;color:rgba(200,190,170,.85);margin-bottom:12px;font-size:15px'>"+q.q+"</p>"+q.a.map(function(x){return"<button onclick=\"answerQuiz("+n+",'"+x[1]+"')\" style='width:100%;padding:12px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px'>"+x[0]+"</button>"}).join("")+"<br><div style='display:flex;gap:4px;margin-top:8px'>"+Array(12).fill(0).map(function(_,i){return"<div style='flex:1;height:3px;border-radius:2px;background:"+(i<n?"#b48cdc":"rgba(255,255,255,.1)")+"'></div>"}).join("")+"</div>"}
+  else{var a=window._quizAnswers;var EI=(a.filter(function(x){return x==="E"}).length>=2?"E":"I");var SN=(a.filter(function(x){return x==="S"}).length>=2?"S":"N");var TF=(a.filter(function(x){return x==="T"}).length>=2?"T":"F");var JP=(a.filter(function(x){return x==="J"}).length>=2?"J":"P");var mbti=EI+SN+TF+JP;var names={INTJ:"建筑师",INTP:"逻辑学家",ENTJ:"指挥官",ENTP:"辩论家",INFJ:"提倡者",INFP:"调停者",ENFJ:"主人公",ENFP:"竞选者",ISTJ:"物流师",ISFJ:"守卫者",ESTJ:"总经理",ESFJ:"执政官",ISTP:"鉴赏家",ISFP:"探险家",ESTP:"企业家",ESFP:"表演者"};_type="personality_quiz";window._quizMbti=mbti;window._quizMbtiName=names[mbti]||"";document.getElementById("modal").classList.remove("active");generate()}}
