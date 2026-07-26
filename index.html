@@ -419,7 +419,24 @@ function generate(){
     ext+=`</div>`;
   }
 
-  _r={tt,pre,ext};
+  // Build clean full report (sections 1-5, no lock hints)
+  if(tp==='life'||tp==='couple'){
+    let full='';
+    full+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
+    full+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
+    full+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
+    full+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
+    full+=`<p>⚠️ <b>避坑提醒：</b>${mo}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    full+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
+    full+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
+    full+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
+    full+=`<div class="lucky-item"><div class="num">${pk(LN,r)}</div><div class="label">幸运数字</div></div>`;
+    full+=`<div class="lucky-item"><div class="num">${pk(LI,r)}</div><div class="label">好运信物</div></div>`;
+    full+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pk(LA,r)}</p></div>`;
+    _r={tt,pre,ext,full};
+  }else{
+    _r={tt,pre,ext,full:pre+ext};
+  }
   document.getElementById('rTitle').textContent=tt;
   document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''} | 职业 ${jb}`;
   document.getElementById('rContent').innerHTML=pre+'<div class="unlock-box"><h3>🔮 解锁完整报告</h3><p>前世完整剧本 · 全部隐藏天赋 · 年度奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
