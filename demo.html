@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>测试</title><style>
+body{background:#0a0a0f;color:#e0e0d0;font-family:"Microsoft YaHei",sans-serif;text-align:center}
+select{padding:8px;margin:4px;background:#1a1530;color:white;border:1px solid #555;border-radius:4px}
+select option{background:#1a1530;color:white}
+button{padding:12px 32px;background:#6b4c9a;color:white;border:none;border-radius:20px;font-size:16px;cursor:pointer;margin:10px}
+.rs{background:rgba(30,20,50,.6);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:16px;margin:10px auto;max-width:500px;text-align:left}
+.locked{display:none}
+</style></head><body>
+<h2>测试 - 隐藏人生剧本</h2>
+<div id="form">
+<select id="y"><option value="">年</option></select>
+<select id="m"><option value="">月</option></select>
+<select id="d"><option value="">日</option></select><br>
+<button id="go">生成报告</button>
+</div>
+<div id="out"></div>
+<script>
+var P=[{t:"终南山灵医",d:"隐居采药人"},{t:"宋代书生",d:"书院教书先生"},{t:"明朝织女",d:"苏州织造府织女"}];
+var G=[["情绪天赋","随手写戳中人心"],["危险直觉","看人很准"],["万物亲和","小动物不怕你"]];
+var A=[["秋日奇遇","遇到贵人"],[ "冬季转折","新机会"]];
+var B=[["别半夜决定","深夜想的多是内耗"],["别委屈自己","你的感受重要"]];
+var LC=["绿","紫","蓝","金"];var LN=[3,7,11,17];var LI=["木挂件","绿松石","银铃铛","水晶"];
+var LA=["带薄荷糖","对镜子笑","放小盆栽"];
+
+function sd(s){var x=0;for(var i=0;i<s.length;i++)x=x*31+s.charCodeAt(i)&0x7fffffff;return function(){x=(x*1103515245+12345)&0x7fffffff;return x/0x7fffffff}}
+function pk(a,r){return a[Math.floor(r()*a.length)]}
+
+// Init dropdowns
+(function(){
+ var y=document.getElementById("y"),m=document.getElementById("m"),d=document.getElementById("d");
+ for(var i=2026;i>=1960;i--){var o=document.createElement("option");o.value=i;o.textContent=i;y.appendChild(o)}
+ for(var i=1;i<=12;i++){var o=document.createElement("option");o.value=i;o.textContent=i+"月";m.appendChild(o)}
+ for(var i=1;i<=31;i++){var o=document.createElement("option");o.value=i;o.textContent=i+"日";d.appendChild(o)}
+})();
+
+document.getElementById("go").onclick=function(){
+ var yr=parseInt(document.getElementById("y").value);
+ var mo=parseInt(document.getElementById("m").value);
+ var da=document.getElementById("d").value;
+ if(!yr||!mo||!da){alert("请选择年月日");return}
+ var r=sd((yr*10000+mo*100+parseInt(da)).toString());
+ var pl=pk(P,r);
+ var h="<div class=rs><b>前世：</b>"+pl.t+" - "+pl.d+"</div>";
+ h+="<div class=rs><b>幸运数字：</b>"+pk(LN,r)+"</div>";
+ h+="<div class=rs class=locked><b>隐藏天赋：</b>"+pk(G,r)[0]+"</div>";
+ h+="<button onclick=\"alert('pay')\">解锁完整版</button>";
+ document.getElementById("out").innerHTML=h;
+};
+
+setTimeout(function(){
+  document.getElementById("y").value="2000";
+  document.getElementById("m").value="6";
+  document.getElementById("d").value="15";
+  document.getElementById("go").click();
+},300);
+</script></body></html>
