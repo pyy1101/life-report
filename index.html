@@ -98,7 +98,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 </div>
 
 <!-- REPORT PAGE -->
-<div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 生成分享图</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
+<div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 生成分享图</button><button class="share-btn" onclick="downloadFullReport()">📄 下载完整报告</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
 
 <!-- MODAL -->
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
@@ -287,4 +287,11 @@ function shareIt(){
 
 
 function downloadShareImg(){var inner=document.querySelector("#shareCard > div");if(!inner)return;html2canvas(inner,{backgroundColor:"#0c0a20",scale:2}).then(function(c){var a=document.createElement("a");a.download="隐藏人生剧本.png";a.href=c.toDataURL("image/png");a.click()})}
+
+function downloadFullReport(){
+  var el=document.getElementById('rContent');if(!el)return;
+  html2canvas(el,{backgroundColor:'#0a0a0f',scale:2,scrollY:-window.scrollY}).then(function(c){
+    var a=document.createElement('a');a.download='完整报告.png';a.href=c.toDataURL('image/png');a.click()
+  });
+}
 </script></body></html>
