@@ -796,7 +796,9 @@ function generate(){
 
   document.getElementById('rTitle').textContent=tt;
   document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''}`;
-  document.getElementById('rContent').innerHTML=html+'<div class="unlock-box" id="unlockBox"><h3>🔮 解锁完整报告</h3><p>全部隐藏天赋 · 完整奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
+  var isFree=(tp==='personality_quiz');
+  var unlockStyle=isFree?'display:none':'';
+  document.getElementById('rContent').innerHTML=html+'<div class="unlock-box" id="unlockBox" style="'+unlockStyle+'"><h3>🔮 解锁完整报告</h3><p>全部隐藏天赋 · 完整奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
   document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');if(isFree){setTimeout(function(){document.querySelectorAll('.locked').forEach(function(el){el.classList.replace('locked','unlocked')})},100);}
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
