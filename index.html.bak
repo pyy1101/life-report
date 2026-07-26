@@ -259,7 +259,7 @@ function shareIt(){
         <div style="font-size:11px;color:rgba(200,190,170,.3)">life.devshells.com</div>
       </div>
     </div>
-    <div style="margin-top:20px;display:flex;gap:12px"><button onclick="downloadShareImg()" style="padding:12px 32px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">⬇ 下载图片</button><button onclick="document.getElementById('shareCard').remove()" style="padding:12px 32px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:16px;cursor:pointer;font-family:inherit">关闭</button></div><div style="display:none"> → 分享到朋友圈</div>
+    <div style="margin-top:14px;color:rgba(200,190,170,.3);font-size:12px">📸 长按截图保存 → 分享到朋友圈</div>
   `;
   document.body.appendChild(card);
 }
