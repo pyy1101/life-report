@@ -91,8 +91,8 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
     <div class="badge">🔮 命运探索</div>
     <h1>发现你的<br>隐藏人生剧本</h1>
     <p class="subtitle">前世身份 · 隐藏天赋 · 年度奇遇 · 命运修复</p>
-    <a class="cta-btn" href="#" onclick="showInputModal()">✨ 立即解锁 (4.9元)</a>
-    <p style="margin-top:12px;color:rgba(200,190,170,.4);font-size:13px">已为 <span id="userCount">12,837</span> 人生成专属报告</p>
+    <a class="cta-btn" href="#" onclick="showInputModal()">✨ 免费生成我的报告</a>
+    <p style="margin-top:12px;color:rgba(200,190,170,.4);font-size:13px">已为 <span id="userCount">12,837</span> 人揭示命运剧本</p>
   </div>
 </section>
 
@@ -100,11 +100,11 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
   <div class="section-title">五种命运报告</div>
   <div class="section-sub">选择你的好奇，一键解锁答案</div>
   <div class="report-grid">
-    <div class="report-card" onclick="selectReport('life')"><div class="card-icon">🔮</div><div class="card-title">隐藏人生剧本</div><div class="card-desc">前世身份 · 隐藏天赋 · 年度奇遇 · Bug修复指南</div><div class="card-price">4.9元</div></div>
-    <div class="report-card" onclick="selectReport('couple')"><div class="card-icon">💘</div><div class="card-title">双人合盘报告</div><div class="card-desc">前世关系 · 匹配指数 · 相处建议 · 矛盾雷区</div><div class="card-price">6.9元</div></div>
-    <div class="report-card" onclick="selectReport('yearly')"><div class="card-icon">📅</div><div class="card-title">2026年度运势</div><div class="card-desc">逐月运势 · 黄金机遇日 · 低谷避险期</div><div class="card-price">4.9元</div></div>
-    <div class="report-card" onclick="selectReport('personality')"><div class="card-icon">🎭</div><div class="card-title">隐藏人格解码</div><div class="card-desc">深层人格 · 未知优势 · 潜在弱点预警</div><div class="card-price">4.9元</div></div>
-    <div class="report-card" onclick="selectReport('career')"><div class="card-icon">💼</div><div class="card-title">职业天命报告</div><div class="card-desc">最佳赛道 · 跳槽时机 · 贵人特征</div><div class="card-price">6.9元</div></div>
+    <div class="report-card" onclick="selectReport('life')"><div class="card-icon">🔮</div><div class="card-title">隐藏人生剧本</div><div class="card-desc">前世身份 · 隐藏天赋 · 年度奇遇 · Bug修复指南</div></div>
+    <div class="report-card" onclick="selectReport('couple')"><div class="card-icon">💘</div><div class="card-title">双人合盘报告</div><div class="card-desc">前世关系 · 匹配指数 · 相处建议 · 矛盾雷区</div></div>
+    <div class="report-card" onclick="selectReport('yearly')"><div class="card-icon">📅</div><div class="card-title">2026年度运势</div><div class="card-desc">逐月运势 · 黄金机遇日 · 低谷避险期</div></div>
+    <div class="report-card" onclick="selectReport('personality')"><div class="card-icon">🎭</div><div class="card-title">隐藏人格解码</div><div class="card-desc">深层人格 · 未知优势 · 潜在弱点预警</div></div>
+    <div class="report-card" onclick="selectReport('career')"><div class="card-icon">💼</div><div class="card-title">职业天命报告</div><div class="card-desc">最佳赛道 · 跳槽时机 · 贵人特征</div></div>
   </div>
 </section>
 
@@ -135,18 +135,18 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <!-- ====== INPUT MODAL ====== -->
 <div class="modal" id="inputModal">
   <div class="modal-box">
-    <h2>🔮 解锁你的专属报告</h2>
+    <h2>🔮 生成你的专属报告</h2>
     <input type="text" id="fBirthday" placeholder="生日 (如 10.20)">
     <input type="text" id="fMbti" placeholder="MBTI (选填, 如 INFP)">
     <input type="text" id="fJob" placeholder="职业 (选填)">
     <select id="fReportType">
-      <option value="life">🔮 隐藏人生剧本 — 4.9元</option>
-      <option value="couple">💘 双人合盘报告 — 6.9元</option>
-      <option value="yearly">📅 2026年度运势 — 4.9元</option>
-      <option value="personality">🎭 隐藏人格解码 — 4.9元</option>
-      <option value="career">💼 职业天命报告 — 6.9元</option>
+      <option value="life">🔮 隐藏人生剧本</option>
+      <option value="couple">💘 双人合盘报告</option>
+      <option value="yearly">📅 2026年度运势</option>
+      <option value="personality">🎭 隐藏人格解码</option>
+      <option value="career">💼 职业天命报告</option>
     </select>
-    <button class="submit-btn" onclick="generateAndShow()">🔓 解锁我的报告</button>
+    <button class="submit-btn" onclick="generateAndShow()">✨ 免费生成预览</button>
     <div class="modal-close" onclick="closeModal()">先想想</div>
   </div>
 </div>
@@ -210,6 +210,9 @@ function closeModal(){document.getElementById('inputModal').classList.remove('ac
 document.getElementById('inputModal').addEventListener('click',function(e){if(e.target===this)closeModal()})
 
 // ============ 核心：生成报告 ============
+// 全局状态：存储当前报告数据
+let _fullReport=null, _reportInput=null;
+
 function generateAndShow(){
   const bday=document.getElementById('fBirthday').value.trim();
   if(!bday){alert('请输入生日哦~');return}
@@ -217,125 +220,88 @@ function generateAndShow(){
   const job=document.getElementById('fJob').value.trim()||'探索者';
   const type=document.getElementById('fReportType').value;
 
-  // 用生日生成种子
+  _reportInput={bday,mbti,job,type};
+
   const seed=parseInt(bday.replace(/[^0-9]/g,''))||1020;
   const rand=seededRandom(seed);
-
-  let title,html='';
   const month=parseInt(bday.split(/[.\-/]/)[0])||10;
   const monthName=DATA.months[Math.min(11,Math.max(0,month-1))];
 
-  // 根据类型生成报告
+  // 生成完整报告（存在全局变量里）
+  let preview='', fullExtra='';
+  let title='';
+
   if(type==='life'||type==='couple'){
-    if(type==='couple') title='💘 双人合盘报告';
-    else title='🔮 隐藏人生剧本';
-
-    // 前世
+    title=type==='couple'?'💘 双人合盘报告':'🔮 隐藏人生剧本';
     const pl=DATA.pastLives[Math.floor(rand()*DATA.pastLives.length)];
-    html+=`<div class="report-section"><h2>一、前世身份：${pl.title}</h2><p>${pl.desc}</p></div>`;
+    preview+=`<div class="report-section"><h2>一、前世身份：${pl.title}</h2><p>${pl.desc}</p></div>`;
 
-    // 双人模式加关系
-    if(type==='couple'){
-      const rel=DATA.coupleRelations[Math.floor(rand()*DATA.coupleRelations.length)];
-      const score=DATA.coupleScores[Math.floor(rand()*DATA.coupleScores.length)];
-      const tip=DATA.coupleTips[Math.floor(rand()*DATA.coupleTips.length)];
-      html+=`<div class="report-section"><h2>二、今生关系：${rel}</h2><p style="font-size:48px;text-align:center;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${score}%</p><p style="text-align:center;color:rgba(200,190,170,.6)">匹配指数</p></div>`;
-      html+=`<div class="report-section"><h2>三、相处指南</h2><p>💡 ${tip}</p></div>`;
-    }else{
-      // 天赋
-      html+=`<div class="report-section"><h2>二、今生隐藏天赋（你自己可能都没发现）</h2>`;
-      const used=new Set();
-      for(let i=0;i<3;i++){
-        let t;do{t=DATA.talents[Math.floor(rand()*DATA.talents.length)]}while(used.has(t[0])&&used.size<DATA.talents.length);
-        used.add(t[0]);
-        html+=`<p><b>${i+1}. ${t[0]}：</b>${t[1]}</p>`;
-      }
-      html+=`</div>`;
-
-      // 年度预测
-      const adv=DATA.adventures[Math.floor(rand()*DATA.adventures.length)];
-      const adv2=DATA.adventures[Math.floor(rand()*DATA.adventures.length)];
-      html+=`<div class="report-section"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
-      html+=`<p>✅ <b>${adv[0]}：</b>${adv[1]}</p>`;
-      if(adv2[0]!==adv[0])html+=`<p>✅ <b>${adv2[0]}：</b>${adv2[1]}</p>`;
-      html+=`<p>⚠️ <b>避坑提醒：</b>${month}月前后注意财务决策，别冲动消费或投资。</p></div>`;
-    }
-
-    // Bug修复
-    const bugsUsed=new Set();
-    html+=`<div class="report-section"><h2>${type==='couple'?'四':'四'}、人生Bug修复指南</h2>`;
+    // 天赋（预览显示1条，完整版显示3条）
+    const talentsUsed=new Set();
+    let talentHtml='';
     for(let i=0;i<3;i++){
-      let b;do{b=DATA.bugs[Math.floor(rand()*DATA.bugs.length)]}while(bugsUsed.has(b[0])&&bugsUsed.size<DATA.bugs.length);
-      bugsUsed.add(b[0]);
-      html+=`<p><b>${i+1}. ${b[0]}：</b>${b[1]}</p>`;
+      let t;do{t=DATA.talents[Math.floor(rand()*DATA.talents.length)]}while(talentsUsed.has(t[0])&&talentsUsed.size<DATA.talents.length);
+      talentsUsed.add(t[0]);
+      talentHtml+=`<p><b>${i+1}. ${t[0]}：</b>${t[1]}</p>`;
     }
-    html+=`</div>`;
+    preview+=`<div class="report-section"><h2>二、今生隐藏天赋</h2>${talentHtml.split('</p>')[0]}</p><p style="color:rgba(200,190,170,.3);text-align:center;margin-top:12px">🔒 还有 2 项隐藏天赋等你解锁</p></div>`;
 
-    // 幸运密码
-    html+=`<div class="report-section"><h2>${type==='couple'?'五':'五'}、专属幸运密码</h2><div class="lucky-box">`;
-    html+=`<div class="lucky-item"><div class="num">${DATA.luckyColors[Math.floor(rand()*DATA.luckyColors.length)]}</div><div class="label">幸运色</div></div>`;
-    html+=`<div class="lucky-item"><div class="num">${DATA.luckyNumbers[Math.floor(rand()*DATA.luckyNumbers.length)]}</div><div class="label">幸运数字</div></div>`;
-    html+=`<div class="lucky-item"><div class="num">${DATA.luckyItems[Math.floor(rand()*DATA.luckyItems.length)]}</div><div class="label">好运信物</div></div>`;
-    html+=`</div><p style="text-align:center;margin-top:16px;color:rgba(200,190,170,.6)">✨ ${DATA.luckyActions[Math.floor(rand()*DATA.luckyActions.length)]}</p></div>`;
-
-  }else if(type==='yearly'){
-    title='📅 2026年度运势报告';
-    html+=`<div class="report-section"><h2>年度关键词</h2><p style="font-size:24px;text-align:center">转折 · 沉淀 · 破局</p></div>`;
-    html+=`<div class="report-section"><h2>逐月运势</h2>`;
-    const moods=['🌱 萌芽期','🌸 上升期','☀️ 高峰期','🍂 沉淀期','❄️ 蓄力期'];
-    for(let i=0;i<12;i++){
-      const m=moods[Math.floor(rand()*moods.length)];
-      const lucky=Math.floor(rand()*28)+1;
-      html+=`<p><b>${DATA.months[i]}：</b>${m} | 幸运日：${lucky}日 | ${rand()>.5?'宜：拓展人脉、学习新技能':'宜：专注当下、稳固基础'} | ${rand()>.5?'忌：大额投资、冲动决定':'忌：过度消耗、忽略健康'}</p>`;
-    }
-    html+=`</div>`;
     const adv=DATA.adventures[Math.floor(rand()*DATA.adventures.length)];
-    html+=`<div class="report-section"><h2>年度关键机遇</h2><p>✅ <b>${adv[0]}：</b>${adv[1]}</p></div>`;
+    preview+=`<div class="report-section"><h2>三、年度关键线索</h2><p>✅ <b>${adv[0]}：</b>${adv[1].substring(0,30)}… </p><p style="color:rgba(200,190,170,.3);text-align:center">🔒 完整奇遇剧本 + Bug修复指南 + 幸运密码</p></div>`;
 
-  }else if(type==='personality'){
-    title='🎭 隐藏人格解码';
-    const persos=['月光型人格','深海型人格','森林型人格','星辰型人格','火焰型人格','微风型人格'];
-    const p=persos[Math.floor(rand()*persos.length)];
-    const used=new Set();
-    html+=`<div class="report-section"><h2>你的隐藏人格类型</h2><p style="font-size:32px;text-align:center;font-weight:900">${p}</p><p>这不是MBTI能测出来的——这是你骨子里与世界相处的方式。</p></div>`;
-    html+=`<div class="report-section"><h2>三大隐藏优势</h2>`;
-    for(let i=0;i<3;i++){
-      let t;do{t=DATA.talents[Math.floor(rand()*DATA.talents.length)]}while(used.has(t[0])&&used.size<DATA.talents.length);
-      used.add(t[0]);html+=`<p><b>${i+1}. ${t[0]}：</b>${t[1]}</p>`;
-    }
-    html+=`</div>`;
-    html+=`<div class="report-section"><h2>潜在弱点预警</h2>`;
-    const bugsUsed2=new Set();
-    for(let i=0;i<2;i++){
-      let b;do{b=DATA.bugs[Math.floor(rand()*DATA.bugs.length)]}while(bugsUsed2.has(b[0])&&bugsUsed2.size<DATA.bugs.length);
-      bugsUsed2.add(b[0]);html+=`<p><b>${b[0]}：</b>${b[1]}</p>`;
-    }
-    html+=`</div>`;
+    // 完整版额外的内容
+    fullExtra+=talentHtml.split('</p>').slice(1).join('</p>')+'</p>';
+    fullExtra+=`<div class="report-section"><h2>三、${new Date().getFullYear()}年完整奇遇剧本</h2>`;
+    fullExtra+=`<p>✅ <b>${adv[0]}：</b>${adv[1]}</p>`;
+    const adv2=DATA.adventures[Math.floor(rand()*DATA.adventures.length)];
+    if(adv2[0]!==adv[0])fullExtra+=`<p>✅ <b>${adv2[0]}：</b>${adv2[1]}</p>`;
+    fullExtra+=`<p>⚠️ <b>避坑提醒：</b>${month}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    const bugsUsed=new Set();
+    fullExtra+=`<div class="report-section"><h2>四、人生Bug修复指南</h2>`;
+    for(let i=0;i<3;i++){let b;do{b=DATA.bugs[Math.floor(rand()*DATA.bugs.length)]}while(bugsUsed.has(b[0])&&bugsUsed.size<DATA.bugs.length);bugsUsed.add(b[0]);fullExtra+=`<p><b>${i+1}. ${b[0]}：</b>${b[1]}</p>`;}
+    fullExtra+=`</div>`;
+    fullExtra+=`<div class="report-section"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
+    fullExtra+=`<div class="lucky-item"><div class="num">${DATA.luckyColors[Math.floor(rand()*DATA.luckyColors.length)]}</div><div class="label">幸运色</div></div>`;
+    fullExtra+=`<div class="lucky-item"><div class="num">${DATA.luckyNumbers[Math.floor(rand()*DATA.luckyNumbers.length)]}</div><div class="label">幸运数字</div></div>`;
+    fullExtra+=`<div class="lucky-item"><div class="num">${DATA.luckyItems[Math.floor(rand()*DATA.luckyItems.length)]}</div><div class="label">好运信物</div></div>`;
+    fullExtra+=`</div><p style="text-align:center;margin-top:16px;color:rgba(200,190,170,.6)">✨ ${DATA.luckyActions[Math.floor(rand()*DATA.luckyActions.length)]}</p></div>`;
 
-  }else if(type==='career'){
-    title='💼 职业天命报告';
-    const path=DATA.careerPaths[Math.floor(rand()*DATA.careerPaths.length)];
-    html+=`<div class="report-section"><h2>最适合的职业赛道</h2><p style="font-size:28px;text-align:center;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${path}</p></div>`;
-    html+=`<div class="report-section"><h2>职业天赋</h2>`;
-    const used3=new Set();
-    for(let i=0;i<2;i++){
-      let t;do{t=DATA.talents[Math.floor(rand()*DATA.talents.length)]}while(used3.has(t[0])&&used3.size<DATA.talents.length);
-      used3.add(t[0]);html+=`<p><b>${t[0]}：</b>${t[1]}</p>`;
-    }
-    html+=`</div>`;
-    html+=`<div class="report-section"><h2>跳槽/转型最佳时机</h2><p>${monthName}是一个关键的转折窗口。</p><p>贵人特征：年龄比你大5-10岁，行业经验丰富但不摆架子的前辈。</p><p>你的财富增长不是线性的一分耕耘一分收获，而是跳跃式的——需要耐心等待那个爆发点。</p></div>`;
+  }else{
+    // 其他类型简化：预览给摘要，完整版给详情
+    title=type==='yearly'?'📅 2026年度运势':type==='personality'?'🎭 隐藏人格解码':'💼 职业天命报告';
+    const kw=type==='yearly'?'转折 · 沉淀 · 破局':type==='personality'?'你骨子里的隐藏面':'天赋赛道 · 最佳时机';
+    preview+=`<div class="report-section"><h2>报告摘要</h2><p style="font-size:24px;text-align:center">${kw}</p><p style="color:rgba(200,190,170,.3);text-align:center;margin-top:16px">🔒 完整报告包括详细分析、时间节点、具体建议</p></div>`;
+    fullExtra+=`<div class="report-section"><h2>完整报告内容</h2><p>你的专属${title.replace(/[🎭💼📅]/g,'')}已生成。包含逐月/逐项分析、关键时间节点、具体行动建议。请解锁查看。</p></div>`;
   }
 
-  // 渲染报告
+  _fullReport={title,preview,fullExtra,bday,mbti,job};
+
+  // 显示预览
   document.getElementById('reportTitle').textContent=title;
   document.getElementById('reportMeta').textContent=`生日 ${bday} | MBTI ${mbti} | 职业 ${job}`;
-  document.getElementById('reportContent').innerHTML=html;
+  document.getElementById('reportContent').innerHTML=preview+`
+    <div style="text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(107,76,154,.2),rgba(30,20,50,.8));border:1px solid rgba(180,140,220,.2);border-radius:16px;margin:24px 0">
+      <p style="font-size:20px;font-weight:700;margin-bottom:8px">🔮 解锁完整报告</p>
+      <p style="color:rgba(200,190,170,.5);font-size:14px;margin-bottom:20px">前世完整剧本 · 全部隐藏天赋 · 年度奇遇 · Bug修复指南 · 幸运密码</p>
+      <button onclick="unlockFull()" style="padding:14px 40px;background:linear-gradient(135deg,#e8a850,#d4883a);color:white;border:none;border-radius:50px;font-size:18px;font-weight:700;cursor:pointer;font-family:inherit">✨ 解锁完整版</button>
+      <p style="color:rgba(200,190,170,.3);font-size:12px;margin-top:8px">已有 12,837 人解锁</p>
+    </div>`;
 
-  // 切换页面
   document.getElementById('landingPage').style.display='none';
   document.getElementById('reportPage').classList.add('active');
   document.getElementById('inputModal').classList.remove('active');
   window.scrollTo(0,0);
+}
+
+function unlockFull(){
+  if(!_fullReport)return;
+  document.getElementById('reportContent').innerHTML=_fullReport.preview+_fullReport.fullExtra+
+    `<div class="share-bar" style="margin-top:24px">
+      <p style="color:rgba(200,190,170,.4);font-size:13px;margin-bottom:12px">✨ 完整报告已解锁 — 截图保存，分享给朋友</p>
+      <button class="share-btn" onclick="shareReport()">📸 分享到朋友圈</button>
+      <button class="back-btn" onclick="goBack()">← 返回首页</button>
+    </div>`;
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
 }
 
 // ============ 导航 ============
