@@ -750,8 +750,8 @@ function answerQuiz(step,val){
 
 // ============ GENERATE ============
 function generate(){
-  let tp=_type,yr,mo,da,gd,bd='',mb='未知',mbName='',r;
-  if(tp==='couple'){
+  let tp=_type,yr=2000,mo=1,da=1,gd='',bd='2000.1.1',mb='未知',mbName='',r;
+  if(tp==='personality_quiz'){mb=window._quizMbti||'未知';mbName=window._quizMbtiName||'';r=sd((mb+'2000').toString())}else if(tp==='couple'){
     let y1=parseInt(document.getElementById('c1Year').value),m1=parseInt(document.getElementById('c1Month').value),d1=document.getElementById('c1Day').value;
     let y2=parseInt(document.getElementById('c2Year').value),m2=parseInt(document.getElementById('c2Month').value),d2=document.getElementById('c2Day').value;
     if(!y1||!m1||!d1||!y2||!m2||!d2){alert('请填写两人的完整生日');return}
