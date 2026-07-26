@@ -312,7 +312,8 @@ const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
   for(let i=1;i<=31;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'日';ds.appendChild(o)}
   // MBTI
   let mbti=document.getElementById('fMbti');
-  ['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'].forEach(x=>{let o=document.createElement('option');o.value=x;o.textContent=x;mbti.appendChild(o)});
+  let mbtiNames={'INTJ':'建筑师','INTP':'逻辑学家','ENTJ':'指挥官','ENTP':'辩论家','INFJ':'提倡者','INFP':'调停者','ENFJ':'主人公','ENFP':'竞选者','ISTJ':'物流师','ISFJ':'守卫者','ESTJ':'总经理','ESFJ':'执政官','ISTP':'鉴赏家','ISFP':'探险家','ESTP':'企业家','ESFP':'表演者'};
+  Object.entries(mbtiNames).forEach(([k,v])=>{let o=document.createElement('option');o.value=k;o.textContent=k+' - '+v;mbti.appendChild(o)});
 })();
 
 // ============ MYSTICAL CLOCK ============
@@ -353,7 +354,9 @@ function generate(){
   if(!yr||!mo||!da){alert('请选择完整的年月日');return}
   let bd=yr+'.'+mo+'.'+da;
   let gd=document.getElementById('fGender').value;
-  let mb=document.getElementById('fMbti').value||'未知';
+  let mbRaw=document.getElementById('fMbti').value||'';
+  let mb=mbRaw?mbRaw.split(' - ')[0]:'未知';
+  let mbName=mbRaw?mbRaw.split(' - ')[1]||'':'';
   let jb='探索者';
   let tp=document.getElementById('fType').value;
   let r=sd((yr*10000+mo*100+parseInt(da)).toString());
@@ -401,7 +404,7 @@ function generate(){
 
   _r={tt,pre,ext};
   document.getElementById('rTitle').textContent=tt;
-  document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb} | 职业 ${jb}`;
+  document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''} | 职业 ${jb}`;
   document.getElementById('rContent').innerHTML=pre+'<div class="unlock-box"><h3>🔮 解锁完整报告</h3><p>前世完整剧本 · 全部隐藏天赋 · 年度奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
   document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
