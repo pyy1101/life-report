@@ -166,12 +166,12 @@ function generate(){
   let r=sd((parseInt(mo)*100+parseInt(da)).toString());
 
   // Gender-filtered template pool
-  function filterGender(arr){
+  let filterGender=function(arr){
     if(!gd) return arr;
     let preferred=arr.filter(x=>x.g===gd), neutral=arr.filter(x=>!x.g||x.g==='u');
-    let pool=[...preferred,...preferred,...neutral]; // 2:1 bias toward preferred gender
+    let pool=[...preferred,...preferred,...neutral];
     return pool.length>0?pool:arr;
-  }
+  };
   let PL=filterGender(P), GL=filterGender(G);
   let mo=parseInt(bd.split(/[.\-/]/)[0])||10,moN=MN[Math.min(11,Math.max(0,mo-1))];
   let pre='',ext='',tt='';
