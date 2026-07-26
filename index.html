@@ -111,9 +111,12 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 
 <div class="modal" id="modal"><div class="modal-box">
   <h2>🔮 生成你的报告</h2>
-  <input type="text" id="fBday" placeholder="生日 (如 10.20)">
+  <div style="display:flex;gap:8px">
+    <select id="fMonth" style="flex:1"><option value="">月</option></select>
+    <select id="fDay" style="flex:1"><option value="">日</option></select>
+  </div>
   <select id="fGender"><option value="">性别 (选填)</option><option value="female">女性</option><option value="male">男性</option></select>
-  <input type="text" id="fMbti" placeholder="MBTI (选填)">
+  <select id="fMbti"><option value="">MBTI (选填)</option></select>
   <input type="text" id="fJob" placeholder="职业 (选填)">
   <select id="fType"><option value="life">🔮 隐藏人生剧本</option><option value="couple">💘 双人合盘报告</option><option value="yearly">📅 年度运势</option><option value="personality">🎭 隐藏人格解码</option><option value="career">💼 职业天命</option></select>
   <button class="submit-btn" onclick="generate()">✨ 生成预览</button>
@@ -125,6 +128,19 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 const P=PAST_LIVES,G=TALENTS,A=ADVENTURES,B=BUGS;
 const LC=LUCKY_COLORS,LN=LUCKY_NUMBERS,LI=LUCKY_ITEMS,LA=LUCKY_ACTIONS;
 const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
+
+// ============ POPULATE DROPDOWNS ============
+(function(){
+  // Month
+  let ms=document.getElementById('fMonth');
+  for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';ms.appendChild(o)}
+  // Day
+  let ds=document.getElementById('fDay');
+  for(let i=1;i<=31;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'日';ds.appendChild(o)}
+  // MBTI
+  let mbti=document.getElementById('fMbti');
+  ['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'].forEach(x=>{let o=document.createElement('option');o.value=x;o.textContent=x;mbti.appendChild(o)});
+})();
 
 // ============ STARS ============
 (function(){let c=document.getElementById('stars'),s=[1,1,1,1.5,1.5,2,2.5,3];for(let i=0;i<130;i++){let e=document.createElement('div'),z=s[Math.floor(Math.random()*s.length)];e.style.cssText=`position:absolute;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${z>2?'.5':z>1.5?'.3':'.15'};animation:tw${Math.random()*4+2}s infinite alternate;animation-delay:${Math.random()*5}s`;c.appendChild(e)}for(let i=0;i<3;i++){let e=document.createElement('div');e.style.cssText=`position:absolute;width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);left:${Math.random()*100}%;top:${Math.random()*80}%;animation:sh${Math.random()*4+4}s linear infinite;animation-delay:${Math.random()*8}s`;c.appendChild(e)}let st=document.createElement('style');st.textContent=`@keyframes tw{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}@keyframes sh{0%{transform:translateX(0)translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px)translateY(80px);opacity:0}100%{opacity:0}}`;document.head.appendChild(st)})();
@@ -141,12 +157,14 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 let _r=null;
 
 function generate(){
-  let bd=document.getElementById('fBday').value.trim();if(!bd){alert('请输入生日');return}
+  let mo=document.getElementById('fMonth').value,da=document.getElementById('fDay').value;
+  if(!mo||!da){alert('请选择生日');return}
+  let bd=mo+'.'+da;
   let gd=document.getElementById('fGender').value;
-  let mb=(document.getElementById('fMbti').value.trim()||'未知').toUpperCase();
+  let mb=document.getElementById('fMbti').value||'未知';
   let jb=document.getElementById('fJob').value.trim()||'探索者';
   let tp=document.getElementById('fType').value;
-  let r=sd(bd.replace(/[^0-9]/g,'')||'1020');
+  let r=sd((parseInt(mo)*100+parseInt(da)).toString());
 
   // Gender-filtered template pool
   function filterGender(arr){
