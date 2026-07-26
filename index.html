@@ -533,6 +533,7 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 
 // ============ GENERATE ============
 function generate(){
+  console.log("generate called, _type:",_type,"P:",typeof P,"PAST_LIVES:",typeof PAST_LIVES);
   let tp=_type,yr,mo,da,gd,bd='',mb='未知',mbName='',r;
   if(tp==='couple'){
     let y1=parseInt(document.getElementById('c1Year').value),m1=parseInt(document.getElementById('c1Month').value),d1=document.getElementById('c1Day').value;
