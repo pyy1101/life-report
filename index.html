@@ -684,16 +684,16 @@ var xh='';
 xh+='<p style=color:#888>'+xyr+'.'+xmo+'.'+xda+'</p>';
 xh+='<div class=rs><h2>一、前世身份：'+xpl.t+'</h2><p>'+xpl.d+'</p></div>';
 xh+='<div class=rs><h2>二、今生隐藏天赋</h2>'+xts.map(function(x,i){return '<p><b>'+(i+1)+'. '+x[0]+'：</b>'+x[1]+'</p>'}).join('')+'</div>';
-xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p class=locked>'+xad2[0]+'：'+xad2[1]+'</p></div>';
-xh+='<div class="rs locked"><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
+xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p data-lock=1>'+xad2[0]+'：'+xad2[1]+'</p></div>';
+xh+='<div class=rs locked><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
 xh+='<div class=unlock-box><button class=btn onclick=unlock()>解锁完整版</button></div>';
 document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;
 setTimeout(function(){
-  var locks=document.getElementById('rContent').getElementsByClassName('locked');
-  while(locks.length>0){locks[0].style.display='none';locks[0].classList.remove('locked')}
+var all=document.querySelectorAll('#rContent [data-lock]');
+for(var i=0;i<all.length;i++){all[i].style.display='none'}
 },100);
 }catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   else if(t==='couple'){h='💘 双人合盘报告';b='查看你们的羁绊';box.innerHTML=`<h2>${h}</h2><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px">你的信息</p>${bdayHTML('c1Year','c1Month','c1Day')}<select id="c1Gender"><option value="">你的性别</option><option value="female">女性</option><option value="male">男性</option></select><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px;margin-top:12px">对方的信息</p>${bdayHTML('c2Year','c2Month','c2Day')}<select id="c2Gender"><option value="">TA的性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="try{
@@ -710,16 +710,16 @@ var xh='';
 xh+='<p style=color:#888>'+xyr+'.'+xmo+'.'+xda+'</p>';
 xh+='<div class=rs><h2>一、前世身份：'+xpl.t+'</h2><p>'+xpl.d+'</p></div>';
 xh+='<div class=rs><h2>二、今生隐藏天赋</h2>'+xts.map(function(x,i){return '<p><b>'+(i+1)+'. '+x[0]+'：</b>'+x[1]+'</p>'}).join('')+'</div>';
-xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p class=locked>'+xad2[0]+'：'+xad2[1]+'</p></div>';
-xh+='<div class="rs locked"><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
+xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p data-lock=1>'+xad2[0]+'：'+xad2[1]+'</p></div>';
+xh+='<div class=rs locked><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
 xh+='<div class=unlock-box><button class=btn onclick=unlock()>解锁完整版</button></div>';
 document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;
 setTimeout(function(){
-  var locks=document.getElementById('rContent').getElementsByClassName('locked');
-  while(locks.length>0){locks[0].style.display='none';locks[0].classList.remove('locked')}
+var all=document.querySelectorAll('#rContent [data-lock]');
+for(var i=0;i<all.length;i++){all[i].style.display='none'}
 },100);
 }catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day')}
   else if(t==='yearly'){h='📅 年度运势';b='预览你的2026';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="try{
@@ -736,16 +736,16 @@ var xh='';
 xh+='<p style=color:#888>'+xyr+'.'+xmo+'.'+xda+'</p>';
 xh+='<div class=rs><h2>一、前世身份：'+xpl.t+'</h2><p>'+xpl.d+'</p></div>';
 xh+='<div class=rs><h2>二、今生隐藏天赋</h2>'+xts.map(function(x,i){return '<p><b>'+(i+1)+'. '+x[0]+'：</b>'+x[1]+'</p>'}).join('')+'</div>';
-xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p class=locked>'+xad2[0]+'：'+xad2[1]+'</p></div>';
-xh+='<div class="rs locked"><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
+xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p data-lock=1>'+xad2[0]+'：'+xad2[1]+'</p></div>';
+xh+='<div class=rs locked><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
 xh+='<div class=unlock-box><button class=btn onclick=unlock()>解锁完整版</button></div>';
 document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;
 setTimeout(function(){
-  var locks=document.getElementById('rContent').getElementsByClassName('locked');
-  while(locks.length>0){locks[0].style.display='none';locks[0].classList.remove('locked')}
+var all=document.querySelectorAll('#rContent [data-lock]');
+for(var i=0;i<all.length;i++){all[i].style.display='none'}
 },100);
 }catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay')}
   else if(t==='personality'){
@@ -767,16 +767,16 @@ var xh='';
 xh+='<p style=color:#888>'+xyr+'.'+xmo+'.'+xda+'</p>';
 xh+='<div class=rs><h2>一、前世身份：'+xpl.t+'</h2><p>'+xpl.d+'</p></div>';
 xh+='<div class=rs><h2>二、今生隐藏天赋</h2>'+xts.map(function(x,i){return '<p><b>'+(i+1)+'. '+x[0]+'：</b>'+x[1]+'</p>'}).join('')+'</div>';
-xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p class=locked>'+xad2[0]+'：'+xad2[1]+'</p></div>';
-xh+='<div class="rs locked"><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
+xh+='<div class=rs><h2>三、2026年奇遇剧本</h2><p>'+xad[0]+'：'+xad[1]+'</p><p data-lock=1>'+xad2[0]+'：'+xad2[1]+'</p></div>';
+xh+='<div class=rs locked><h2>四、人生Bug修复指南</h2>'+xbs.map(function(x,i){return '<p>'+(i+1)+'. '+x[0]+'：'+x[1]+'</p>'}).join('')+'</div>';
 xh+='<div class=unlock-box><button class=btn onclick=unlock()>解锁完整版</button></div>';
 document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;
 setTimeout(function(){
-  var locks=document.getElementById('rContent').getElementsByClassName('locked');
-  while(locks.length>0){locks[0].style.display='none';locks[0].classList.remove('locked')}
+var all=document.querySelectorAll('#rContent [data-lock]');
+for(var i=0;i<all.length;i++){all[i].style.display='none'}
 },100);
 }catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   document.getElementById('modal').classList.add('active');setTimeout(function(){var b=document.getElementById('genBtn-'+t);if(b)b.onclick=function(){generate()}},100);
@@ -868,8 +868,8 @@ h+="<div class=rs><h2>一、前世身份："+pl.t+"</h2><p>"+pl.d+"</p></div>";
 h+="<div class=rs><h2>二、今生隐藏天赋</h2>"+ts.map(function(x,i){return"<p><b>"+(i+1)+". "+x[0]+"：</b>"+x[1]+"</p>"}).join("")+"</div>";
 h+="<div class=rs><h2>三、2026年奇遇剧本</h2>";
 h+="<p> * <b>"+ad[0]+"：</b>"+ad[1]+"</p>";
-h+="<p class=locked> * <b>"+ad2[0]+"：</b>"+ad2[1]+"</p>";
-h+="<p class=locked> * <b>避坑提醒：</b>"+(mo||1)+"月前后注意财务决策。</p></div>";
+h+="<p data-lock=1> * <b>"+ad2[0]+"：</b>"+ad2[1]+"</p>";
+h+="<p data-lock=1> * <b>避坑提醒：</b>"+(mo||1)+"月前后注意财务决策。</p></div>";
 h+="<div class=\"rs locked\"><h2>四、人生Bug修复指南</h2>"+bs.map(function(x,i){return"<p><b>"+(i+1)+". "+x[0]+"：</b>"+x[1]+"</p>"}).join("")+"</div>";
 h+="<div class=\"rs locked\"><h2>五、专属幸运密码</h2><div class=lucky-box>";
 h+="<div class=lucky-item><div class=num>"+pk(LC,r)+"</div><div class=label>幸运色</div></div>";
