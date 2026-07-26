@@ -1,48 +1,46 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>隐藏人生剧本 - 发现你的命运密码</title>
+<script src="templates.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow-x:hidden}
-/* HERO */
 .hero{min-height:100vh;background:linear-gradient(180deg,#050510,#0c0a20 20%,#0e0c2a 40%,#0a0a1a 70%,#060610);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,#0a0a0f);z-index:1}
-.nebula{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;animation:nebulaFloat 20s ease-in-out infinite}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,#0a0a0f);z-index:0}
+.nebula{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;animation:nf 20s infinite}
 .n1{width:500px;height:500px;top:-100px;left:-100px;background:radial-gradient(circle,#6b4c9a,transparent)}
 .n2{width:400px;height:400px;top:50%;right:-100px;background:radial-gradient(circle,#4a3060,transparent);animation-delay:-7s}
 .n3{width:350px;height:350px;bottom:-80px;left:30%;background:radial-gradient(circle,#2a1a40,transparent);animation-delay:-14s}
-@keyframes nebulaFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-20px) scale(1.1)}50%{transform:translate(-20px,10px) scale(.95)}75%{transform:translate(15px,25px) scale(1.05)}}
-.moon{position:absolute;top:60px;right:15%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f5e6d3,#e8d5b8 30%,#c8a882 70%,transparent 72%);box-shadow:0 0 60px rgba(200,160,120,.15),0 0 120px rgba(200,160,120,.06);animation:moonglow 8s ease-in-out infinite;z-index:0}
-@keyframes moonglow{0%,100%{box-shadow:0 0 60px rgba(200,160,120,.15)}50%{box-shadow:0 0 80px rgba(220,180,140,.2)}}
-.ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(80vw,500px);height:min(80vw,500px);border-radius:50%;border:1px solid rgba(180,140,220,.04);pointer-events:none;z-index:0}
-.ring:nth-child(7){width:min(60vw,380px);height:min(60vw,380px);border-color:rgba(180,140,220,.025);transform:translate(-50%,-50%) rotate(30deg)}
-.ring:nth-child(8){width:min(40vw,260px);height:min(40vw,260px);border-color:rgba(180,140,220,.015);transform:translate(-50%,-50%) rotate(-20deg)}
+@keyframes nf{0%,100%{transform:translate(0,0)scale(1)}25%{transform:translate(30px,-20px)scale(1.1)}50%{transform:translate(-20px,10px)scale(.95)}75%{transform:translate(15px,25px)scale(1.05)}}
+.moon{position:absolute;top:60px;right:15%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35%35%,#f5e6d3,#e8d5b8 30%,#c8a882 70%,transparent 72%);box-shadow:0 0 60px rgba(200,160,120,.15);animation:mg 8s infinite;z-index:0}
+@keyframes mg{0%,100%{box-shadow:0 0 60px rgba(200,160,120,.15)}50%{box-shadow:0 0 80px rgba(220,180,140,.2)}}
+.ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(180,140,220,.04);pointer-events:none;z-index:0}
+.r1{width:min(80vw,500px);height:min(80vw,500px)}
+.r2{width:min(60vw,380px);height:min(60vw,380px);border-color:rgba(180,140,220,.025);transform:translate(-50%,-50%)rotate(30deg)}
+.r3{width:min(40vw,260px);height:min(40vw,260px);border-color:rgba(180,140,220,.015);transform:translate(-50%,-50%)rotate(-20deg)}
 .hero-content{position:relative;z-index:2;max-width:700px}
-.badge{display:inline-block;padding:8px 24px;border:1px solid rgba(180,140,220,.3);border-radius:20px;font-size:13px;color:#b48cdc;letter-spacing:3px;margin-bottom:36px;backdrop-filter:blur(10px)}
+.badge{display:inline-block;padding:8px 24px;border:1px solid rgba(180,140,220,.3);border-radius:20px;font-size:13px;color:#b48cdc;letter-spacing:3px;margin-bottom:36px}
 .hero h1{font-size:clamp(40px,7vw,68px);font-weight:900;background:linear-gradient(180deg,#f0e0cc,#d4b896 30%,#c4a080 60%,#8b6c9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px;line-height:1.25;letter-spacing:2px}
 .hero .subtitle{font-size:18px;color:rgba(200,190,170,.55);margin-bottom:56px;letter-spacing:3px;font-weight:300}
 .cta-btn{display:inline-block;padding:18px 56px;background:linear-gradient(135deg,rgba(140,100,180,.3),rgba(100,70,150,.2));color:#f0e0cc;font-size:19px;font-weight:600;border:1px solid rgba(180,140,220,.3);border-radius:50px;cursor:pointer;text-decoration:none;letter-spacing:2px;backdrop-filter:blur(10px);transition:all .4s}
 .cta-btn:hover{background:linear-gradient(135deg,rgba(160,120,200,.4),rgba(120,90,170,.3));border-color:rgba(200,160,240,.5);transform:translateY(-2px);box-shadow:0 8px 40px rgba(140,100,180,.25)}
-.scroll-hint{position:absolute;bottom:40px;z-index:2;color:rgba(200,190,170,.35);font-size:13px;letter-spacing:2px;animation:bounce 2s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-/* REPORTS */
+.scroll-hint{position:absolute;bottom:40px;z-index:2;color:rgba(200,190,170,.35);font-size:13px;letter-spacing:2px;animation:bc 2s infinite}
+@keyframes bc{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 .reports{padding:80px 20px;max-width:1100px;margin:0 auto}
 .section-title{text-align:center;font-size:32px;font-weight:900;margin-bottom:15px;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .section-sub{text-align:center;color:rgba(200,190,170,.5);margin-bottom:50px;font-size:15px}
 .report-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
-.report-card{background:linear-gradient(135deg,rgba(30,20,50,.8),rgba(20,15,35,.9));border:1px solid rgba(180,140,220,.12);border-radius:16px;padding:28px 20px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.report-card{background:linear-gradient(135deg,rgba(30,20,50,.8),rgba(20,15,35,.9));border:1px solid rgba(180,140,220,.12);border-radius:16px;padding:28px 20px;transition:all .3s;cursor:pointer}
 .report-card:hover{border-color:rgba(180,140,220,.35);transform:translateY(-4px);box-shadow:0 16px 48px rgba(107,76,154,.18)}
-.report-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.5),transparent)}
+.report-card::before{content:'';display:block;height:2px;margin-bottom:16px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.5),transparent)}
 .card-icon{font-size:36px;margin-bottom:14px}
 .card-title{font-size:19px;font-weight:700;margin-bottom:6px;color:#e8e0d0}
 .card-desc{font-size:13px;color:rgba(200,190,170,.45);line-height:1.6}
-/* TESTIMONIALS */
 .testimonials{padding:80px 20px;max-width:900px;margin:0 auto}
 .test-grid{display:grid;gap:20px}
 .test{background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.08);border-radius:12px;padding:22px;display:flex;gap:14px;align-items:flex-start}
 .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
 .tc{flex:1}.tn{font-weight:700;font-size:14px}.tt{color:rgba(200,190,170,.55);font-size:13px;margin-top:5px;line-height:1.6}.td{color:rgba(200,190,170,.25);font-size:12px;margin-top:6px}
-/* MODAL */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;padding:20px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
 .modal-box{background:#1a1530;border:1px solid rgba(180,140,220,.2);border-radius:20px;padding:36px 28px;max-width:420px;width:90%;text-align:center}
 .modal-box h2{font-size:22px;margin-bottom:20px}
@@ -50,16 +48,14 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 .modal-box input::placeholder{color:rgba(255,255,255,.3)}
 .submit-btn{width:100%;padding:13px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);border:none;border-radius:10px;color:white;font-size:17px;font-weight:700;cursor:pointer;margin-top:6px}
 .modal-close{display:inline-block;margin-top:14px;color:rgba(255,255,255,.35);cursor:pointer;font-size:13px}
-/* REPORT */
 #reportPage{display:none}#reportPage.active{display:block}
 .report-container{max-width:750px;margin:0 auto;padding:32px 24px}
-.report-header{text-align:center;padding:50px 20px 36px;background:radial-gradient(ellipse at 50% 0%,#1a1040,#0a0a0f)}
+.report-header{text-align:center;padding:50px 20px 36px;background:radial-gradient(ellipse at 50%0%,#1a1040,#0a0a0f)}
 .report-header h1{font-size:26px;font-weight:900;margin-bottom:10px}
 .report-meta{color:rgba(200,190,170,.45);font-size:13px}
 .rs{background:linear-gradient(135deg,rgba(30,20,50,.6),rgba(20,15,35,.7));border:1px solid rgba(180,140,220,.1);border-radius:16px;padding:26px 22px;margin-bottom:18px}
 .rs h2{font-size:19px;font-weight:700;margin-bottom:14px;color:#d4b8f0}
 .rs p,.rs li{font-size:15px;line-height:1.9;color:rgba(220,210,190,.82);margin-bottom:8px}
-.rs ul{padding-left:18px}.rs li::marker{color:#b48cdc}
 .lucky-box{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;text-align:center}
 .lucky-item{background:rgba(107,76,154,.12);border-radius:12px;padding:16px 20px;min-width:90px}
 .lucky-item .num{font-size:28px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -68,25 +64,22 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 .share-btn{padding:14px 36px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;margin:0 6px;font-family:inherit}
 .back-btn{padding:14px 36px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:17px;cursor:pointer;font-family:inherit}
 .unlock-box{text-align:center;padding:36px 20px;background:linear-gradient(135deg,rgba(107,76,154,.15),rgba(30,20,50,.8));border:1px solid rgba(180,140,220,.18);border-radius:16px;margin:20px 0}
-.unlock-box h3{font-size:19px;font-weight:700;margin-bottom:6px}
-.unlock-box p{color:rgba(200,190,170,.45);font-size:13px;margin-bottom:18px}
 .unlock-btn{padding:13px 36px;background:linear-gradient(135deg,#e8a850,#d4883a);color:white;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
 .footer{text-align:center;padding:50px 20px 36px;color:rgba(200,190,170,.25);font-size:12px;border-top:1px solid rgba(180,140,220,.06)}
 @media(max-width:600px){.hero h1{font-size:32px}.cta-btn{padding:14px 36px;font-size:17px}.report-grid{grid-template-columns:1fr}}
 </style></head><body>
 
-<!-- LANDING -->
 <div id="landing">
 <section class="hero">
   <div class="nebula n1"></div><div class="nebula n2"></div><div class="nebula n3"></div>
-  <div class="moon"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="moon"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
   <div id="stars"></div>
   <div class="hero-content">
     <div class="badge">DESTINY EXPLORER</div>
     <h1>发现你的<br>隐藏人生剧本</h1>
     <p class="subtitle">前世身份 · 隐藏天赋 · 年度奇遇 · 命运修复</p>
     <a class="cta-btn" href="#reports">生成我的报告 ↓</a>
-    <p style="margin-top:14px;color:rgba(200,190,170,.35);font-size:13px">已为 <span id="userCount">13,000</span>+ 人揭示命运剧本</p>
+    <p style="margin-top:14px;color:rgba(200,190,170,.35);font-size:13px">已为 <span id="uc">13,000</span>+ 人揭示命运剧本</p>
   </div>
   <div class="scroll-hint">向下探索</div>
 </section>
@@ -106,19 +99,16 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <section class="testimonials">
   <div class="section-title">他们这样说</div>
   <div class="test-grid">
-    <div class="test"><div class="av">🌸</div><div class="tc"><div class="tn">小丸子</div><div class="tt">太准了！说我危险直觉强还不信，回头一想之前那个offer前就觉得不对，果然是个坑。</div><div class="td">2天前</div></div></div>
+    <div class="test"><div class="av">🌸</div><div class="tc"><div class="tn">小丸子</div><div class="tt">太准了！说我危险直觉强还不信，回头一想之前那个offer前就觉得不对，果然是个坑。发给闺蜜看她也说准得离谱…</div><div class="td">2天前</div></div></div>
     <div class="test"><div class="av">⭐</div><div class="tc"><div class="tn">晚风与猫</div><div class="tt">男朋友非要我测双人合盘，测完说原来咱俩前世是师徒哈哈。已经推荐给全公司了。</div><div class="td">5天前</div></div></div>
     <div class="test"><div class="av">🌙</div><div class="tc"><div class="tn">林深时见鹿</div><div class="tt">"别跟老朋友合伙"这条直接击中——去年刚跟发小合伙开店闹掰了。早点测就好了。</div><div class="td">1周前</div></div></div>
   </div>
 </section>
-
 <footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer>
 </div>
 
-<!-- REPORT -->
 <div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 截图分享</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
 
-<!-- INPUT MODAL -->
 <div class="modal" id="modal"><div class="modal-box">
   <h2>🔮 生成你的报告</h2>
   <input type="text" id="fBday" placeholder="生日 (如 10.20)">
@@ -130,132 +120,73 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 </div></div>
 
 <script>
-// ============ DATA ============
-const P=[
-  {t:"终南山林间灵医",d:"隐居在终南山里的采药人，守着一片药田，很少下山。不爱跟俗人打交道，却总忍不住救迷路的旅人、受伤的小狐狸，治病不收银钱，只收对方讲一个山外的新鲜故事。这辈子你依然带着这份本能：天生共情力强，见不得别人难过；总喜欢躲在自己的小世界里，比起热闹人群更爱跟植物、小动物待在一起；嘴上不说，心里总偷偷给身边人兜底。"},
-  {t:"宋代江南书院书生",d:"前世是江南小镇书院里的教书先生，爱书如命却不爱功名。课余在院子里种菜养花，学生们都说你是最不像先生的先生。你最大的快乐是看学生豁然开朗的那一瞬间。这辈子你天生擅长用简单话说清复杂道理，对知识有无尽的渴望，但内心深处对名利场始终保持着疏离和清醒。"},
-  {t:"大漠丝绸之路画师",d:"你前世是随商队穿行丝绸之路的画师，用画笔记录沿途的风土人情。每到一座城就停下来画上几天，画完继续上路。你的画不是为了卖，只是为了把这个世界的斑斓留住。这辈子你骨子里带着漂泊感，在一个地方待久了会焦躁；你的审美直觉远超常人，对颜色、构图有天生的敏锐。"},
-  {t:"明朝江南织女",d:"前世是苏州织造府的顶尖织女，十指翻飞能织出云霞般的锦缎。你的织品被送进紫禁城，但你从不以此为傲，深夜独自织布时最是自在。这辈子你手极巧，做什么手工都上手快；对细节苛刻到近乎强迫，但你做出来的东西就是比别人精致十倍。"},
-  {t:"商周部落星象祭司",d:"前世是黄河边部落里的女祭司，负责观察星象、主持仪式。你能通过草木的生长状态预测当年的收成，部落里的人都敬畏你。这辈子你可能对星空有莫名的迷恋，直觉强到让自己害怕，有时候说出来的话会莫名其妙地应验。"},
-  {t:"民国上海滩书店老板",d:"前世是上海法租界里一间小书店的老板，店里藏着各种禁书和地下刊物。白天卖正经书，晚上偷偷借给进步青年。你从不多问他们拿去做什么，只是默默在每本书里夹一张写着'保重'的字条。这辈子你天然有保护弱者的冲动，对文字敏感，骨子里带着老派的浪漫和骨气。"},
-  {t:"古埃及神庙抄写员",d:"你前世是尼罗河边神庙里的抄写员，用芦苇笔在莎草纸上记录星辰轨迹和草药配方。你是神庙里最安静的那个人，却掌握着最多的秘密。这辈子你天生对符号、文字有超乎寻常的敏感，学语言快，做笔记工整得像印刷品，内心深处藏着对智慧的虔敬。"},
-  {t:"江户时代浮世绘画匠",d:"前世是江户街头的浮世绘画匠，画美人、画歌舞伎、画市井烟火。你一生清贫却从未为钱折腰，晚年烧掉了所有未完成的画稿。这辈子你骨子里有日本美学里'物哀'的底色——对美好事物的逝去有种深刻的共鸣，这也让你比旁人更懂得珍惜当下的瞬间。"},
-  {t:"维京航海人",d:"前世是北欧峡湾里的航海者，一生追逐地平线。你见过极光在冰海上跳舞，也经历过暴风雨中九死一生。你不是战士，是船上负责导航的那个人——靠星星辨别方向。这辈子你天生方向感极好，在一个地方困久了会窒息，需要定期的'出海'——哪怕只是一次长途旅行。"},
-  {t:"盛唐长安乐师",d:"前世是长安城里教坊司的琵琶师，指尖流出的是整个盛唐的繁华。你在皇帝面前弹过曲，也在深夜的酒肆里给失意人弹过。音乐是你的一切，但你知道最动人的音符永远藏在无声的停顿里。这辈子你对旋律有天然的感应，可能不会乐器，但听到好音乐会莫名想哭。"},
-  {t:"古希腊广场哲人",d:"前世是雅典广场上的思考者，不写书、不收徒，就站在橄榄树下跟路过的人聊天。你用问题回答问题，从来没有给过任何人一个直接的答案，但每个人离开时都觉得自己更清醒了。这辈子你天生擅长提问、反思、拆解复杂问题，别人眼中的困境，你三两句话就能理清。"},
-  {t:"战国楚国铸剑师",d:"前世是楚国深山里的铸剑师，一生只铸过七把剑，每一把都有自己的名字和性格。你不为君王铸剑，只为那些'值得拥有一把好剑的人'而铸。这辈子你对自己做的事有极高标准，宁可做得慢也不愿意交出半成品，你的底气来自于对品质的洁癖。"},
-];
-
-const G=[
-  ["情绪文字天赋","你随手写的句子总能戳中别人的心事，做内容、搞创作比普通人容易出结果。你的朋友圈、微博发发都有很高的互动率——这不是偶然，是你天生会'情绪翻译'。"],
-  ["危险直觉","你第一眼觉得不舒服的人、拿不准的事，最后大概率会出问题。别怀疑你的第六感——它比你的理性分析更准确。你的直觉系统像一个隐形的雷达，24小时扫描着周围的风吹草动。"],
-  ["万物亲和力","小动物天然不怕你，养多肉、绿植都比别人容易养活。去山里、海边会莫名觉得放松，好像大自然的能量在自动给你充电。你可能还不知道，你其实是个'自然体质'——越远离城市，你的灵气越强。"],
-  ["深夜创造力","你在晚上10点以后的思维比白天活跃三倍。这不是熬夜的借口，是你的大脑在这个时间段进入了'灵感模式'。很多伟大的艺术家都有这个特质，你不是孤例。"],
-  ["能量感知力","你能感知到一个房间里的气氛，吵架前的沉默、有人不开心时的空气，你都比旁人先捕捉到。这叫'高敏感人格'，是一种天赋而不是缺陷。"],
-  ["默默影响力","你可能没注意过：别人跟你聊完天后总会感觉好一点。这不是你的话疗，而是你的能量场——你不经意的一句话、一个眼神，就足以让别人重新振作。"],
-  ["空间构图天赋","你拍照从不用学构图，随手一拍就是比别人好看。你布置房间、搭配衣服的感觉都很好——这不是学来的，是你的眼睛天生能捕捉'视觉平衡'。"],
-  ["危机处理能力","平时你看似懒散随性，但一到紧急关头，你是所有人里最冷静的那个。你能在混乱中迅速抓住重点，做决定快且准——这是一种极其稀缺的领导力天赋。"],
-  ["识人之明","你第一次见面就能大致判断一个人的底色，虽然你通常不说出来。事实证明你的预判经常是对的。不是你会看面相，是你的潜意识在整理对方微表情、语气、肢体语言的信号。"],
-  ["故事编织力","你讲一件事情总能让别人听得津津有味，哪怕只是昨天去超市买了菜。你有能力把平凡日常讲成故事——这是天生的叙事者天赋，不写小说可惜了。"],
-  ["数字敏感度","你对数字、规律、模式有天然的嗅觉。别人看到一堆数字头疼，你一眼就能发现哪里不对。这不是数学能力，是一种'秩序感知'。"],
-  ["痛感预知","你身体某个部位会在别人不舒服之前先有反应。这不是玄学——高敏感人群的镜像神经元更活跃，你会'感同身受'别人的身体状况。医学生和心理咨询师里有很多这种人。"],
-];
-
-const A=[
-  ["秋日奇遇","9-10月你会在一家旧书店或社区咖啡店里，遇到一个戴木质手串的长辈。他会跟你说一句没头没尾的话，当时你听不懂，但三个月后遇到人生岔路口时，这句话会突然浮现在你脑海里，帮你避开一个大坑。"],
-  ["冬季转折","12月会有一个完全陌生领域的机会找上门，跟你现在做的事几乎不沾边。别直接拒绝，抱着试试的心态接下来，会给你带来意料之外的收入和新的方向。"],
-  ["盛夏邂逅","7-8月在一次短途旅行中，你会遇到一个改变你职业轨迹的人。不是恋爱关系，是事业上的贵人。对方可能看起来毫不起眼，但你们之间的对话会像钥匙和锁一样契合。"],
-  ["春末顿悟","4-5月的某个凌晨，你会突然想通一件纠结了大半年的事。不是在思考——是在半梦半醒间，答案自己浮上来的。那之前别焦虑，你的潜意识已经帮你想了六个月了。"],
-  ["意外来信","今年你会收到一封来自过去的信或消息——可能是一个很久不联系的老朋友，也可能是一个你忘掉的承诺突然兑现。这条消息会重新点燃你某个放弃已久的计划。"],
-  ["雨中相遇","今年雨季的某一天，你会因为躲雨而走进一个平时不会去的地方，在那里遇到的人或事会打开一个全新的圈子。记得随身带伞——不是为了挡雨，是为了让你有理由停下来。"],
-];
-
-const B=[
-  ["别在凌晨三点做决定","你深夜想的事90%都是无意义内耗。第二天早上醒来会觉得昨晚的自己像个戏精。如果忍不住，至少写下来而不是立刻执行。"],
-  ["别总委屈自己迁就别人","你的感受比'别人会不会不高兴'重要一万倍。你总以为忍一忍就过去了，但你忍的每一次都在身体里留下了痕迹——肩膀疼、失眠、莫名烦躁都是信号。"],
-  ["每年春天去山里走走","不用跟人说话，光是待着就能补满能量。你不是社恐，你只是需要定期'归零'。这个习惯比什么保健品都管用。"],
-  ["暂停过度分析","你习惯在脑子里预演所有可能性，但这个能力用过头就是自我折磨。有些事没道理就是没道理，你分析不出来答案的。放过自己。"],
-  ["学会接受赞美","别人夸你的时候别说'没有啦'，学着说'谢谢'。你总觉得自己不够好，但其实在别人眼里你已经很好了。从今天开始练习接受夸奖。"],
-  ["别跟认识超五年的朋友合伙","你太重感情，遇到利益分歧时不忍心争，最后只会自己吃亏。跟熟人的关系一旦叠上金钱维度，翻车的概率远高于跟陌生人合作。"],
-  ["学会说'不'","你总觉得拒绝别人不好，所以总在帮一些不是你的责任的忙。但你的时间和精力是有限的——每一次对别人说'是'，都是在对自己说'不'。"],
-  ["不要让社交媒体影响你的自我认知","你刷到的99%都是别人精心剪辑的高光片段，拿来跟自己24小时的真实生活比，不公平。每天睡前想三件自己做好的小事，坚持一个月。"],
-];
-
-const LC=["松烟绿","暮云紫","深海蓝","琥珀金","月光银","珊瑚粉","雾霭灰","薄雾紫","霜叶红","星夜蓝"];
-const LN=[3,5,7,9,11,13,17,21];
-const LI=["木质小挂件","绿松石手链","银色小铃铛","水晶小摆件","羽毛书签","铜质小镜子","玛瑙小挂坠","檀木小梳子"];
-const LA=["随身带一颗薄荷糖，紧张时含一颗","每天早上对着镜子笑一下，哪怕假笑也行","办公桌上放一个小盆栽","每月月圆之夜写下一个愿望","左手腕系一根红线（洗澡可摘）","出门前往左走三步再回头看一眼","手机壳里夹一片干花或树叶","每周给自己买一束花"];
-
-const MN=["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
-const REL=["前世师徒","战场上并肩的战友","失散多年的手足","相遇又错过的恋人","同一条船上的商人","同一座寺院的修行者","山林中偶遇的旅人","星空下对谈的陌生人"];
-const SCS=[78,82,85,88,91,94,96,83,87,90];
-const CT=["多给对方独处的时间，你们都需要个人空间","别在生气时发消息，冷静十分钟再沟通","每月至少一次不带手机的约会","学会用对方的爱语表达感情","吵架时不翻旧账，这是关系的黄金法则","一起完成一个小项目，能让感情升温","定期给对方写手写信，文字的力量大于微信"];
-const CP=["内容创作/新媒体","设计/艺术方向","教育/培训行业","心理咨询/助人","自由职业/数字游民","研究/学术领域","创业/自主经营","跨领域复合型人才"];
-
-// ============ HELPERS ============
-function sr(s){let x=0;for(let i=0;i<s.length;i++)x=(x*31+s.charCodeAt(i))%2147483647;return function(){x=(x*1103515245+12345)%2147483647;return x/2147483647}}
-function pick(arr,r){return arr[Math.floor(r()*arr.length)]}
-function picks(arr,n,r){let u=new Set(),res=[];while(res.length<n){let x=pick(arr,r);if(!u.has(x[0])){u.add(x[0]);res.push(x)}}return res}
+// ============ ALIASES from templates.js ============
+const P=PAST_LIVES,G=TALENTS,A=ADVENTURES,B=BUGS;
+const LC=LUCKY_COLORS,LN=LUCKY_NUMBERS,LI=LUCKY_ITEMS,LA=LUCKY_ACTIONS;
+const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
 
 // ============ STARS ============
-(function(){let c=document.getElementById('stars'),s=[1,1,1,1.5,1.5,2,2.5,3];for(let i=0;i<130;i++){let e=document.createElement('div'),z=s[Math.floor(Math.random()*s.length)];e.style.cssText=`position:absolute;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${z>2?'.5':z>1.5?'.3':'.15'};animation:tw${Math.random()*4+2}s infinite alternate;animation-delay:${Math.random()*5}s`;c.appendChild(e)}for(let i=0;i<3;i++){let e=document.createElement('div');e.style.cssText=`position:absolute;width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);left:${Math.random()*100}%;top:${Math.random()*80}%;animation:shoot${Math.random()*4+4}s linear infinite;animation-delay:${Math.random()*8}s`;c.appendChild(e)}let st=document.createElement('style');st.textContent=`@keyframes tw{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}@keyframes shoot{0%{transform:translateX(0)translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px)translateY(80px);opacity:0}100%{opacity:0}}`;document.head.appendChild(st)})();
-document.getElementById('userCount').textContent=(13000+Math.floor(Math.random()*500)).toLocaleString();
+(function(){let c=document.getElementById('stars'),s=[1,1,1,1.5,1.5,2,2.5,3];for(let i=0;i<130;i++){let e=document.createElement('div'),z=s[Math.floor(Math.random()*s.length)];e.style.cssText=`position:absolute;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${z>2?'.5':z>1.5?'.3':'.15'};animation:tw${Math.random()*4+2}s infinite alternate;animation-delay:${Math.random()*5}s`;c.appendChild(e)}for(let i=0;i<3;i++){let e=document.createElement('div');e.style.cssText=`position:absolute;width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);left:${Math.random()*100}%;top:${Math.random()*80}%;animation:sh${Math.random()*4+4}s linear infinite;animation-delay:${Math.random()*8}s`;c.appendChild(e)}let st=document.createElement('style');st.textContent=`@keyframes tw{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}@keyframes sh{0%{transform:translateX(0)translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px)translateY(80px);opacity:0}100%{opacity:0}}`;document.head.appendChild(st)})();
+document.getElementById('uc').textContent=(13000+Math.floor(Math.random()*500)).toLocaleString();
+
+// ============ HELPERS ============
+function sd(s){let x=0;for(let i=0;i<s.length;i++)x=(x*31+s.charCodeAt(i))%2147483647;return function(){x=(x*1103515245+12345)%2147483647;return x/2147483647}}
+function pk(a,r){return a[Math.floor(r()*a.length)]}
+function pks(a,n,r){let u=new Set(),res=[];while(res.length<n){let x=pk(a,r);if(!u.has(x[0])){u.add(x[0]);res.push(x)}}return res}
 
 // ============ FLOW ============
-function start(type){document.getElementById('fType').value=type;document.getElementById('modal').classList.add('active')}
+function start(t){document.getElementById('fType').value=t;document.getElementById('modal').classList.add('active')}
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active')});
-let _report=null,_meta=null;
+let _r=null;
 
 function generate(){
-  let b=document.getElementById('fBday').value.trim();if(!b){alert('请输入生日');return}
-  let mbti=(document.getElementById('fMbti').value.trim()||'未知').toUpperCase();
-  let job=document.getElementById('fJob').value.trim()||'探索者';
-  let type=document.getElementById('fType').value;
-  _meta={bday:b,mbti,job,type};
-  let r=sr(b.replace(/[^0-9]/g,'')||'1020');
-  let mo=parseInt(b.split(/[.\-/]/)[0])||10,moN=MN[Math.min(11,Math.max(0,mo-1))];
-  let preview='',extra='',title='';
+  let bd=document.getElementById('fBday').value.trim();if(!bd){alert('请输入生日');return}
+  let mb=(document.getElementById('fMbti').value.trim()||'未知').toUpperCase();
+  let jb=document.getElementById('fJob').value.trim()||'探索者';
+  let tp=document.getElementById('fType').value;
+  let r=sd(bd.replace(/[^0-9]/g,'')||'1020');
+  let mo=parseInt(bd.split(/[.\-/]/)[0])||10,moN=MN[Math.min(11,Math.max(0,mo-1))];
+  let pre='',ext='',tt='';
 
-  if(type==='life'||type==='couple'){
-    title=type==='couple'?'💘 双人合盘报告':'🔮 隐藏人生剧本';
-    let pl=pick(P,r);
-    preview+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
-    let ts=picks(G,3,r);
-    preview+=`<div class="rs"><h2>二、今生隐藏天赋</h2><p><b>1. ${ts[0][0]}：</b>${ts[0][1]}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:8px">🔒 解锁查看另外 2 项隐藏天赋</p></div>`;
-    let ad=pick(A,r);
-    preview+=`<div class="rs"><h2>三、年度关键线索</h2><p>✅ <b>${ad[0]}：</b>${ad[1].substring(0,28)}…</p><p style="color:rgba(200,190,170,.25);text-align:center">🔒 解锁完整奇遇 + Bug修复指南 + 幸运密码</p></div>`;
-    // extra
-    extra+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
-    extra+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
-    let ad2=pick(A,r);if(ad2[0]===ad[0])ad2=pick(A,r);
-    extra+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
-    extra+=`<p>⚠️ <b>避坑提醒：</b>${mo}月前后注意财务决策，别冲动消费或投资。</p></div>`;
-    let bs=picks(B,3,r);
-    extra+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
-    extra+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
-    extra+=`<div class="lucky-item"><div class="num">${pick(LC,r)}</div><div class="label">幸运色</div></div>`;
-    extra+=`<div class="lucky-item"><div class="num">${pick(LN,r)}</div><div class="label">幸运数字</div></div>`;
-    extra+=`<div class="lucky-item"><div class="num">${pick(LI,r)}</div><div class="label">好运信物</div></div>`;
-    extra+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pick(LA,r)}</p></div>`;
+  if(tp==='life'||tp==='couple'){
+    tt=tp==='couple'?'💘 双人合盘报告':'🔮 隐藏人生剧本';
+    let pl=pk(P,r);
+    pre+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
+    let ts=pks(G,3,r);
+    pre+=`<div class="rs"><h2>二、今生隐藏天赋</h2><p><b>1. ${ts[0][0]}：</b>${ts[0][1]}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:8px">🔒 解锁查看另外 2 项隐藏天赋</p></div>`;
+    let ad=pk(A,r);
+    pre+=`<div class="rs"><h2>三、年度关键线索</h2><p>✅ <b>${ad[0]}：</b>${ad[1].substring(0,30)}…</p><p style="color:rgba(200,190,170,.25);text-align:center">🔒 解锁完整奇遇 + Bug修复指南 + 幸运密码</p></div>`;
+    ext+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
+    ext+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
+    let ad2=pk(A,r);if(ad2[0]===ad[0])ad2=pk(A,r);
+    ext+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
+    ext+=`<p>⚠️ <b>避坑提醒：</b>${mo}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    let bs=pks(B,3,r);
+    ext+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
+    ext+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
+    ext+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
+    ext+=`<div class="lucky-item"><div class="num">${pk(LN,r)}</div><div class="label">幸运数字</div></div>`;
+    ext+=`<div class="lucky-item"><div class="num">${pk(LI,r)}</div><div class="label">好运信物</div></div>`;
+    ext+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pk(LA,r)}</p></div>`;
   }else{
-    title=type==='yearly'?'📅 年度运势':type==='personality'?'🎭 隐藏人格解码':'💼 职业天命';
-    preview+=`<div class="rs"><h2>报告摘要</h2><p style="font-size:22px;text-align:center">${type==='yearly'?'转折 · 沉淀 · 破局':type==='personality'?'你不为人知的那一面':'天赋赛道 · 最佳时机'}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:12px">🔒 解锁查看完整报告</p></div>`;
-    extra+=`<div class="rs"><h2>完整报告</h2>`;
-    if(type==='yearly'){for(let i=0;i<12;i++)extra+=`<p><b>${MN[i]}：</b>${pick(['🌱萌芽期','🌸上升期','☀️高峰期','🍂沉淀期','❄️蓄力期'],r)} | 幸运日：${Math.floor(r()*28)+1}日 | 宜：${pick(['拓展人脉','学习新技能','专注当下','稳固基础'],r)}</p>`}
-    else if(type==='personality'){extra+=`<p style="font-size:28px;text-align:center;font-weight:900">${pick(['月光型人格','深海型人格','森林型人格','星辰型人格'],r)}</p>`+picks(G,3,r).map((x,i)=>`<p><b>${x[0]}：</b>${x[1]}</p>`).join('')}
-    else{extra+=`<p style="font-size:26px;text-align:center;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${pick(CP,r)}</p><p>${moN}是关键的转折窗口</p><p>贵人特征：年龄大5-10岁，经验丰富但不摆架子的前辈</p>`}
-    extra+=`</div>`;
+    tt=tp==='yearly'?'📅 年度运势':tp==='personality'?'🎭 隐藏人格解码':'💼 职业天命';
+    pre+=`<div class="rs"><h2>报告摘要</h2><p style="font-size:22px;text-align:center">${tp==='yearly'?'转折·沉淀·破局':tp==='personality'?'你不为人知的那一面':'天赋赛道·最佳时机'}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:12px">🔒 解锁查看完整报告</p></div>`;
+    ext+=`<div class="rs"><h2>完整报告</h2>`;
+    if(tp==='yearly'){for(let i=0;i<12;i++)ext+=`<p><b>${MN[i]}：</b>${pk(['🌱萌芽期','🌸上升期','☀️高峰期','🍂沉淀期','❄️蓄力期'],r)} | 幸运日：${Math.floor(r()*28)+1}日 | 宜：${pk(['拓展人脉','学习新技能','专注当下','稳固基础'],r)}</p>`}
+    else if(tp==='personality'){ext+=`<p style="font-size:28px;text-align:center;font-weight:900">${pk(['月光型人格','深海型人格','森林型人格','星辰型人格','火焰型人格','微风型人格'],r)}</p>`+pks(G,3,r).map((x,i)=>`<p><b>${x[0]}：</b>${x[1]}</p>`).join('')}
+    else{ext+=`<p style="font-size:26px;text-align:center;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${pk(CP,r)}</p><p>${moN}是关键的转折窗口</p><p>贵人特征：年龄大5-10岁，经验丰富但不摆架子的前辈</p>`}
+    ext+=`</div>`;
   }
 
-  _report={title,preview,extra};
-  document.getElementById('rTitle').textContent=title;
-  document.getElementById('rMeta').textContent=`生日 ${b} | MBTI ${mbti} | 职业 ${job}`;
-  document.getElementById('rContent').innerHTML=preview+'<div class="unlock-box"><h3>🔮 解锁完整报告</h3><p>前世完整剧本 · 全部隐藏天赋 · 年度奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
+  _r={tt,pre,ext};
+  document.getElementById('rTitle').textContent=tt;
+  document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb} | 职业 ${jb}`;
+  document.getElementById('rContent').innerHTML=pre+'<div class="unlock-box"><h3>🔮 解锁完整报告</h3><p>前世完整剧本 · 全部隐藏天赋 · 年度奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
   document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
 
-function unlock(){if(!_report)return;document.getElementById('rContent').innerHTML=_report.preview+_report.extra+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁 — 截图保存并分享</p><button class="share-btn" onclick="shareIt()">📸 分享到朋友圈</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}
+function unlock(){if(!_r)return;document.getElementById('rContent').innerHTML=_r.pre+_r.ext+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁 — 截图保存并分享</p><button class="share-btn" onclick="shareIt()">📸 分享到朋友圈</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}
 function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
 function shareIt(){alert('请截图当前页面分享~\n\n推荐配文：\n"测完惊呆了，原来我的隐藏天赋是这个..."')}
 </script></body></html>
