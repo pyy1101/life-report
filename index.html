@@ -265,19 +265,12 @@ function shareIt(){
 }
 
 	function downloadShareImg(){
-	  var c=document.createElement('canvas');c.width=840;c.height=900;var ctx=c.getContext('2d');
-	  var bg=ctx.createLinearGradient(0,0,0,c.height);bg.addColorStop(0,'#0c0a20');bg.addColorStop(0.35,'#1a1040');bg.addColorStop(0.65,'#0e0c2a');bg.addColorStop(1,'#0a0a1a');
-	  ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(0,0,c.width,c.height,24);ctx.fill();
-	  ctx.beginPath();ctx.arc(420,72,28,0,Math.PI*2);var mg=ctx.createRadialGradient(410,65,5,420,72,28);mg.addColorStop(0,'#f5e6d3');mg.addColorStop(0.4,'#d4b896');mg.addColorStop(0.72,'#8b6c9a');mg.addColorStop(0.74,'transparent');ctx.fillStyle=mg;ctx.fill();
-	  ctx.fillStyle='rgba(200,190,170,0.35)';ctx.font='10px serif';ctx.textAlign='center';ctx.fillText('HIDDEN LIFE SCRIPT',420,120);
-	  var title=(document.getElementById('rTitle')?.textContent||'hidden life').replace(/[^a-zA-Z0-9一-龥 ]/g,'').trim();
-	  ctx.fillStyle='#f0e0cc';ctx.font='bold 26px serif';ctx.textAlign='center';ctx.fillText(title,420,155);
-	  ctx.fillStyle='rgba(200,190,170,0.4)';ctx.font='12px serif';ctx.textAlign='center';ctx.fillText(document.getElementById('rMeta')?.textContent||'',420,178);
-	  ctx.strokeStyle='rgba(180,140,220,0.4)';ctx.beginPath();ctx.moveTo(400,200);ctx.lineTo(440,200);ctx.stroke();
-	  var txt=document.getElementById('rContent')?.innerText||'';var m=txt.match(/一、前世身份：(.+)/);
-	  if(m){ctx.fillStyle='rgba(30,20,50,0.5)';ctx.beginPath();ctx.roundRect(40,240,760,80,12);ctx.fill();ctx.fillStyle='rgba(200,190,170,0.35)';ctx.font='11px serif';ctx.textAlign='left';ctx.fillText('前世身份',60,262);ctx.fillStyle='rgba(220,210,190,0.75)';ctx.font='15px serif';ctx.fillText(m[1].substring(0,60),60,288)}
-	  ctx.fillStyle='rgba(10,5,20,0.6)';ctx.fillRect(0,c.height-60,c.width,60);ctx.fillStyle='#d4b8f0';ctx.font='12px serif';ctx.textAlign='center';ctx.fillText('发现你的隐藏人生剧本',210,c.height-30);ctx.fillStyle='rgba(200,190,170,0.3)';ctx.font='11px serif';ctx.fillText('life.devshells.com',630,c.height-30);
-	  c.toBlob(function(b){var a=document.createElement('a');a.download='life-script.png';a.href=URL.createObjectURL(b);a.click()});
+	  var inner=document.querySelector('#shareCard > div');if(!inner)return;
+	  if(typeof html2canvas!=='undefined'){html2canvas(inner,{backgroundColor:'#0c0a20',scale:2}).then(function(c){var a=document.createElement('a');a.download='life-script.png';a.href=c.toDataURL('image/png');a.click()});return}
+	  var s=document.createElement('script');
+	  s.src='https://unpkg.zhimg.com/html2canvas@1.4.1/dist/html2canvas.min.js';
+	  s.onload=function(){html2canvas(inner,{backgroundColor:'#0c0a20',scale:2}).then(function(c){var a=document.createElement('a');a.download='life-script.png';a.href=c.toDataURL('image/png');a.click()})};
+	  s.onerror=function(){s.src='https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'};
+	  document.head.appendChild(s);
 	}
-
 </script></body></html>
