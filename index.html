@@ -757,6 +757,7 @@ var yr=yrEl?parseInt(yrEl.value):2000,mo=moEl?parseInt(moEl.value):6,da=daEl?daE
 if(!yr||!mo||!da){alert("no date values, using defaults");yr=2000;mo=6;da="15"}
 var gd=gdEl?gdEl.value:"",mb="unknown",mbName="";
 if(mbEl&&mbEl.value){var raw=mbEl.value.split(" - ");mb=raw[0];mbName=raw[1]||""}
+try{
 var r=sd((yr*10000+mo*100+parseInt(da)).toString());
 function fg(arr){if(!gd)return arr;var p=arr.filter(function(x){return x.g===gd}),n=arr.filter(function(x){return!x.g||x.g==="u"});return p.concat(p).concat(n)}
 var PL=fg(P),GL=fg(G);
@@ -782,6 +783,7 @@ document.getElementById("landing").style.display="none";
 document.getElementById("reportPage").classList.add("active");
 document.getElementById("rContent").innerHTML=h;
 window.scrollTo(0,0);
+}catch(e){alert("ERROR: "+e.message+" line:"+e.lineNumber);}
 };window.generate=function(){
   let tp=_type,yr=2000,mo=1,da=1,gd='',bd='2000.1.1',mb='未知',mbName='',r;
   if(tp==='personality_quiz'){mb=window._quizMbti||'未知';mbName=window._quizMbtiName||'';r=sd((mb+'2000').toString())}else if(tp==='couple'){
@@ -834,6 +836,7 @@ window.scrollTo(0,0);
   document.getElementById('rContent').innerHTML=html+'<div class="unlock-box" id="unlockBox" style="'+unlockStyle+'"><h3>🔮 解锁完整报告</h3><p>全部隐藏天赋 · 完整奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
   document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');if(isFree){setTimeout(function(){document.querySelectorAll('.locked').forEach(function(el){el.classList.replace('locked','unlocked')})},100);}
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
+}catch(e){alert("ERROR: "+e.message+" line:"+e.lineNumber);}
 }
 
 function unlock(){
