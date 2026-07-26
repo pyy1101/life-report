@@ -1,171 +1,4 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>隐藏人生剧本 - 发现你的命运密码</title>
-<script>
-// ============================================================
-// 隐藏人生剧本 · 模板数据库
-// 50+ 前世身份 | 36 隐藏天赋 | 24 年度奇遇 | 24 Bug修复
-// 组合数 > 10^20，永不重复
-// ============================================================
-
-const PAST_LIVES = [
-  // ===== 东方系列 =====
-  {t:"终南山林间灵医",g:"u",d:"隐居在终南山里的采药人，守着一片药田，很少下山。不爱跟俗人打交道，却总忍不住救迷路的旅人、受伤的小狐狸，治病不收银钱，只收对方讲一个山外的新鲜故事。这辈子你依然带着这份本能：天生共情力强，见不得别人难过；总喜欢躲在自己的小世界里，比起热闹人群更爱跟植物、小动物待在一起；嘴上不说，心里总偷偷给身边人兜底。"},
-  {t:"宋代江南书院书生",g:"m",d:"前世是江南小镇书院里的教书先生，爱书如命却不爱功名。课余在院子里种菜养花，学生们都说你是最不像先生的先生。你最大的快乐是看学生豁然开朗的那一瞬间。这辈子你天生擅长用简单话说清复杂道理，对知识有无尽的渴望，但内心深处对名利场始终保持着疏离和清醒。"},
-  {t:"明朝江南织女",g:"f",d:"前世是苏州织造府的顶尖织女，十指翻飞能织出云霞般的锦缎。你的织品被送进紫禁城，但你从不以此为傲，深夜独自织布时最是自在。这辈子你手极巧，做什么手工都上手快；对细节苛刻到近乎强迫，但你做出来的东西就是比别人精致十倍。"},
-  {t:"商周部落星象祭司",g:"f",d:"前世是黄河边部落里的女祭司，负责观察星象、主持仪式。你能通过草木的生长状态预测当年的收成，部落里的人都敬畏你。这辈子你可能对星空有莫名的迷恋，直觉强到让自己害怕，有时候说出来的话会莫名其妙地应验。"},
-  {t:"民国上海滩书店老板",g:"u",d:"前世是上海法租界里一间小书店的老板，店里藏着各种禁书和地下刊物。白天卖正经书，晚上偷偷借给进步青年。你从不多问他们拿去做什么，只是默默在每本书里夹着一张写着'保重'的字条。这辈子你天然有保护弱者的冲动，对文字敏感，骨子里带着老派的浪漫和骨气。"},
-  {t:"盛唐长安乐师",g:"f",d:"前世是长安城里教坊司的琵琶师，指尖流出的是整个盛唐的繁华。你在皇帝面前弹过曲，也在深夜的酒肆里给失意人弹过。音乐是你的一切，但你知道最动人的音符永远藏在无声的停顿里。这辈子你对旋律有天然的感应，可能不会乐器，但听到好音乐会莫名想哭。"},
-  {t:"战国楚国铸剑师",g:"m",d:"前世是楚国深山里的铸剑师，一生只铸过七把剑，每一把都有自己的名字和性格。你不为君王铸剑，只为那些'值得拥有一把好剑的人'而铸。这辈子你对自己做的事有极高标准，宁可做得慢也不愿意交出半成品，你的底气来自于对品质的洁癖。"},
-  {t:"秦朝长城烽火兵",g:"m",d:"前世是镇守北方长城的烽火兵，日夜守望狼烟升起的方向。你的生命里只有两种状态：警觉与等待，一生见过无数次日出却从未认真看过一次。这辈子你可能经常失眠、对安全感的渴求比常人更强烈，但同时拥有超乎常人的耐力——天塌下来你都不会第一个跑。"},
-  {t:"盛唐敦煌壁画师",g:"u",d:"前世是在敦煌莫高窟里描摹佛陀的画师。沙漠深处一待就是三十年，颜料贵如黄金，你的每一笔都带着对光的虔诚。你画了满墙壁的天国，脚底下却踩着尘土和骆驼粪。这辈子你天生对宗教、哲学有亲近感，对色彩的把控力像是肌肉记忆一样刻在身体里。"},
-  {t:"宋朝茶马古道马帮",g:"m",d:"前世是穿梭于川藏茶马古道上的马帮人，赶着骡马翻越雪山、穿越密林。你的生活字典里没有'舒适'这个词，但每一次活着回到起点时喝的那碗酥油茶，比什么都香。这辈子你可能身体里流淌着不安分的血液，对冒险有天然的向往，在极限环境中反而比平时更清醒。"},
-  {t:"清代紫禁城御医",g:"u",d:"前世是太医院里最年轻的御医，给皇帝把过脉也给宫女偷偷塞过药。你见过权力的腐烂也见过生命在最低处绽放的尊严，终身信奉'医者仁心'四个字。这辈子你可能天然想帮助别人、对医学或疗愈方向有莫名的亲近，最看不得弱者在受苦。"},
-  {t:"魏晋竹林七贤之一",g:"m",d:"前世是魏晋时期的隐士，跟几个朋友住在竹林里，喝酒、弹琴、写诗、骂世道。你不做官不是因为不能，是因为不屑。你活得很穷但从不觉得自己可怜，因为你拥有的是别人拿整个官位都换不来的自由。这辈子你内心有一套自己的'对错标准'，不轻易向主流妥协。"},
-  {t:"南宋临安茶坊主",g:"u",d:"前世是临安城里最受欢迎的茶坊老板。你的茶坊不是最大也不是最贵的，但全城的人都喜欢来——因为你觉得每个人都是客人而不是买卖，新客送一碟瓜子、老客记得他上次喝的是什么。这辈子你对'人'的记忆力超强，脸、名字、故事的关联你在脑子里有张自动地图。"},
-  {t:"明末景德镇窑工",g:"m",d:"前世是景德镇的瓷器匠人，专门烧制祭红釉。这种釉色极难掌握，成功率不到一成，但你一生烧成了三十六件，每一件都被收藏至今。你这辈子对'时机'有天然的嗅觉——什么时候出手、什么时候等待，你心里清楚。"},
-  {t:"北魏云冈石窟雕刻师",g:"m",d:"前世是北魏时期在云冈石窟里雕刻佛像的匠人。你跟石头对话了几十年，每一凿下去都在想'里面那个佛是什么样子的'。你觉得你只是把本来就藏在石头里的佛凿出来。这辈子你有一种'穿透表象看到本质'的能力，别人看到混乱你看到结构。"},
-  {t:"清代云南茶山采茶女",g:"f",d:"前世是云南六大茶山上的采茶人，每年春天在山间采茶，歌声越过山谷飘进村寨。你懂每一片叶子的性格，知道什么时候摘最甜。这辈子你可能对自然节律特别敏感，春天的到来会让你整个人都不一样——像植物感知到光。"},
-  {t:"春秋时期竹简抄写师",g:"u",d:"前世是春秋时期各诸侯国之间传递竹简的抄写师。你见过太多秘密——宣战书、和亲盟约、暗杀名单——但你从不泄露任何内容，因为你相信'文字有灵'。这辈子你嘴巴特别严，别人跟你倾诉总是放心，知道到你这里就是终点。"},
-  {t:"明代海上丝绸之路翻译官",g:"m",d:"前世是明朝郑和船队里的通事（翻译官），精通五种语言。你不是在书房里学的——是在爪哇的香料市场、锡兰的宝石集市、阿拉伯人的骆驼队里学的。这辈子你学语言快，对异文化有天然的接纳度，去了国外像回家。"},
-  {t:"南宋官窑瓷器修复师",g:"u",d:"前世是专门修复宫廷瓷器的匠人。破损的瓷器送到你手里，你能让它们焕然一新却看不出修复痕迹。你的秘诀是——你不是把裂痕补上，你是让裂痕变成花纹的一部分。这辈子你有一种把'破碎变成美感'的天赋，失败和伤害在你手里能被转化为艺术。"},
-  {t:"晚清南洋华侨教员",g:"u",d:"前世是清末下南洋的华侨，在马来亚的华人社区办了一间学堂。你教孩子们认汉字、读三字经，也教他们如何在异乡活下去。你这一生没什么钱，但死后全社区的人来送你。这辈子你可能总想'教书育人'或用某种方式传递知识，对文化和根的认同感特别强。"},
-
-  // ===== 西方/世界系列 =====
-  {t:"大漠丝绸之路画师",g:"u",d:"你前世是随商队穿行丝绸之路的画师，用画笔记录沿途的风土人情。每到一座城就停下来画上几天，画完继续上路。你的画不是为了卖，只是为了把这个世界的斑斓留住。这辈子你骨子里带着漂泊感，在一个地方待久了会焦躁；你的审美直觉远超常人，对颜色、构图有天生的敏锐。"},
-  {t:"古埃及神庙抄写员",g:"u",d:"你前世是尼罗河边神庙里的抄写员，用芦苇笔在莎草纸上记录星辰轨迹和草药配方。你是神庙里最安静的那个人，却掌握着最多的秘密。这辈子你天生对符号、文字有超乎寻常的敏感，学语言快，做笔记工整得像印刷品，内心深处藏着对智慧的虔敬。"},
-  {t:"江户时代浮世绘画匠",g:"m",d:"前世是江户街头的浮世绘画匠，画美人、画歌舞伎、画市井烟火。你一生清贫却从未为钱折腰，晚年烧掉了所有未完成的画稿。这辈子你骨子里有日本美学里'物哀'的底色——对美好事物的逝去有种深刻的共鸣，你也比旁人更懂得珍惜当下的瞬间。"},
-  {t:"维京航海人",g:"m",d:"前世是北欧峡湾里的航海者，一生追逐地平线。你见过极光在冰海上跳舞，也经历过暴风雨中九死一生。你不是战士，是船上负责导航的那个人——靠星星辨别方向。这辈子你天生方向感极好，在一个地方困久了会窒息，需要定期的'出海'——哪怕只是一次长途旅行。"},
-  {t:"古希腊广场哲人",g:"u",d:"前世是雅典广场上的思考者，不写书、不收徒，就站在橄榄树下跟路过的人聊天。你用问题回答问题，从来没有给过任何人一个直接的答案，但每个人离开时都觉得自己更清醒了。这辈子你天生擅长提问、反思、拆解复杂问题，别人眼中的困境，你三两句话就能理清。"},
-  {t:"中世纪欧洲修道院抄经人",g:"u",d:"前世是中世纪欧洲一座偏远修道院里的抄经士。你在烛光下一笔一画地抄写了三十年的经文，手指因常年握笔而变形。你抄的字没有一笔是应付的——因为你觉得上帝在看着每一笔。这辈子你习惯默默做事、不张扬、不解释，但你的作品本身就是最好的证明。"},
-  {t:"文艺复兴时期佛罗伦萨学徒",g:"m",d:"前世是文艺复兴时期佛罗伦萨一家作坊里的学徒，师傅是个脾气古怪的画家。你帮他调了十年颜料，偷学了所有他没教你的技术。师傅死后你接过了他的画室。这辈子你学习方式是'偷师'——在没人注意的时候默默积累，等到机会来时你已经准备好了。"},
-  {t:"19世纪巴黎歌剧院舞蹈演员",g:"f",d:"前世是巴黎歌剧院芭蕾舞团的一名舞者。你的脚流过血、膝盖受过伤、半夜痛醒是家常便饭。但你站在聚光灯下那一刻——你觉得身体不再属于你，而属于某种更高的东西。这辈子你的身体控制力极好，学运动、舞蹈比常人快，但内心对'完美'的执念也容易让你受伤。"},
-  {t:"维多利亚时代的植物猎人",g:"f",d:"前世是受雇于英皇植物园的女植物学家，独自穿越南美雨林采集稀有植物标本。你的标本改变了植物分类学，但学界从未承认你的贡献——因为你是女人。这辈子你内心深处有'被看见'的渴望，你做事的动力有一部分来自'证明他们错了'。"},
-  {t:"西部淘金时代的镇公所书记员",g:"u",d:"前世是美国西部淘金热时期一个小镇上的书记员。你见证了整个镇从三十个帐篷变成三千人的城市，矿工们在你这里登记采矿权、写信给远方家人。你不富，但每一个人都信任你。这辈子你有一种让人本能信任的气质——像是天生自带公信力。"},
-  {t:"江户末期京都染坊主",g:"u",d:"前世是京都的一家染坊主人，你的蓝染技术远近闻名。你不追求鲜艳的颜色，只追求那种'在水里浸了一千次之后沉淀出来的蓝'。这辈子你喜欢的东西都偏'深'——深度、深情、深沉——表面热闹的东西打动不了你。"},
-  {t:"一战时期的战地护士",g:"f",d:"前世是一战期间的一名战地护士。你在帐篷里日日夜夜地包扎、缝合、安慰。你不是军人，但你的手比任何武器都有力量。这辈子你可能对'修复'有一种天然的使命感，看到破碎的东西——不管是身体还是心灵——都忍不住想帮。"},
-  {t:"1920年代芝加哥爵士乐手",g:"m",d:"前世是20年代芝加哥地下爵士酒吧里的萨克斯手。你白天在工厂做工，晚上在烟雾缭绕的地下室里吹萨克斯。你的音乐里有一种说不清的悲伤，但悲伤里又有一种'管他呢'的洒脱。这辈子你对节奏有天生的感应，走路自带BGM——真的。"},
-  {t:"古罗马水道工程师",g:"m",d:"前世是古罗马帝国的一名水利工程师，负责设计和维护把山泉引到城市的水道。你的名字出现在水道的尽头，上面写着'此人给罗马带来了水'。这辈子你对系统、流程、架构有天然的直觉——你喜欢把事情捋顺、搭好框架。"},
-  {t:"印加帝国信使",g:"m",d:"前世是安第斯山脉上奔跑的印加信使，接力传递着帝国的信息。你在海拔四千米的山脊上奔跑，肺活量惊人，一生用脚丈量了半个南美。这辈子你可能坐不住、闲不住、在一个地方待久了会焦虑——你的身体记得奔跑的感觉。"},
-  {t:"17世纪阿姆斯特丹地图绘制师",g:"u",d:"前世是荷兰黄金时代的地图绘制师，在海港边的工作室里画着世界的样子。你从未出过海，但你的地图被带上每一艘驶向东方的商船。这辈子你对'远方'有执念，可能房间墙上挂满了地图，也可能从事需要宏观视野的工作。"},
-  {t:"吐蕃王朝时期的藏药采集者",g:"u",d:"前世是雪域高原上的藏药采集者，你攀爬在海拔五千米的悬崖上只为找到一株稀有的草药。你相信每座山都有自己的神灵和脾气，采药前要跟山说话。这辈子你有一种'被自然庇护'的特殊体质——在关键时刻总有东西帮你挡住。"},
-  {t:"西非部落鼓手",g:"u",d:"前世是西非部落里的鼓手，你的鼓语能从一个村子传到二十公里外的另一个村子。没有鼓的时候你就用手掌拍打任何能发声的东西。这辈子你天生有节奏感，你的心跳、呼吸似乎都在遵循某种韵律，而你身边的人也会不自觉地被你的节奏带着走。"},
-
-  // ===== 奇幻/传说系列 =====
-  {t:"龙宫珊瑚匠",g:"f",d:"传说你前世不是人类，是住在海底龙宫里的一名珊瑚匠人。你用千年珊瑚雕刻出会发光的宫殿，你养的海马会唱歌。你离开龙宫是因为听到了岸上有人在吹笛子，你被那个声音吸引上岸，从此再也回不去了。这辈子你特别容易被音乐打动，对蓝色的东西有莫名的亲切感，海水声能让你瞬间平静。"},
-  {t:"雪山白狐",g:"f",d:"你前世是一只修习了五百年的白狐。距离化成人形只差一步的时候，你为了救一个落入冰窟的小孩而功亏一篑。你没有后悔。这辈子你天生怕冷又向往寒冷的地方，你的眼睛对光的变化特别敏感，人群中你总是第一个发现别人需要帮助的那个。"},
-  {t:"森林精灵的使者",g:"u",d:"前世你是一片古老森林里的精灵使者，负责传递树与树之间的信息。你跑起来比风快，笑起来像树叶沙沙响。你从不在任何地方停留超过三日，因为你永不变老——所有森林精灵都不会长大。这辈子你可能有一张'看起来永远比实际年龄小'的脸，而且你真的相信植物会说话。"},
-  {t:"月宫玉兔",g:"f",d:"前世你是月宫里那只捣药的玉兔，跟着嫦娥在广寒宫里度过了千年。你的工作是捣制长生不老的药，但你把最灵的一颗藏起来了——因为你觉得'永远活着'不如'精彩地过一程'。这辈子你骨子里有月亮的轮回感——三十天一个小周期，偏偏在满月之夜睡不着觉。"},
-  {t:"四海游走的云",g:"u",d:"前世你是一朵云，没用过脚走路，没用过嘴说话，只是经过。你见过烈日下的麦田和暴雨中的海面，你把一个旅人从沙漠中救了出来——遮住太阳让他多活了半天。这辈子你做事比较慢，不急不躁，而且你真的喜欢看天空。"},
-];
-
-// ============================================================
-const TALENTS = [
-  ["情绪文字天赋","你随手写的句子总能戳中别人的心事，做内容、搞创作比普通人容易出结果。你的朋友圈、微博发发都有很高的互动率——这不是偶然，是你天生会'情绪翻译'。"],
-  ["危险直觉","你第一眼觉得不舒服的人、拿不准的事，最后大概率会出问题。别怀疑你的第六感——它比你的理性分析更准确。"],
-  ["万物亲和力","小动物天然不怕你，养多肉绿植都比别人容易养活。去山里海边会莫名觉得放松，越远离城市你的灵气越强。"],
-  ["深夜创造力","晚上10点以后的思维比白天活跃三倍。这是你的大脑进入了'灵感模式'。很多伟大艺术家都有这个特质。"],
-  ["能量感知力","你能感知一个房间里的气氛——吵架前的沉默、有人不开心时的空气，比旁人先捕捉到。这是高敏感人格，是天赋不是缺陷。"],
-  ["默默影响力","别人跟你聊完天后总会感觉好一点。不是你的话疗，是你的能量场——不经意的一句话、一个眼神就足以让对方重新振作。"],
-  ["空间构图天赋","拍照从不用学构图，布置房间、搭配衣服都好看——你的眼睛天生能捕捉'视觉平衡'。"],
-  ["危机处理能力","平时懒散随性，但紧急关头是所有人里最冷静的。你能瞬间抓住重点，做决定快且准——这是稀缺的领导力天赋。"],
-  ["识人之明","第一次见面就能大致判断一个人的底色。你的潜意识在整理微表情、语气、肢体语言——你不是会看面相，你是会'读人'。"],
-  ["故事编织力","讲最平凡的小事都能让人听得津津有味。你有能力把日常讲成故事——这是天生的叙事者天赋。"],
-  ["数字敏感度","对数字、规律、模式有天然的嗅觉。别人头疼的一堆数据你一眼就能发现异常——这叫'秩序感知'。"],
-  ["痛感预知","你身体某个部位会在别人不舒服之前先有反应。高敏感人群的镜像神经元更活跃，你会'感同身受'——医护人员里很多这种人。"],
-  ["声音记忆力","你对听到过的声音过耳不忘。音乐、对话、环境音都在脑子里自动存档。你可能从不走音，或者别人说过的话你能一字不差复述。"],
-  ["气味联想","某一种气味能瞬间把你拉回到十年前的一个下午。你的嗅觉跟情绪记忆系统是直连的——芳疗师、调香师、咖啡师里很多人有这个天赋。"],
-  ["触觉敏锐","你对布料的纹理、温度的变化、微风的方向都有超出常人的感知力。夏天你能感觉到空调比设定温度差了半度。这不是龟毛，是上一世留下的触觉记忆。"],
-  ["色彩的直觉","你能看到别人看不到的颜色细微差别——一件衣服你能看出红色里混了几丝蓝，一幅画的光影偏暖还是偏冷。你的衣柜大概率是按渐变色排列的。"],
-  ["陌生人的故事感","你看街上的陌生人会不自觉地脑补他们的故事——那个提着菜篮子的阿姨可能是个退休的舞蹈家，那个坐在公园长椅上的青年正在等一封不会来的信。你不是在胡思乱想，你是在'接收'。"],
-  ["光影敏感","你对光的变化特别敏锐——黄昏时分的金色光线比其他任何时刻都让你放松。你的房间可能有很多灯但都开着很暗——因为你受不了刺眼的顶光。"],
-  ["情绪天气计","你有时候会莫名其妙地觉得压抑或难过，后来发现不是你的情绪——是你身边某个人的情绪渗透过来了。你不是情绪不稳定，你是'情绪共感'体质。"],
-  ["手写的魔力","你用手写比用键盘更有灵感。纸和笔之间有一种电流，你的想法从大脑到手指的路径在握笔时特别通畅——这也是为什么你手写的字可能比打印体好看得多。"],
-  ["梦境存档师","你每天早上醒来会记得自己的梦，而且细节丰富到可以写成小说。你的梦不是随机的——它们有时候会提前剧透你接下来会经历的事。"],
-  ["人群中的隐身术","你有一种能力：在需要的时候让自己变得'不那么显眼'。不是真的消失，而是散发出一种'不用关注我'的磁场——在拥挤的地铁上永远没人挨着你。"],
-  ["时间的拉伸感","你有一种奇怪的时间感知力：有趣的事情你觉得过得飞快但同时又能仔细品味每一秒。每次别人说'时间过得好快'时你在心里默默想'其实刚好'。"],
-  ["颜色的情绪翻译","看到某种颜色会直接产生一种情绪反应。紫色让你心慌、绿色让你安静、橙色让你想吃饭。这不是心理暗示——是你上一世作为画师或染匠留下的'颜色-情绪直连'。"],
-  ["植物的低语","你养的植物比其他人的健康，而且你有时候会'感觉到'它要死了或者要开花了。你不是绿手指——你是真的能跟植物'交流'，只是你自己没发现。"],
-  ["节奏同步","你走路的时候会不自觉地跟周围的声音同步——音乐、红绿灯的滴答声、旁边人的脚步声。你的身体是一台隐形的节拍器，你有时候在无意识中用手指敲出刚才听到的旋律。"],
-  ["不请自来的灵感","你在洗澡、散步、做家务时脑子里会突然蹦出解决方案。你以为是偶然——但其实是因为你的潜意识24小时都在后台运行，只在你的理性大脑'下班'后才敢提交报告。"],
-  ["温度的情绪含义","你对温度的感知跟情绪混在一起：被拒绝的感觉'冷冷的'、被拥抱的感觉'暖暖的'——对你来说这不是比喻，是真实的体感。在人群中你能感觉到氛围的'温度'变化。"],
-  ["文字的味觉","读到某些词语时会不自觉地分泌唾液——'柠檬'、'薄荷'、'辣椒'。你的大脑对语言的处理打通了味觉区域——这不是通感是什么？作家和美食家里很多人有这种天赋。"],
-  ["前世的记忆碎片","你对某些从未去过的地方有强烈的既视感。第一次到某座城市会莫名其妙地知道路怎么走。你不是迷路，是'回家'——你的灵魂曾经到过那里。"],
-  ["情绪的物理位置","你生气时胸口闷、焦虑时肚子不舒服、难过时喉咙发紧——对你的身体来说，情绪不是抽象的，是有精确的物理地址的。这是一种被低估的身体智慧。"],
-  ["人群中的能量过滤","你不是社恐——你是'能量过敏'。在人多的地方你感觉到的不是'热闹'而是'信息过载'。你需要充电不是因为累，是因为你吸收了太多不属于你的情绪。"],
-  ["他人的梦境邀请","你的朋友有时候会莫名其妙地梦到你，第二天告诉你'我梦到你了'。你不是日有所思夜有所梦的女主角——你是'梦境的接收站'，别人的潜意识在你磁场范围内更容易'联机'。"],
-  ["直觉的延迟验证","你有时候会说出一句自己都不太理解的话，结果几周后发现那句话精准地回答了当时还没发生的问题。你不是在预言——是你的大脑在时间轴上快进了几步。"],
-  ["纯粹的快乐感染","你的笑声能让一个房间里所有人都放松下来。人群中有你在，气氛就像被加了润滑剂——大家不自觉地笑更多、更真诚。这不是你的幽默感——是你的快乐感染力。"],
-  ["不学自通","你有几件事从来没学过但第一次做就像练了很久一样。可能是游泳、可能是弹一个从未碰过的乐器、可能是做一道从来没看过的菜——这不是天赋，是上一世带过来的肌肉记忆。"],
-];
-
-// ============================================================
-const ADVENTURES = [
-  ["秋日奇遇","9-10月在一家旧书店或社区咖啡店里，你会遇到一个戴木质手串的长辈。他会跟你说一句没头没尾的话，当时听不懂，三个月后人生岔路口时突然想起来，这句话帮你避开一个大坑。"],
-  ["冬季转折","12月会有一个完全陌生领域的机会找上门，跟你现在做的事几乎不沾边。别直接拒绝，抱着试试的心态接下来，会带来意料之外的收入和方向。"],
-  ["盛夏邂逅","7-8月在一次短途旅行中，你会遇到一个改变你职业轨迹的人。不是恋爱，是事业贵人。对方可能看起来毫不起眼，但对话会像钥匙和锁一样契合。"],
-  ["春末顿悟","4-5月某个凌晨，你会突然想通一件纠结了大半年的事。不是在思考——是在半梦半醒间，答案自己浮上来的。那之前别焦虑，潜意识已经帮你想了六个月。"],
-  ["意外来信","今年会收到一封来自过去的信或消息——可能是一个很久不联系的老朋友，也可能是你忘掉的承诺突然兑现。这条消息会重新点燃某个放弃已久的计划。"],
-  ["雨中相遇","今年雨季有一天你会因为躲雨而走进一个平时不会去的地方，在那里遇到的人或事会打开一个全新的圈子。记得随身带伞——不是为了挡雨，是为了让你有理由停下来。"],
-  ["深夜地铁的礼物","冬夜末班地铁上，你旁边坐着一个低头织毛线的老人。下车时她塞给你一团毛线球说'这个颜色适合你'。三个月后你在搬家时重新找到那团毛线，发现里面裹着一枚小银章——是一份你祖上曾在民国时期经营过的商号标记，那个商号现在被一家公司复刻在做文创。"],
-  ["旧图书馆的夹层","你去图书馆还一本过期三年的书，管理员罚款时说这本书记录里最后一次被借是1957年。你翻开书的封底，发现夹层里有一张手绘的地图——是你所在城市的地图，但标注的是完全不存在的街道名。你把地图发到社交平台后被一位老教授看到，他告诉你那是这座城市规划初稿的蓝图。"],
-  ["花市的约定","今年春天你路过一个路边的花摊，摊主是个语言不通的外国老太太。她执意要送你一盆不知名的植物。你拿回家后随手放在阳台，三个月后它开花的那天晚上——你收到了一个改变你生活轨迹的电话。"],
-  ["陌生人的伞","夏季暴雨中你把自己的伞给了一个没带伞的陌生人。对方说'我欠你一把伞，改天还你'。你以为只是客套，结果三个月后在一次职业面试中，面试你的人开口第一句话是——'你还记得那把伞吗？'"],
-  ["地铁站的钢琴","某天晚上你路过一个空无一人的地铁站通道，那里放着一架公共钢琴。你随手按了几个键——旁边一个路过的人停下来了，从包里拿出了一把口琴。你们即兴合奏了五分钟。那个人后来帮你在关键时候做了引荐。"],
-  ["朋友的梦","一个很久不联系的朋友突然发消息给你：'昨晚梦到你了，梦里的你开了一家花店/书店/咖啡馆，生意很好。我要来打工。'这不是无缘无故的梦——这说明近期你的能量场正在被周围人重新'搜索'，有人要找你合作了。"],
-  ["书页里的便签","你在二手书店随手翻开一本书，发现里面夹着一张1987年某人写的读书笔记便签，字迹清秀，文笔极好。你拍了照发到微博上，被原主人当年读大学的孙女看到了——她现在恰好是你想进入的那家公司的HR。"],
-  ["错过的航班","因为闹钟没响错过了去某地的高铁。懊恼之余在候车大厅买了杯咖啡，旁边坐下的人恰好是你的上一个行业的前辈。他告诉了你一个关于你现任老板的关键信息——如果你准时坐了那班车你就永远不会知道。"],
-  ["菜市场的方言","你在异地的菜市场买菜，随口说了一句家乡话。旁边一个阿姨猛地回头看你——她跟你来自同一个县城。三个月后她介绍你认识了她的女儿，而她的女儿恰好是X公司的联合创始人。"],
-  ["树叶上的字","秋天在路边踩到一片树叶，叶子上有个很规则的洞——像是被虫子咬出来的一个'口'字。你觉得好玩拍了照，结果被一个字体设计师看到——他正在寻找'自然形成的字体'灵感，后来他用的你这个叶子上的形状做了一个获奖字体。而那个字体最大的客户——是你想跳槽的那家公司。"],
-  ["凌晨四点的电话","凌晨四点手机响了一声就挂断了——来电显示是一个你三年没换过的手机号。你回拨没人接。两天后你查了一下，那个号码曾经属于一个在你最难的时候帮过你一把的人。你决定去找他——而这次重逢会让你绕开一个即将到来的错误决定。"],
-  ["小区流浪猫的选择","你家楼下有一只流浪猫，从来不靠近任何人——但它开始每天早上在你门口等你。邻居说从来没见过这只猫对人这么亲近。流浪猫的直觉比人强——它闻到了你身上即将发生的好事。"],
-  ["电梯里的30秒","你跟一个陌生人困在电梯里不到一分钟。你们尴尬地聊了两句。一个月后的某次会议上——那个陌生人就坐在你对面，你们相视一笑，然后他给了你想要的东西。"],
-  ["旧电脑里的文档","为了给新电脑腾空间翻出一台五年前的旧电脑。开机后在桌面角落发现一个文件叫'梦想清单.txt'，上面列的八件事你现在已经实现了五件——但你完全不记得写过这个文件。这是你潜意识五年前发射的一枚信号弹，现在它回信了。"],
-  ["粥铺的纸条","你在早餐店的粥底下看到一张圆形的纸条，上面手写着'今日大吉'——以为是谁随手丢的垃圾。后来发现周围每一碗粥里都有，是店主每天亲手写的。你问了一下，店主说她已经坚持了十二年。这个举动让你想起了一个你很久以前放弃的习惯。你重新开始做这件事的第三天——好运来了。"],
-  ["公司门口的石狮子","你每天上班路过两座石狮子，从来没注意过它们。直到有一天你发现其中一只嘴里塞着一个小纸卷——不知道谁放进去的。拆开是一句话：'你正在找的东西，三个月前就已经到了。只是你没认出来。'后来你回想三个月前的某件事，发现那确实是你一直在等的答案。"],
-  ["陌生人的书单","你在网上随手点赞了一个陌生人发的书单。陌生人私信你说'谢谢你的赞，我多买了一本送给你'。你收到书的时候看到了书中夹着的一个邀请函——陌生人原来是个活动策展人。那场活动的主题恰好是你最感兴趣的领域。"],
-  ["雨天的留白","你原定出门的日子下了大雨，索性取消所有计划，在家翻旧物。翻到一张高中时代画的画——画上面的东西恰好是你现在在做的事。你拿起笔重新开始画，在画的过程中心里某个结突然松了。"],
-];
-
-// ============================================================
-const BUGS = [
-  ["别在凌晨三点做决定","你深夜想的事90%都是无意义内耗。第二天早上醒来会觉得昨晚的自己像个戏精。如果忍不住，至少写下来而不是立刻执行。"],
-  ["别总委屈自己迁就别人","你的感受比'别人会不会不高兴'重要一万倍。你总以为忍一忍就过去了，但你忍的每一次都在身体里留下了痕迹——肩膀疼、失眠、莫名烦躁都是信号。"],
-  ["每年春天去山里走走","不用跟人说话，光是待着就能补满能量。你不是社恐，你只是需要定期'归零'。这个习惯比什么保健品都管用。"],
-  ["暂停过度分析","你习惯在脑子里预演所有可能性，但这个能力用过头就是自我折磨。有些事没道理就是没道理，你分析不出来答案。放过自己。"],
-  ["学会接受赞美","别人夸你的时候别说'没有啦'，学着说'谢谢'。你总觉得自己不够好，但其实在别人眼里你已经很好了。从今天开始练习。"],
-  ["别跟认识超五年的朋友合伙","你太重感情，利益分歧时不忍心争，最后只会自己吃亏。跟熟人的关系一旦叠上金钱维度，翻车的概率远高于跟陌生人合作。"],
-  ["学会说'不'","你总怕拒绝别人不好，但你的时间和精力是有限的。每一次对别人说'是'，都是在对自己说'不'。从拒绝一顿不想吃的饭开始练习。"],
-  ["不要让社交媒体影响自我认知","你刷到的99%都是别人精心剪辑的高光片段，拿来跟自己24小时的真实生活比不公平。每天睡前想三件自己做好的小事坚持一个月。"],
-  ["别把'完美'当拖延的借口","你说'还没准备好'不是真的没准备好——是觉得不够完美。但你在等的那个'完美的时机'永远不会来。把'做到80分就开始'作为你的新座右铭。"],
-  ["别在生气时发任何东西","你生气的情绪只有七秒的寿命——但发出去的话会活很久。把打字的手停下来，去喝杯水，三分钟后再看。你会发现百分之九十的气都是多余的。"],
-  ["别把别人的期待当成自己的目标","你爸妈希望你稳定、你朋友觉得你该买房、你同事觉得你该升职——但这些都是他们的剧本。你这辈子不是来完成别人给你布置的作业的。"],
-  ["不要总替别人'预道歉'","你在心里替别人解释：ta不回信息是因为忙、ta约你从来不主动是因为内向。有时候不是你不能放手——是你太擅长给别人找理由了。相信对方的能力——如果ta真的在乎，ta会自己来说。"],
-  ["你不是任何人的情绪垃圾桶","你朋友心情不好找你倾诉——一次两次没问题，但同一个人同一件事说第十遍的时候，你就不是帮助者而是情感人质。你可以说：'我听了你说了九遍，我的建议还是上次那个。'这不可怜——这是边界。"],
-  ["放弃'让所有人都满意'的KPI","你给自己定了一个不可能完成的目标：让每个人对你满意。这世界上能让所有人满意的东西只有两样：空气和自来水。你不需要降低自己变成空气。"],
-  ["别把'独处'和'孤独'搞混","独处是你给自己充电，孤独是没电可充。你喜欢一个人待着——不是因为你不需要任何人，是因为你需要跟自己待够了一定时间才能跟别人好好相处。这是健康的，不要因此感到内疚。"],
-  ["不要让'过去的承诺'绑架现在的你","你三年前跟朋友说了'一起开个店'——但这三年里你的人生方向完全变了。别人不提你也不提，但你自己在深夜会内疚。去说一声：'我变了，那个承诺不能兑现了。'不是背信——是对自己和对方都诚实。"],
-  ["不要把'善良'和'没有底线'搞混","你帮别人的前提是——你自己首先要安全、要有余力。善良不是把你自己挖空去填别人的坑。为别人撑伞可以——但不要把自己淋湿了。"],
-  ["别迷信'一万小时定律'","你一直在某个领域里磨——但磨的方向对着墙壁。一万小时是必要的但不够——你需要定期抬头看看方向对不对。在错误的道路上坚持一万小时，你得到的是'在这个错误上的专家级熟练度'。"],
-  ["不要用'我没有天赋'来退场","你放弃某件事不是因为没天赋——是因为没耐心。天赋只决定你能跑多快，但连马拉松都可以走路完成。把目标切成碎片——今天的你只需要比昨天的你多完成一片。"],
-  ["停止在脑内预演失败的台词","你的大脑花了大量时间在准备失败的致辞——'如果被拒绝我该怎么说'、'如果失败了该怎么解释'。你没发现吗——你把成功场景的剧本从没写过。从今天开始每天花五分钟预演一下——如果你成功了你会做什么。"],
-  ["不要问'准备好了吗'——问'现在能做的最小一步是什么'","你有个计划等了两年还没开始——因为你在等'准备好了'。但'准备好了'是一个没有标准答案的问题。换一个问题：现在能做的第一步是什么？小到打开电脑都不用。小到用手机查一个关键词。做了这一步你就启动了一个不可逆的进程。"],
-  ["不要觉得'年龄到了就该怎么样'","你的人生不是地铁时刻表——没有人有权利告诉你在几点钟必须到哪一站。你的节奏是只有你自己能把握的。有人30岁退休，有人70岁开始创业。你的时钟是你自己设定的。"],
-  ["不要用'想太多'来否定自己","你被人说了很久的'想太多'——好像这是缺点。但想太多的人看到别人看不到的风险、想到别人没想过的细节。你的深度思考是你的特征，不是你的bug。只是要学会在'想太多'和'想够了'之间安一个开关。"],
-  ["不要为了快速合群而扮演别人","你到一个新环境时会有一种冲动——快速伪装成一个'适合这里'的人。但你在扮演别人的角色时是不快乐的——而且别人其实能察觉，因为假的东西都带静电。做自己可能慢一点但建立起来的关系不会塌。"],
-];
-
-// ============================================================
-const LUCKY_COLORS = ["松烟绿","暮云紫","深海蓝","琥珀金","月光银","珊瑚粉","雾霭灰","薄雾紫","霜叶红","星夜蓝","苔藓绿","烟熏玫瑰","靛青","麦浪金","雪松灰","月白","檀木棕","晨雾白","孔雀蓝","暮日橙"];
-const LUCKY_NUMBERS = [3,5,7,9,11,13,17,21,23,27,31,33];
-const LUCKY_ITEMS = ["木质小挂件","绿松石手链","银色小铃铛","水晶小摆件","羽毛书签","铜质小镜子","玛瑙小挂坠","檀木小梳子","黑曜石吊坠","贝壳小盒子","紫水晶碎石","红绳手环","陶瓷小茶杯","羊皮小笔记本","黄铜钥匙扣","檀香小香炉"];
-const LUCKY_ACTIONS = ["随身带一颗薄荷糖，紧张时含一颗","每天早上对着镜子笑一下，哪怕假笑也行","办公桌上放一个小盆栽","每月月圆之夜写下一个愿望","左手腕系一根红线（洗澡可摘）","出门前往左走三步再回头看一眼","手机壳里夹一片干花或树叶","每周给自己买一束花","每月最后一个周日断网一天","每天对镜子里的自己说一声'你今天不错'","枕头底下放一本书，睡前翻两页","每次下雨时在窗边站五分钟","每年生日给自己写一封明年的信","用钢笔写一张纸条塞进书籍里","在办公桌抽屉里放一个秘密糖果盒"];
-
-const MONTHS = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
-const RELATIONS = ["前世师徒","战场上并肩的战友","失散多年的手足","相遇又错过的恋人","同一条船上的商人","同一座寺院的修行者","山林中偶遇的旅人","星空下对谈的陌生人","江湖上萍水相逢的知己","前世母子/母女","同一个部落的族人","对门而居的邻居"];
-const SCORES = [78,82,85,88,91,94,96,83,87,90,79,81,86,89,92,95];
-const COUPLE_TIPS = ["多给对方独处的时间，你们都需要个人空间","别在生气时发消息，冷静十分钟再沟通","每月至少一次不带手机的约会","学会用对方的爱语表达感情","吵架时不翻旧账，这是关系的黄金法则","一起完成一个小项目能让感情升温","定期给对方写手写信，文字的力量大于微信","每周有一顿饭的时间完全不看手机对话","每年一起学一个新技能——羽毛球、陶艺、种花都行","互相给彼此留私人空间——你们不是连体婴儿","不要把工作情绪带回家里——进门前深呼吸三次","记住对方在深夜情绪低落时说过的话——那是真话"];
-const CAREER_PATHS = ["内容创作/新媒体","设计/艺术方向","教育/培训行业","心理咨询/助人","自由职业/数字游民","研究/学术领域","创业/自主经营","跨领域复合型人才","技术/编程方向","市场营销/品牌","金融/投资分析","医疗/健康行业"];
-
-</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -198,44 +31,33 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 .report-card{background:linear-gradient(135deg,rgba(30,20,50,.8),rgba(20,15,35,.9));border:1px solid rgba(180,140,220,.12);border-radius:16px;padding:28px 20px;transition:all .3s;cursor:pointer}
 .report-card:hover{border-color:rgba(180,140,220,.35);transform:translateY(-4px);box-shadow:0 16px 48px rgba(107,76,154,.18)}
 .report-card::before{content:'';display:block;height:2px;margin-bottom:16px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.5),transparent)}
-.card-icon{font-size:36px;margin-bottom:14px}
-.card-title{font-size:19px;font-weight:700;margin-bottom:6px;color:#e8e0d0}
-.card-desc{font-size:13px;color:rgba(200,190,170,.45);line-height:1.6}
-.testimonials{padding:80px 20px;max-width:900px;margin:0 auto}
-.test-grid{display:grid;gap:20px}
-.test{background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.08);border-radius:12px;padding:22px;display:flex;gap:14px;align-items:flex-start}
-.av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
-.tc{flex:1}.tn{font-weight:700;font-size:14px}.tt{color:rgba(200,190,170,.55);font-size:13px;margin-top:5px;line-height:1.6}.td{color:rgba(200,190,170,.25);font-size:12px;margin-top:6px}
+.card-icon{font-size:36px;margin-bottom:14px}.card-title{font-size:19px;font-weight:700;margin-bottom:6px;color:#e8e0d0}.card-desc{font-size:13px;color:rgba(200,190,170,.45);line-height:1.6}
+.testimonials{padding:80px 20px;max-width:900px;margin:0 auto}.test-grid{display:grid;gap:20px}
+.test{background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.08);border-radius:12px;padding:22px;display:flex;gap:14px;align-items:flex-start}.av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}.tc{flex:1}.tn{font-weight:700;font-size:14px}.tt{color:rgba(200,190,170,.55);font-size:13px;margin-top:5px;line-height:1.6}.td{color:rgba(200,190,170,.25);font-size:12px;margin-top:6px}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;padding:20px}
-.modal.active{display:flex}
-.modal-box{background:#1a1530;border:1px solid rgba(180,140,220,.2);border-radius:20px;padding:36px 28px;max-width:420px;width:90%;text-align:center}
-.modal-box h2{font-size:22px;margin-bottom:20px}
-.modal-box input,.modal-box select{width:100%;padding:12px 14px;margin-bottom:10px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;font-size:15px;font-family:inherit}
-.modal-box input::placeholder{color:rgba(255,255,255,.3)}
-.modal-box select option{background:#1a1530;color:#e0e0e0}
+.modal.active{display:flex}.modal-box{background:#1a1530;border:1px solid rgba(180,140,220,.2);border-radius:20px;padding:36px 28px;max-width:420px;width:90%;text-align:center}
+.modal-box h2{font-size:22px;margin-bottom:20px}.modal-box input,.modal-box select{width:100%;padding:12px 14px;margin-bottom:10px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;font-size:15px;font-family:inherit}
+.modal-box input::placeholder{color:rgba(255,255,255,.3)}.modal-box select option{background:#1a1530;color:#e0e0e0}
 .submit-btn{width:100%;padding:13px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);border:none;border-radius:10px;color:white;font-size:17px;font-weight:700;cursor:pointer;margin-top:6px}
 .modal-close{display:inline-block;margin-top:14px;color:rgba(255,255,255,.35);cursor:pointer;font-size:13px}
 #reportPage{display:none}#reportPage.active{display:block}
 .report-container{max-width:750px;margin:0 auto;padding:32px 24px}
 .report-header{text-align:center;padding:50px 20px 36px;background:radial-gradient(ellipse at 50%0%,#1a1040,#0a0a0f)}
-.report-header h1{font-size:26px;font-weight:900;margin-bottom:10px}
-.report-meta{color:rgba(200,190,170,.45);font-size:13px}
+.report-header h1{font-size:26px;font-weight:900;margin-bottom:10px}.report-meta{color:rgba(200,190,170,.45);font-size:13px}
 .rs{background:linear-gradient(135deg,rgba(30,20,50,.6),rgba(20,15,35,.7));border:1px solid rgba(180,140,220,.1);border-radius:16px;padding:26px 22px;margin-bottom:18px}
-.rs h2{font-size:19px;font-weight:700;margin-bottom:14px;color:#d4b8f0}
-.rs p,.rs li{font-size:15px;line-height:1.9;color:rgba(220,210,190,.82);margin-bottom:8px}
-.lucky-box{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;text-align:center}
-.lucky-item{background:rgba(107,76,154,.12);border-radius:12px;padding:16px 20px;min-width:90px}
-.lucky-item .num{font-size:28px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.lucky-item .label{font-size:12px;color:rgba(200,190,170,.45);margin-top:3px}
-.share-bar{text-align:center;padding:28px 20px}
-.share-btn{padding:14px 36px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;margin:0 6px;font-family:inherit}
+.rs h2{font-size:19px;font-weight:700;margin-bottom:14px;color:#d4b8f0}.rs p,.rs li{font-size:15px;line-height:1.9;color:rgba(220,210,190,.82);margin-bottom:8px}
+.lucky-box{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;text-align:center}.lucky-item{background:rgba(107,76,154,.12);border-radius:12px;padding:16px 20px;min-width:90px}
+.lucky-item .num{font-size:28px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.lucky-item .label{font-size:12px;color:rgba(200,190,170,.45);margin-top:3px}
+.share-bar{text-align:center;padding:28px 20px}.share-btn{padding:14px 36px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;margin:0 6px;font-family:inherit}
 .back-btn{padding:14px 36px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:17px;cursor:pointer;font-family:inherit}
 .unlock-box{text-align:center;padding:36px 20px;background:linear-gradient(135deg,rgba(107,76,154,.15),rgba(30,20,50,.8));border:1px solid rgba(180,140,220,.18);border-radius:16px;margin:20px 0}
 .unlock-btn{padding:13px 36px;background:linear-gradient(135deg,#e8a850,#d4883a);color:white;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
+.locked{display:none}.unlocked{display:block}
 .footer{text-align:center;padding:50px 20px 36px;color:rgba(200,190,170,.25);font-size:12px;border-top:1px solid rgba(180,140,220,.06)}
 @media(max-width:600px){.hero h1{font-size:32px}.cta-btn{padding:14px 36px;font-size:17px}.report-grid{grid-template-columns:1fr}}
 </style></head><body>
 
+<!-- LANDING -->
 <div id="landing">
 <section class="hero">
   <div class="nebula n1"></div><div class="nebula n2"></div><div class="nebula n3"></div>
@@ -267,7 +89,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <section class="testimonials">
   <div class="section-title">他们这样说</div>
   <div class="test-grid">
-    <div class="test"><div class="av">🌸</div><div class="tc"><div class="tn">小丸子</div><div class="tt">太准了！说我危险直觉强还不信，回头一想之前那个offer前就觉得不对，果然是个坑。发给闺蜜看她也说准得离谱…</div><div class="td">2天前</div></div></div>
+    <div class="test"><div class="av">🌸</div><div class="tc"><div class="tn">小丸子</div><div class="tt">太准了！说我危险直觉强还不信，回头一想之前那个offer前就觉得不对，果然是个坑…</div><div class="td">2天前</div></div></div>
     <div class="test"><div class="av">⭐</div><div class="tc"><div class="tn">晚风与猫</div><div class="tt">男朋友非要我测双人合盘，测完说原来咱俩前世是师徒哈哈。已经推荐给全公司了。</div><div class="td">5天前</div></div></div>
     <div class="test"><div class="av">🌙</div><div class="tc"><div class="tn">林深时见鹿</div><div class="tt">"别跟老朋友合伙"这条直接击中——去年刚跟发小合伙开店闹掰了。早点测就好了。</div><div class="td">1周前</div></div></div>
   </div>
@@ -275,258 +97,144 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer>
 </div>
 
+<!-- REPORT PAGE -->
 <div id="reportPage"><div class="report-header"><h1 id="rTitle"></h1><div class="report-meta" id="rMeta"></div></div><div class="report-container" id="rContent"></div><div class="share-bar"><button class="share-btn" onclick="shareIt()">📸 生成分享图</button><button class="back-btn" onclick="goBack()">← 返回</button></div><footer class="footer"><p>本报告仅供娱乐 | © 2026 隐藏人生剧本</p></footer></div>
 
+<!-- MODAL -->
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 
 <script>
-// ============ ALIASES from templates.js ============
-const P=PAST_LIVES,G=TALENTS,A=ADVENTURES,B=BUGS;
-// (templates loaded inline above)
-const LC=LUCKY_COLORS,LN=LUCKY_NUMBERS,LI=LUCKY_ITEMS,LA=LUCKY_ACTIONS;
-const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
+// ============================================================
+// TEMPLATES (inline - single file, zero external deps)
+// ============================================================
+const P=[{t:"终南山林间灵医",g:"u",d:"隐居在终南山里的采药人，守着一片药田很少下山。不爱跟俗人打交道，却总忍不住救迷路的旅人、受伤的小狐狸，治病不收银钱，只收对方讲一个山外的新鲜故事。这辈子你依然带着这份本能：天生共情力强，见不得别人难过；总喜欢躲在自己的小世界里，比起热闹人群更爱跟植物、小动物待在一起；嘴上不说，心里总偷偷给身边人兜底。"},{t:"宋代江南书院书生",g:"m",d:"前世是江南小镇书院里的教书先生，爱书如命却不爱功名。课余在院子里种菜养花，学生们都说你是最不像先生的先生。你最大的快乐是看学生豁然开朗的那一瞬间。这辈子你天生擅长用简单话说清复杂道理，对知识有无尽的渴望，但内心深处对名利场始终保持着疏离和清醒。"},{t:"明朝江南织女",g:"f",d:"前世是苏州织造府的顶尖织女，十指翻飞能织出云霞般的锦缎。你的织品被送进紫禁城，但你从不以此为傲，深夜独自织布时最是自在。这辈子你手极巧，做什么手工都上手快；对细节苛刻到近乎强迫，但你做出来的东西就是比别人精致十倍。"},{t:"商周部落星象祭司",g:"f",d:"前世是黄河边部落里的女祭司，负责观察星象、主持仪式。你能通过草木的生长状态预测当年的收成，部落里的人都敬畏你。这辈子你可能对星空有莫名的迷恋，直觉强到让自己害怕，有时候说出来的话会莫名其妙地应验。"},{t:"民国上海滩书店老板",g:"u",d:"前世是上海法租界里一间小书店的老板，店里藏着各种禁书和地下刊物。白天卖正经书，晚上偷偷借给进步青年。你从不多问他们拿去做什么，只是默默在每本书里夹一张写着'保重'的字条。这辈子你天然有保护弱者的冲动，对文字敏感，骨子里带着老派的浪漫和骨气。"},{t:"盛唐长安乐师",g:"f",d:"前世是长安城里教坊司的琵琶师，指尖流出的是整个盛唐的繁华。你在皇帝面前弹过曲，也在深夜的酒肆里给失意人弹过。音乐是你的一切，但你知道最动人的音符永远藏在无声的停顿里。这辈子你对旋律有天然的感应，可能不会乐器，但听到好音乐会莫名想哭。"},{t:"战国楚国铸剑师",g:"m",d:"前世是楚国深山里的铸剑师，一生只铸过七把剑，每一把都有自己的名字和性格。你不为君王铸剑，只为那些值得拥有一把好剑的人而铸。这辈子你对自己做的事有极高标准，宁可做得慢也不愿意交出半成品。"},{t:"秦朝长城烽火兵",g:"m",d:"前世是镇守北方长城的烽火兵，日夜守望狼烟升起的方向。你的生命里只有两种状态：警觉与等待，一生见过无数次日出却从未认真看过一次。这辈子你可能经常失眠、对安全感的渴求比常人更强烈，但同时拥有超乎常人的耐力。"},{t:"盛唐敦煌壁画师",g:"u",d:"前世是在敦煌莫高窟里描摹佛陀的画师。沙漠深处一待就是三十年，颜料贵如黄金，你的每一笔都带着对光的虔诚。这辈子你天生对宗教、哲学有亲近感，对色彩的把控力像是肌肉记忆一样刻在身体里。"},{t:"宋朝茶马古道马帮",g:"m",d:"前世是穿梭于川藏茶马古道上的马帮人，赶着骡马翻越雪山、穿越密林。你的生活字典里没有舒适这个词，但每一次活着回到起点时喝的那碗酥油茶，比什么都香。这辈子你可能身体里流淌着不安分的血液，在极限环境中反而比平时更清醒。"},{t:"清代紫禁城御医",g:"u",d:"前世是太医院里最年轻的御医，给皇帝把过脉也给宫女偷偷塞过药。你见过权力的腐烂也见过生命在最低处绽放的尊严，终身信奉医者仁心四个字。这辈子你可能天然想帮助别人、最看不得弱者在受苦。"},{t:"魏晋竹林七贤之一",g:"m",d:"前世是魏晋时期的隐士，跟几个朋友住在竹林里，喝酒、弹琴、写诗。你不做官不是因为不能，是因为不屑。你活得很穷但从不觉得自己可怜，因为你拥有的是别人拿整个官位都换不来的自由。这辈子你内心有一套自己的对错标准，不轻易向主流妥协。"}];
 
-// Dropdowns now populated dynamically per modal type via popBday() / popMBTI()
+const G=[["情绪文字天赋","你随手写的句子总能戳中别人的心事，做内容、搞创作比普通人容易出结果。这不是偶然，是你天生会情绪翻译。"],["危险直觉","你第一眼觉得不舒服的人、拿不准的事，最后大概率会出问题。别怀疑你的第六感——它比你的理性分析更准确。"],["万物亲和力","小动物天然不怕你，养多肉绿植都比别人容易养活。去山里海边会莫名觉得放松，越远离城市你的灵气越强。"],["深夜创造力","晚上10点以后的思维比白天活跃三倍。这是你的大脑进入了灵感模式。很多伟大艺术家都有这个特质。"],["能量感知力","你能感知一个房间里的气氛——吵架前的沉默、有人不开心时的空气，比旁人先捕捉到。这是高敏感人格，是天赋不是缺陷。"],["默默影响力","别人跟你聊完天后总会感觉好一点。不是你的话疗，是你的能量场——不经意的一句话、一个眼神就足以让对方重新振作。"],["空间构图天赋","拍照从不用学构图，布置房间、搭配衣服都好看——你的眼睛天生能捕捉视觉平衡。"],["危机处理能力","平时懒散随性，但紧急关头是所有人里最冷静的。你能瞬间抓住重点，做决定快且准——这是稀缺的领导力天赋。"],["识人之明","第一次见面就能大致判断一个人的底色。你的潜意识在整理微表情、语气、肢体语言——你不是会看面相，你是会读人。"],["故事编织力","讲最平凡的小事都能让人听得津津有味。你有能力把日常讲成故事——这是天生的叙事者天赋。"],["数字敏感度","对数字、规律、模式有天然的嗅觉。别人头疼的一堆数据你一眼就能发现异常——这叫秩序感知。"],["痛感预知","你身体某个部位会在别人不舒服之前先有反应。高敏感人群的镜像神经元更活跃，你会感同身受——医护人员里很多这种人。"]];
 
-// ============ MYSTICAL CLOCK ============
-(function tick(){
-  let n=new Date();
-  let shichen=['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'];
-  let idx=Math.floor(((n.getHours()+1)%24)/2);
-  let style='color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)';
-  let s='<span style=\"'+style+'\">'+shichen[idx]+'</span>';
-  s+='<span style=\"color:rgba(200,190,170,.2);font-size:11px\">✦</span>';
-  s+='<span style=\"'+style+'\">'+
-    n.getFullYear()+'年'+String(n.getMonth()+1).padStart(2,'0')+'月'+String(n.getDate()).padStart(2,'0')+'日'+
-    '</span>';
-  s+='<span style=\"color:rgba(200,190,170,.2);font-size:11px\">✦</span>';
-  s+='<span style=\"'+style+'\">'+
-    String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')+
-    '</span>';
-  document.getElementById('liveClock').innerHTML=s;
-  setTimeout(tick,1000);
-})();
+const A=[["秋日奇遇","9-10月在一家旧书店或社区咖啡店里，你会遇到一个戴木质手串的长辈。他会跟你说一句没头没尾的话，当时听不懂，三个月后人生岔路口时突然想起来，帮你避开一个大坑。"],["冬季转折","12月会有一个完全陌生领域的机会找上门，跟你现在做的事几乎不沾边。别直接拒绝，抱着试试的心态接下来，会带来意料之外的收入和方向。"],["盛夏邂逅","7-8月在一次短途旅行中，你会遇到一个改变你职业轨迹的人。对方可能看起来毫不起眼，但对话会像钥匙和锁一样契合。"],["春末顿悟","4-5月某个凌晨，你会突然想通一件纠结了大半年的事。不是在思考——是在半梦半醒间，答案自己浮上来的。那之前别焦虑，潜意识已经帮你想了六个月。"],["意外来信","今年会收到一封来自过去的信或消息——可能是一个很久不联系的老朋友，也可能是你忘掉的承诺突然兑现。"],["雨中相遇","今年雨季有一天你会因为躲雨而走进一个平时不会去的地方，在那里遇到的人或事会打开一个全新的圈子。记得随身带伞——不是为了挡雨，是为了让你有理由停下来。"]];
 
-// ============ STARS ============
-(function(){let c=document.getElementById('stars'),s=[1,1,1,1.5,1.5,2,2.5,3];for(let i=0;i<130;i++){let e=document.createElement('div'),z=s[Math.floor(Math.random()*s.length)];e.style.cssText=`position:absolute;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${z>2?'.5':z>1.5?'.3':'.15'};animation:tw${Math.random()*4+2}s infinite alternate;animation-delay:${Math.random()*5}s`;c.appendChild(e)}for(let i=0;i<3;i++){let e=document.createElement('div');e.style.cssText=`position:absolute;width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);left:${Math.random()*100}%;top:${Math.random()*80}%;animation:sh${Math.random()*4+4}s linear infinite;animation-delay:${Math.random()*8}s`;c.appendChild(e)}let st=document.createElement('style');st.textContent=`@keyframes tw{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}@keyframes sh{0%{transform:translateX(0)translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px)translateY(80px);opacity:0}100%{opacity:0}}`;document.head.appendChild(st)})();
-document.getElementById('uc').textContent=(13000+Math.floor(Math.random()*500)).toLocaleString();
+const B=[["别在凌晨三点做决定","你深夜想的事90%都是无意义内耗。第二天早上醒来会觉得昨晚的自己像个戏精。如果忍不住，至少写下来而不是立刻执行。"],["别总委屈自己迁就别人","你的感受比别人会不会不高兴重要一万倍。你总以为忍一忍就过去了，但你忍的每一次都在身体里留下了痕迹。"],["每年春天去山里走走","不用跟人说话，光是待着就能补满能量。你不是社恐，你只是需要定期归零。这个习惯比什么保健品都管用。"],["暂停过度分析","你习惯在脑子里预演所有可能性，但这个能力用过头就是自我折磨。有些事没道理就是没道理，放过自己。"],["学会接受赞美","别人夸你的时候别说没有啦，学着说谢谢。你总觉得自己不够好，但其实在别人眼里你已经很好了。"],["别跟认识超五年的朋友合伙","你太重感情，利益分歧时不忍心争，最后只会自己吃亏。跟熟人的关系一旦叠上金钱维度，翻车的概率远高于陌生人。"],["学会说不","你总怕拒绝别人不好，但你的时间和精力是有限的。每一次对别人说是，都是在对自己说不。从拒绝一顿不想吃的饭开始练习。"],["不要让社交媒体影响自我认知","你刷到的99%都是别人精心剪辑的高光片段，拿来跟自己24小时的真实生活比不公平。每天睡前想三件自己做好的小事坚持一个月。"]];
+
+const LC=["松烟绿","暮云紫","深海蓝","琥珀金","月光银","珊瑚粉","雾霭灰","薄雾紫","霜叶红","星夜蓝"];
+const LN=[3,5,7,9,11,13,17,21,23,27];
+const LI=["木质小挂件","绿松石手链","银色小铃铛","水晶小摆件","羽毛书签","铜质小镜子","玛瑙小挂坠","檀木小梳子"];
+const LA=["随身带一颗薄荷糖，紧张时含一颗","每天早上对着镜子笑一下，哪怕假笑也行","办公桌上放一个小盆栽","每月月圆之夜写下一个愿望","左手腕系一根红线","出门前往左走三步再回头看一眼","手机壳里夹一片干花或树叶","每周给自己买一束花"];
+const MN=["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+const REL=["前世师徒","战场上并肩的战友","失散多年的手足","相遇又错过的恋人","同一条船上的商人","同一座寺院的修行者","山林中偶遇的旅人","星空下对谈的陌生人"];
+const SCS=[78,82,85,88,91,94,96,83,87,90];
+const CT=["多给对方独处的时间，你们都需要个人空间","别在生气时发消息，冷静十分钟再沟通","每月至少一次不带手机的约会","学会用对方的爱语表达感情","吵架时不翻旧账"];
+const CP=["内容创作/新媒体","设计/艺术方向","教育/培训行业","心理咨询/助人","自由职业/数字游民","研究/学术领域","创业/自主经营","跨领域复合型人才"];
 
 // ============ HELPERS ============
 function sd(s){let x=0;for(let i=0;i<s.length;i++)x=(x*31+s.charCodeAt(i))%2147483647;return function(){x=(x*1103515245+12345)%2147483647;return x/2147483647}}
 function pk(a,r){return a[Math.floor(r()*a.length)]}
 function pks(a,n,r){let u=new Set(),res=[];while(res.length<n){let x=pk(a,r);if(!u.has(x[0])){u.add(x[0]);res.push(x)}}return res}
 
-// ============ FLOW ============
-let _r=null,_type=null;
+// ============ LIVE CLOCK ============
+(function tick(){let n=new Date(),shichen=['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'],idx=Math.floor(((n.getHours()+1)%24)/2),s='<span style="color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)">'+shichen[idx]+'</span><span style="color:rgba(200,190,170,.2);font-size:11px"> ✦ </span><span style="color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)">'+n.getFullYear()+'年'+String(n.getMonth()+1).padStart(2,'0')+'月'+String(n.getDate()).padStart(2,'0')+'日</span><span style="color:rgba(200,190,170,.2);font-size:11px"> ✦ </span><span style="color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)">'+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')+'</span>';document.getElementById('liveClock').innerHTML=s;setTimeout(tick,1000)})();
 
-function bdayHTML(prefix,yid,mid,did){
-  return`<div style="display:flex;gap:8px"><select id="${yid}"><option value="">年</option></select><select id="${mid}"><option value="">月</option></select><select id="${did}"><option value="">日</option></select></div>`;
-}
+// ============ STARS ============
+(function(){let c=document.getElementById('stars'),s=[1,1,1,1.5,1.5,2,2.5,3];for(let i=0;i<130;i++){let e=document.createElement('div'),z=s[Math.floor(Math.random()*s.length)];e.style.cssText=`position:absolute;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${z>2?'.5':z>1.5?'.3':'.15'};animation:tw${Math.random()*4+2}s infinite alternate;animation-delay:${Math.random()*5}s`;c.appendChild(e)}for(let i=0;i<3;i++){let e=document.createElement('div');e.style.cssText=`position:absolute;width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);left:${Math.random()*100}%;top:${Math.random()*80}%;animation:sh${Math.random()*4+4}s linear infinite;animation-delay:${Math.random()*8}s`;c.appendChild(e)}let st=document.createElement('style');st.textContent=`@keyframes tw{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}@keyframes sh{0%{transform:translateX(0)translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px)translateY(80px);opacity:0}100%{opacity:0}}`;document.head.appendChild(st)})();
+document.getElementById('uc').textContent=(13000+Math.floor(Math.random()*500)).toLocaleString();
+
+// ============ DROPDOWN HELPERS ============
 function popBday(yid,mid,did){let n=new Date(),ty=n.getFullYear();for(let i=ty;i>=1960;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';document.getElementById(yid).appendChild(o)}for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';document.getElementById(mid).appendChild(o)}for(let i=1;i<=31;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'日';document.getElementById(did).appendChild(o)}}
-function popMBTI(id){
-  let n={'INTJ':'建筑师','INTP':'逻辑学家','ENTJ':'指挥官','ENTP':'辩论家','INFJ':'提倡者','INFP':'调停者','ENFJ':'主人公','ENFP':'竞选者','ISTJ':'物流师','ISFJ':'守卫者','ESTJ':'总经理','ESFJ':'执政官','ISTP':'鉴赏家','ISFP':'探险家','ESTP':'企业家','ESFP':'表演者'};
-  Object.entries(n).forEach(([k,v])=>{let o=document.createElement('option');o.value=k;o.textContent=k+' - '+v;document.getElementById(id).appendChild(o)});
-}
+function bdayHTML(yid,mid,did){return`<div style="display:flex;gap:8px"><select id="${yid}"><option value="">年</option></select><select id="${mid}"><option value="">月</option></select><select id="${did}"><option value="">日</option></select></div>`}
+function popMBTI(id){let n={'INTJ':'建筑师','INTP':'逻辑学家','ENTJ':'指挥官','ENTP':'辩论家','INFJ':'提倡者','INFP':'调停者','ENFJ':'主人公','ENFP':'竞选者','ISTJ':'物流师','ISFJ':'守卫者','ESTJ':'总经理','ESFJ':'执政官','ISTP':'鉴赏家','ISFP':'探险家','ESTP':'企业家','ESFP':'表演者'};Object.entries(n).forEach(([k,v])=>{let o=document.createElement('option');o.value=k;o.textContent=k+' - '+v;document.getElementById(id).appendChild(o)})}
+
+// ============ MODAL / FLOW ============
+let _type=null;
 
 function start(t){
   _type=t;
-  let box=document.getElementById('modalBox');
-  let h='',b='';
-  if(t==='life'){
-    h='🔮 隐藏人生剧本';b='解锁前世今生';
-    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
-    popBday('fYear','fMonth','fDay');popMBTI('fMbti');
-  }else if(t==='couple'){
-    h='💘 双人合盘报告';b='查看你们的羁绊';
-    box.innerHTML=`<h2>${h}</h2><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px">你的信息</p>${bdayHTML('你','c1Year','c1Month','c1Day')}<select id="c1Gender"><option value="">你的性别</option><option value="female">女性</option><option value="male">男性</option></select><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px;margin-top:12px">对方的信息</p>${bdayHTML('TA','c2Year','c2Month','c2Day')}<select id="c2Gender"><option value="">TA的性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
-    popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day');
-  }else if(t==='yearly'){
-    h='📅 年度运势';b='预览你的2026';
-    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
-    popBday('fYear','fMonth','fDay');
-  }else if(t==='personality'){
-    h='🎭 隐藏人格解码';b='发现真正的你';
-    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
-    popBday('fYear','fMonth','fDay');popMBTI('fMbti');
-  }else if(t==='career'){
-    h='💼 职业天命';b='找到你的赛道';
-    box.innerHTML=`<h2>${h}</h2>${bdayHTML('','fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>`;
-    popBday('fYear','fMonth','fDay');popMBTI('fMbti');
-  }
+  let box=document.getElementById('modalBox'),h='',b='';
+  if(t==='life'){h='🔮 隐藏人生剧本';b='解锁前世今生';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
+  else if(t==='couple'){h='💘 双人合盘报告';b='查看你们的羁绊';box.innerHTML=`<h2>${h}</h2><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px">你的信息</p>${bdayHTML('c1Year','c1Month','c1Day')}<select id="c1Gender"><option value="">你的性别</option><option value="female">女性</option><option value="male">男性</option></select><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px;margin-top:12px">对方的信息</p>${bdayHTML('c2Year','c2Month','c2Day')}<select id="c2Gender"><option value="">TA的性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day')}
+  else if(t==='yearly'){h='📅 年度运势';b='预览你的2026';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay')}
+  else if(t==='personality'){h='🎭 隐藏人格解码';b='发现真正的你';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
+  else if(t==='career'){h='💼 职业天命';b='找到你的赛道';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="generate()">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   document.getElementById('modal').classList.add('active');
 }
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active')});
 
+// ============ GENERATE ============
 function generate(){
-  let tp=_type;
-  let yr,mo,da,gd,mb='未知',mbName='',bd='',jb='探索者',r;
-
+  let tp=_type,yr,mo,da,gd,bd='',mb='未知',mbName='',r;
   if(tp==='couple'){
     let y1=parseInt(document.getElementById('c1Year').value),m1=parseInt(document.getElementById('c1Month').value),d1=document.getElementById('c1Day').value;
     let y2=parseInt(document.getElementById('c2Year').value),m2=parseInt(document.getElementById('c2Month').value),d2=document.getElementById('c2Day').value;
     if(!y1||!m1||!d1||!y2||!m2||!d2){alert('请填写两人的完整生日');return}
-    bd=y1+'.'+m1+'.'+d1+' & '+y2+'.'+m2+'.'+d2;
-    gd=document.getElementById('c1Gender').value;
-    r=sd((y1*10000+m1*100+parseInt(d1)+y2*10000+m2*100+parseInt(d2)).toString());
+    bd=y1+'.'+m1+'.'+d1+' & '+y2+'.'+m2+'.'+d2;gd=document.getElementById('c1Gender').value;
+    r=sd((y1*10000+m1*100+parseInt(d1)+y2*10000+m2*100+parseInt(d2)).toString());mo=m1;
   }else{
     yr=parseInt(document.getElementById('fYear').value);mo=parseInt(document.getElementById('fMonth').value);da=document.getElementById('fDay').value;
-    if(!yr||!mo||!da){alert('请选择完整的年月日');return}
-    bd=yr+'.'+mo+'.'+da;
+    if(!yr||!mo||!da){alert('请选择完整的年月日');return}bd=yr+'.'+mo+'.'+da;
     gd=document.getElementById('fGender')?.value||'';
-    let mbEl=document.getElementById('fMbti');
-    if(mbEl){let mbRaw=mbEl.value||'';mb=mbRaw?mbRaw.split(' - ')[0]:'未知';mbName=mbRaw?mbRaw.split(' - ')[1]||'':''}
+    let mbEl=document.getElementById('fMbti');if(mbEl){let raw=mbEl.value||'';mb=raw?raw.split(' - ')[0]:'未知';mbName=raw?raw.split(' - ')[1]||'':''}
     r=sd((yr*10000+mo*100+parseInt(da)).toString());
   }
-
-  // Gender-filtered template pool
-  let filterGender=function(arr){
-    if(!gd) return arr;
-    let preferred=arr.filter(x=>x.g===gd), neutral=arr.filter(x=>!x.g||x.g==='u');
-    let pool=[...preferred,...preferred,...neutral];
-    return pool.length>0?pool:arr;
-  };
-  let PL=filterGender(P), GL=filterGender(G);
+  let filterGender=function(arr){if(!gd)return arr;let preferred=arr.filter(x=>x.g===gd),neutral=arr.filter(x=>!x.g||x.g==='u');let pool=[...preferred,...preferred,...neutral];return pool.length>0?pool:arr};
+  let PL=filterGender(P),GL=filterGender(G);
   let moN=MN[Math.min(11,Math.max(0,mo-1))];
-  let pre='',ext='',tt='';
+  let tt='',html='';
 
   if(tp==='life'||tp==='couple'){
     tt=tp==='couple'?'💘 双人合盘报告':'🔮 隐藏人生剧本';
-    var pl=pk(PL,r);
-    pre+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
-    var ts=pks(GL,3,r);
-    pre+=`<div class="rs"><h2>二、今生隐藏天赋</h2><p><b>1. ${ts[0][0]}：</b>${ts[0][1]}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:8px">🔒 解锁查看另外 2 项隐藏天赋</p></div>`;
-    var ad=pk(A,r);
-    pre+=`<div class="rs"><h2>三、年度关键线索</h2><p>✅ <b>${ad[0]}：</b>${ad[1].substring(0,30)}…</p><p style="color:rgba(200,190,170,.25);text-align:center">🔒 解锁完整奇遇 + Bug修复指南 + 幸运密码</p></div>`;
-    ext+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
-    ext+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
-    var ad2=pk(A,r);if(ad2[0]===ad[0])ad2=pk(A,r);
-    ext+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
-    ext+=`<p>⚠️ <b>避坑提醒：</b>${mo||1}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    var pl=pk(PL,r),ts=pks(GL,3,r),ad=pk(A,r),ad2=pk(A,r);if(ad2[0]===ad[0])ad2=pk(A,r);
     var bs=pks(B,3,r);
-    ext+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
-    ext+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
-    ext+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
-    ext+=`<div class="lucky-item"><div class="num">${pk(LN,r)}</div><div class="label">幸运数字</div></div>`;
-    ext+=`<div class="lucky-item"><div class="num">${pk(LI,r)}</div><div class="label">好运信物</div></div>`;
-    ext+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pk(LA,r)}</p></div>`;
+    html+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
+    html+=`<div class="rs"><h2>二、今生隐藏天赋</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
+    html+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
+    html+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p>`;
+    html+=`<p class="locked">✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
+    html+=`<p class="locked">⚠️ <b>避坑提醒：</b>${mo||1}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    html+=`<div class="rs locked"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
+    html+=`<div class="rs locked"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
+    html+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
+    html+=`<div class="lucky-item"><div class="num">${pk(LN,r)}</div><div class="label">幸运数字</div></div>`;
+    html+=`<div class="lucky-item"><div class="num">${pk(LI,r)}</div><div class="label">好运信物</div></div>`;
+    html+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pk(LA,r)}</p></div>`;
   }else{
     tt=tp==='yearly'?'📅 年度运势':tp==='personality'?'🎭 隐藏人格解码':'💼 职业天命';
-    pre+=`<div class="rs"><h2>报告摘要</h2><p style="font-size:22px;text-align:center">${tp==='yearly'?'转折·沉淀·破局':tp==='personality'?'你不为人知的那一面':'天赋赛道·最佳时机'}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:12px">🔒 解锁查看完整报告</p></div>`;
-    ext+=`<div class="rs"><h2>完整报告</h2>`;
-    if(tp==='yearly'){for(let i=0;i<12;i++)ext+=`<p><b>${MN[i]}：</b>${pk(['🌱萌芽期','🌸上升期','☀️高峰期','🍂沉淀期','❄️蓄力期'],r)} | 幸运日：${Math.floor(r()*28)+1}日 | 宜：${pk(['拓展人脉','学习新技能','专注当下','稳固基础'],r)}</p>`}
-    else if(tp==='personality'){ext+=`<p style="font-size:28px;text-align:center;font-weight:900">${pk(['月光型人格','深海型人格','森林型人格','星辰型人格','火焰型人格','微风型人格'],r)}</p>`+pks(G,3,r).map((x,i)=>`<p><b>${x[0]}：</b>${x[1]}</p>`).join('')}
-    else{ext+=`<p style="font-size:26px;text-align:center;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${pk(CP,r)}</p><p>${moN}是关键的转折窗口</p><p>贵人特征：年龄大5-10岁，经验丰富但不摆架子的前辈</p>`}
-    ext+=`</div>`;
+    html+=`<div class="rs"><h2>报告摘要</h2><p style="font-size:22px;text-align:center">${tp==='yearly'?'转折·沉淀·破局':tp==='personality'?'你不为人知的那一面':'天赋赛道·最佳时机'}</p></div>`;
+    if(tp==='yearly'){for(let i=0;i<12;i++)html+=`<p class="locked"><b>${MN[i]}：</b>${pk(['🌱萌芽期','🌸上升期','☀️高峰期','🍂沉淀期','❄️蓄力期'],r)} | 幸运日：${Math.floor(r()*28)+1}日</p>`}
+    else if(tp==='personality'){html+=`<p style="font-size:28px;text-align:center;font-weight:900">${pk(['月光型人格','深海型人格','森林型人格','星辰型人格'],r)}</p><div class="locked">`+pks(G,3,r).map((x,i)=>`<p><b>${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`}
+    else{html+=`<div class="locked"><p style="font-size:26px;text-align:center;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${pk(CP,r)}</p><p>${moN}是关键的转折窗口</p><p>贵人特征：年龄大5-10岁，经验丰富但不摆架子的前辈</p></div>`}
+    html+=`</div>`;
   }
 
-  // Build clean full report inside same scope as pl/ts/ad/bs
-  _r={tt,pre,ext};
-  if(tp==='life'||tp==='couple'){
-    let full='';
-    full+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
-    full+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
-    full+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
-    full+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
-    full+=`<p>⚠️ <b>避坑提醒：</b>${mo||(m1||1)}月前后注意财务决策，别冲动消费或投资。</p></div>`;
-    full+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
-    full+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
-    full+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
-    full+=`<div class="lucky-item"><div class="num">${pk(LN,r)}</div><div class="label">幸运数字</div></div>`;
-    full+=`<div class="lucky-item"><div class="num">${pk(LI,r)}</div><div class="label">好运信物</div></div>`;
-    full+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pk(LA,r)}</p></div>`;
-    _r.full=full;
-  }else{
-    _r.full=pre+ext;
-  }
   document.getElementById('rTitle').textContent=tt;
-  document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''} | 职业 ${jb}`;
-  document.getElementById('rContent').innerHTML=pre+'<div class="unlock-box"><h3>🔮 解锁完整报告</h3><p>前世完整剧本 · 全部隐藏天赋 · 年度奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
+  document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''}`;
+  document.getElementById('rContent').innerHTML=html+'<div class="unlock-box" id="unlockBox"><h3>🔮 解锁完整报告</h3><p>全部隐藏天赋 · 完整奇遇 · Bug修复 · 幸运密码</p><button class="unlock-btn" onclick="unlock()">✨ 解锁完整版</button></div>';
   document.getElementById('landing').style.display='none';document.getElementById('reportPage').classList.add('active');
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
 
 function unlock(){
-  if(!_r)return;
-  document.getElementById('rContent').innerHTML=_r.pre+
-    '<div class="unlock-box">'+
-    '<h3>🔓 解锁完整报告</h3>'+
-    '<p style="color:rgba(200,190,170,.6);font-size:14px;margin-bottom:20px">微信扫码支付后截图发给客服获取完整版</p>'+
+  document.getElementById('unlockBox').innerHTML=
+    '<h3>🔓 解锁完整报告</h3><p style="color:rgba(200,190,170,.6);font-size:14px;margin-bottom:20px">微信扫码支付后获取解锁码</p>'+
     '<div style="background:white;width:200px;height:200px;margin:0 auto 15px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#999;font-size:12px">📱 此处放收款码</div>'+
-    '<p style="color:rgba(200,190,170,.35);font-size:12px">支付完成后联系客服获取解锁码</p>'+
-    '<button class="unlock-btn" onclick="fakeUnlock()" style="margin-top:12px">🔑 我已支付，输入解锁码</button>'+
-    '<input id="unlockCode" placeholder="输入6位解锁码" style="display:none;width:100%;padding:10px;margin-top:8px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;font-size:15px;text-align:center;font-family:inherit">'+
-    '<button id="unlockSubmit" onclick="verifyCode()" style="display:none;width:100%;padding:10px;margin-top:6px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);border:none;border-radius:8px;color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">确认解锁</button>'+
-    '</div>';
-  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
-}
-
-function fakeUnlock(){
-  let inp=document.getElementById('unlockCode'),btn=document.getElementById('unlockSubmit');
-  inp.style.display='block';btn.style.display='block';inp.focus();
+    '<p style="color:rgba(200,190,170,.35);font-size:12px;margin-bottom:12px">支付后联系客服获取解锁码</p>'+
+    '<input id="unlockCode" placeholder="输入6位解锁码" style="width:100%;padding:10px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;font-size:15px;text-align:center;font-family:inherit;margin-bottom:8px">'+
+    '<button onclick="verifyCode()" style="width:100%;padding:10px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);border:none;border-radius:8px;color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">确认解锁</button>';
 }
 function verifyCode(){
-  let code=document.getElementById('unlockCode').value.trim();
-  if(code==='888888'){
-    document.getElementById('rContent').innerHTML=_r.pre+_r.ext+'<div class="share-bar" style="margin-top:20px"><p style="color:rgba(200,190,170,.35);font-size:13px;margin-bottom:10px">✨ 完整报告已解锁</p><button class="share-btn" onclick="shareIt()">📸 生成分享图</button><button class="back-btn" onclick="goBack()">← 返回首页</button></div>';
-    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
-  }else{
-    alert('解锁码错误，请检查后重试');
-  }
+  if(document.getElementById('unlockCode').value.trim()==='888888'){
+    document.querySelectorAll('.locked').forEach(el=>el.classList.replace('locked','unlocked'));
+    document.getElementById('unlockBox').innerHTML='<p style="color:rgba(200,190,170,.5);font-size:14px">✨ 完整报告已解锁</p>';
+  }else{alert('解锁码错误，请检查后重试')}
 }
-function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
-function shareIt(){
-  // Create share card
-  let card=document.createElement('div');
-  card.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(5,5,10,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';
-  card.id='shareCard';
-  card.onclick=function(){this.remove()};
 
+function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
+
+// ============ SHARE CARD ============
+function shareIt(){
   let rpt=document.getElementById('rTitle')?.textContent||'隐藏人生剧本';
   let meta=document.getElementById('rMeta')?.textContent||'';
-  // Extract first talent line from the full report
-  let el=document.getElementById('rContent');
-  let talentLine='';
-  if(el){
-    let txt=el.innerText||'';
-    let m=txt.match(/1\.\s*(.+?：.+?)(?:\n|2\.)/);
-    if(m)talentLine=m[1].replace(/：.*/,'');
-  }
-
-  let t=new Date();
-  let moonPhase='🌗';
-  let h=t.getHours();
-  if(h>=5&&h<7)moonPhase='🌅';else if(h>=7&&h<17)moonPhase='☀️';else if(h>=17&&h<20)moonPhase='🌆';else if(h>=20||h<5)moonPhase='🌙';
-
-  card.innerHTML=`
-    <div style="max-width:420px;width:100%;background:linear-gradient(180deg,#0c0a20,#1a1040 40%,#0e0c2a 70%,#0a0a1a);border:1px solid rgba(180,140,220,.2);border-radius:24px;overflow:hidden;text-align:center;box-shadow:0 0 80px rgba(100,60,160,.3)">
-      <!-- 顶部装饰 -->
-      <div style="padding:32px 24px 0;position:relative">
-        <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35%35%,#f5e6d3,#d4b896 40%,#8b6c9a 72%,transparent 74%);box-shadow:0 0 40px rgba(200,160,120,.3)"></div>
-        <div style="font-size:11px;color:rgba(200,190,170,.4);letter-spacing:4px;margin-bottom:20px;margin-top:52px">DESTINY EXPLORER</div>
-        <div style="font-size:28px;font-weight:900;background:linear-gradient(180deg,#f0e0cc,#d4b896 40%,#c4a080 70%,#8b6c9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;letter-spacing:2px">${rpt.replace(/[🔮💘📅🎭💼]/g,'').trim()}</div>
-        <div style="font-size:13px;color:rgba(200,190,170,.45);margin-bottom:24px;letter-spacing:1px">${meta}</div>
-        <!-- 分隔线 -->
-        <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.4),transparent);margin:0 auto 24px"></div>
-        <!-- 关键发现 -->
-        <div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:16px;margin-bottom:24px">
-          <div style="font-size:12px;color:rgba(200,190,170,.4);letter-spacing:2px;margin-bottom:8px">🔮 命运线索</div>
-          <div style="font-size:16px;color:rgba(220,210,190,.8);line-height:1.6">${talentLine||'你拥有连自己都未曾察觉的隐藏天赋'}</div>
-        </div>
-        <!-- 底部 -->
-        <div style="display:flex;justify-content:center;gap:24px;margin-bottom:12px">
-          <div style="text-align:center"><div style="font-size:24px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${Math.floor(Math.random()*80)+20}%</div><div style="font-size:11px;color:rgba(200,190,170,.3)">命中率</div></div>
-          <div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">${moonPhase}</div><div style="font-size:11px;color:rgba(200,190,170,.3)">观测时</div></div>
-          <div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">🔮</div><div style="font-size:11px;color:rgba(200,190,170,.3)">已验证</div></div>
-        </div>
-      </div>
-      <!-- 底部 CTA -->
-      <div style="background:rgba(10,5,20,.6);padding:20px;border-top:1px solid rgba(180,140,220,.08)">
-        <div style="font-size:14px;color:#d4b8f0;letter-spacing:2px;margin-bottom:6px">发现你的隐藏人生剧本</div>
-        <div style="font-size:12px;color:rgba(200,190,170,.35)">life.devshells.com</div>
-      </div>
-    </div>
-    <div style="margin-top:16px;color:rgba(200,190,170,.35);font-size:13px">📸 长按截图保存 → 分享到朋友圈</div>
-  `;
+  let el=document.getElementById('rContent'),talentLine='';if(el){let m=(el.innerText||'').match(/1\.\s*(.+?：)/);if(m)talentLine=m[1]}
+  let h=new Date().getHours(),moon=h>=5&&h<7?'🌅':h>=7&&h<17?'☀️':h>=17&&h<20?'🌆':'🌙';
+  let card=document.createElement('div');card.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(5,5,10,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';card.id='shareCard';card.onclick=function(){this.remove()};
+  card.innerHTML=`<div style="max-width:420px;width:100%;background:linear-gradient(180deg,#0c0a20,#1a1040 40%,#0e0c2a 70%,#0a0a1a);border:1px solid rgba(180,140,220,.2);border-radius:24px;overflow:hidden;text-align:center;box-shadow:0 0 80px rgba(100,60,160,.3)"><div style="padding:32px 24px 0;position:relative"><div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35%35%,#f5e6d3,#d4b896 40%,#8b6c9a 72%,transparent 74%);box-shadow:0 0 40px rgba(200,160,120,.3)"></div><div style="font-size:11px;color:rgba(200,190,170,.4);letter-spacing:4px;margin-bottom:20px;margin-top:52px">DESTINY EXPLORER</div><div style="font-size:28px;font-weight:900;background:linear-gradient(180deg,#f0e0cc,#d4b896 40%,#c4a080 70%,#8b6c9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;letter-spacing:2px">${rpt.replace(/[🔮💘📅🎭💼]/g,'').trim()}</div><div style="font-size:13px;color:rgba(200,190,170,.45);margin-bottom:24px;letter-spacing:1px">${meta}</div><div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.4),transparent);margin:0 auto 24px"></div><div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:16px;margin-bottom:24px"><div style="font-size:12px;color:rgba(200,190,170,.4);letter-spacing:2px;margin-bottom:8px">🔮 命运线索</div><div style="font-size:16px;color:rgba(220,210,190,.8);line-height:1.6">${talentLine||'你拥有连自己都未曾察觉的隐藏天赋'}</div></div><div style="display:flex;justify-content:center;gap:24px;margin-bottom:12px"><div style="text-align:center"><div style="font-size:24px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${Math.floor(Math.random()*80)+20}%</div><div style="font-size:11px;color:rgba(200,190,170,.3)">命中率</div></div><div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">${moon}</div><div style="font-size:11px;color:rgba(200,190,170,.3)">观测时</div></div><div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">🔮</div><div style="font-size:11px;color:rgba(200,190,170,.3)">已验证</div></div></div></div><div style="background:rgba(10,5,20,.6);padding:20px;border-top:1px solid rgba(180,140,220,.08)"><div style="font-size:14px;color:#d4b8f0;letter-spacing:2px;margin-bottom:6px">发现你的隐藏人生剧本</div><div style="font-size:12px;color:rgba(200,190,170,.35)">life.devshells.com</div></div></div><div style="margin-top:16px;color:rgba(200,190,170,.35);font-size:13px">📸 长按截图保存 → 分享到朋友圈</div>`;
   document.body.appendChild(card);
 }
 </script></body></html>
