@@ -9,20 +9,36 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow-x:hidden}
 
-/* ====== LANDING ====== */
-.hero{min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#1a1040 0%,#0a0a0f 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;width:600px;height:600px;top:-200px;background:radial-gradient(circle,rgba(180,140,220,0.15) 0%,transparent 70%);border-radius:50%}
-.stars{position:absolute;inset:0;pointer-events:none}
-.star{position:absolute;background:white;border-radius:50%;animation:twinkle 3s infinite alternate}
-@keyframes twinkle{0%{opacity:.2;transform:scale(1)}100%{opacity:1;transform:scale(1.5)}}
-.hero-content{position:relative;z-index:1;max-width:700px}
-.badge{display:inline-block;padding:6px 20px;border:1px solid rgba(180,140,220,.4);border-radius:20px;font-size:14px;color:#b48cdc;letter-spacing:2px;margin-bottom:30px}
-.hero h1{font-size:clamp(36px,6vw,64px);font-weight:900;background:linear-gradient(135deg,#d4b8f0 0%,#f0c8a0 40%,#c8d8f0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;line-height:1.3}
-.hero .subtitle{font-size:18px;color:rgba(200,190,170,.7);margin-bottom:50px;letter-spacing:1px}
-.cta-btn{display:inline-block;padding:16px 48px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;font-size:20px;font-weight:700;border:none;border-radius:50px;cursor:pointer;text-decoration:none;letter-spacing:2px;box-shadow:0 8px 32px rgba(107,76,154,.4);transition:all .3s}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(107,76,154,.6)}
-.scroll-hint{position:absolute;bottom:40px;color:rgba(200,190,170,.4);font-size:14px;animation:bounce 2s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+/* ====== HERO ====== */
+.hero{min-height:100vh;background:linear-gradient(180deg,#050510 0%,#0c0a20 20%,#0e0c2a 40%,#0a0a1a 70%,#060610 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,#0a0a0f);z-index:1}
+
+/* 星云 */
+.nebula{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;animation:nebulaFloat 20s ease-in-out infinite}
+.nebula1{width:500px;height:500px;top:-100px;left:-100px;background:radial-gradient(circle,#6b4c9a,transparent);animation-delay:0s}
+.nebula2{width:400px;height:400px;top:50%;right:-100px;background:radial-gradient(circle,#4a3060,transparent);animation-delay:-7s}
+.nebula3{width:350px;height:350px;bottom:-80px;left:30%;background:radial-gradient(circle,#2a1a40,transparent);animation-delay:-14s}
+@keyframes nebulaFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-20px) scale(1.1)}50%{transform:translate(-20px,10px) scale(.95)}75%{transform:translate(15px,25px) scale(1.05)}}
+
+/* 星空 */
+.stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+
+/* 月亮 */
+.moon{position:absolute;top:60px;right:15%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f5e6d3 0%,#e8d5b8 30%,#c8a882 70%,transparent 72%);box-shadow:0 0 60px rgba(200,160,120,.15),0 0 120px rgba(200,160,120,.06);animation:moonglow 8s ease-in-out infinite;z-index:0}
+@keyframes moonglow{0%,100%{box-shadow:0 0 60px rgba(200,160,120,.15),0 0 120px rgba(200,160,120,.06)}50%{box-shadow:0 0 80px rgba(220,180,140,.2),0 0 150px rgba(200,160,120,.1)}}
+
+/* 环形光晕 */
+.ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(80vw,500px);height:min(80vw,500px);border-radius:50%;border:1px solid rgba(180,140,220,.04);pointer-events:none;z-index:0}
+.ring2{width:min(60vw,380px);height:min(60vw,380px);border-color:rgba(180,140,220,.025);transform:translate(-50%,-50%) rotate(30deg)}
+.ring3{width:min(40vw,260px);height:min(40vw,260px);border-color:rgba(180,140,220,.015);transform:translate(-50%,-50%) rotate(-20deg)}
+
+.hero-content{position:relative;z-index:2;max-width:700px}
+.badge{display:inline-block;padding:8px 24px;border:1px solid rgba(180,140,220,.3);border-radius:20px;font-size:13px;color:#b48cdc;letter-spacing:3px;margin-bottom:36px;text-transform:uppercase;backdrop-filter:blur(10px)}
+.hero h1{font-size:clamp(40px,7vw,68px);font-weight:900;background:linear-gradient(180deg,#f0e0cc 0%,#d4b896 30%,#c4a080 60%,#8b6c9a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px;line-height:1.25;letter-spacing:2px}
+.hero .subtitle{font-size:18px;color:rgba(200,190,170,.55);margin-bottom:56px;letter-spacing:3px;font-weight:300}
+.cta-btn{display:inline-block;padding:18px 56px;background:linear-gradient(135deg,rgba(140,100,180,.3),rgba(100,70,150,.2));color:#f0e0cc;font-size:19px;font-weight:600;border:1px solid rgba(180,140,220,.3);border-radius:50px;cursor:pointer;text-decoration:none;letter-spacing:2px;backdrop-filter:blur(10px);transition:all .4s;position:relative}
+.cta-btn:hover{background:linear-gradient(135deg,rgba(160,120,200,.4),rgba(120,90,170,.3));border-color:rgba(200,160,240,.5);transform:translateY(-2px);box-shadow:0 8px 40px rgba(140,100,180,.25),0 0 80px rgba(140,100,180,.08)}
+.scroll-hint{position:absolute;bottom:40px;z-index:2;color:rgba(200,190,170,.35);font-size:13px;letter-spacing:2px;animation:bounce 2s infinite}
 
 /* ====== REPORTS ====== */
 .reports{padding:80px 20px;max-width:1100px;margin:0 auto}
@@ -86,14 +102,22 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <!-- ====== LANDING PAGE ====== -->
 <div id="landingPage">
 <section class="hero">
+  <div class="nebula nebula1"></div>
+  <div class="nebula nebula2"></div>
+  <div class="nebula nebula3"></div>
+  <div class="moon"></div>
+  <div class="ring"></div>
+  <div class="ring ring2"></div>
+  <div class="ring ring3"></div>
   <div class="stars" id="stars"></div>
   <div class="hero-content">
-    <div class="badge">🔮 命运探索</div>
+    <div class="badge">DESTINY EXPLORER</div>
     <h1>发现你的<br>隐藏人生剧本</h1>
     <p class="subtitle">前世身份 · 隐藏天赋 · 年度奇遇 · 命运修复</p>
-    <a class="cta-btn" href="#reports">✨ 生成我的报告</a>
-    <p style="margin-top:12px;color:rgba(200,190,170,.4);font-size:13px">已为 <span id="userCount">12,837</span> 人揭示命运剧本</p>
+    <a class="cta-btn" href="#reports">生成我的报告 ↓</a>
+    <p style="margin-top:14px;color:rgba(200,190,170,.35);font-size:13px">已为 <span id="userCount">12,837</span> 人揭示命运剧本</p>
   </div>
+  <div class="scroll-hint">向下探索</div>
 </section>
 
 <section class="reports" id="reports">
@@ -152,8 +176,43 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 </div>
 
 <script>
-// ============ 星星 ============
-(function(){const c=document.getElementById('stars');for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*3+2}s`;c.appendChild(s)}})();
+// ============ 星空 ============
+(function(){
+  const container=document.getElementById('stars');
+  const sizes=[1,1,1,1,1.5,1.5,2,2,2.5,3]; // mostly small, few bright
+  for(let i=0;i<120;i++){
+    const s=document.createElement('div');
+    const size=sizes[Math.floor(Math.random()*sizes.length)];
+    const bright=size>2?'opacity:.6':size>1.5?'opacity:.35':'opacity:.18';
+    s.style.cssText=`
+      position:absolute;background:white;border-radius:50%;
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${size}px;height:${size}px;${bright};
+      animation:twinkle ${Math.random()*4+2}s infinite alternate;
+      animation-delay:${Math.random()*5}s;
+    `;
+    container.appendChild(s);
+  }
+  // shooting stars
+  for(let i=0;i<3;i++){
+    const ss=document.createElement('div');
+    ss.style.cssText=`
+      position:absolute;
+      width:80px;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+      left:${Math.random()*100}%;top:${Math.random()*80}%;
+      animation:shoot ${Math.random()*4+4}s linear infinite;
+      animation-delay:${Math.random()*8}s;
+    `;
+    container.appendChild(ss);
+  }
+  const style=document.createElement('style');
+  style.textContent=`
+    @keyframes twinkle{0%{opacity:.1;transform:scale(1)}100%{opacity:.6;transform:scale(1.8)}}
+    @keyframes shoot{0%{transform:translateX(0) translateY(0);opacity:0}5%{opacity:1}15%{transform:translateX(-300px) translateY(80px);opacity:0}100%{opacity:0}}
+  `;
+  document.head.appendChild(style);
+})();
 
 // ============ 用户数 ============
 document.getElementById('userCount').textContent = (12837 + Math.floor(Math.random()*500)).toLocaleString();
