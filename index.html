@@ -278,6 +278,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <div class="modal" id="modal"><div class="modal-box">
   <h2>🔮 生成你的报告</h2>
   <div style="display:flex;gap:8px">
+    <select id="fYear" style="flex:1"><option value="">年</option></select>
     <select id="fMonth" style="flex:1"><option value="">月</option></select>
     <select id="fDay" style="flex:1"><option value="">日</option></select>
   </div>
@@ -297,6 +298,9 @@ const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
 
 // ============ POPULATE DROPDOWNS ============
 (function(){
+  // Year
+  let ys=document.getElementById('fYear');
+  for(let i=2006;i>=1960;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';ys.appendChild(o)}
   // Month
   let ms=document.getElementById('fMonth');
   for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';ms.appendChild(o)}
@@ -323,14 +327,14 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 let _r=null;
 
 function generate(){
-  let mo=parseInt(document.getElementById('fMonth').value),da=document.getElementById('fDay').value;
-  if(!mo||!da){alert('请选择生日');return}
-  let bd=mo+'.'+da;
+  let yr=parseInt(document.getElementById('fYear').value),mo=parseInt(document.getElementById('fMonth').value),da=document.getElementById('fDay').value;
+  if(!yr||!mo||!da){alert('请选择完整的年月日');return}
+  let bd=yr+'.'+mo+'.'+da;
   let gd=document.getElementById('fGender').value;
   let mb=document.getElementById('fMbti').value||'未知';
   let jb='探索者';
   let tp=document.getElementById('fType').value;
-  let r=sd((parseInt(mo)*100+parseInt(da)).toString());
+  let r=sd((yr*10000+mo*100+parseInt(da)).toString());
 
   // Gender-filtered template pool
   let filterGender=function(arr){
