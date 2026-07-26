@@ -391,18 +391,18 @@ function generate(){
 
   if(tp==='life'||tp==='couple'){
     tt=tp==='couple'?'💘 双人合盘报告':'🔮 隐藏人生剧本';
-    let pl=pk(PL,r);
+    var pl=pk(PL,r);
     pre+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
-    let ts=pks(GL,3,r);
+    var ts=pks(GL,3,r);
     pre+=`<div class="rs"><h2>二、今生隐藏天赋</h2><p><b>1. ${ts[0][0]}：</b>${ts[0][1]}</p><p style="color:rgba(200,190,170,.25);text-align:center;margin-top:8px">🔒 解锁查看另外 2 项隐藏天赋</p></div>`;
-    let ad=pk(A,r);
+    var ad=pk(A,r);
     pre+=`<div class="rs"><h2>三、年度关键线索</h2><p>✅ <b>${ad[0]}：</b>${ad[1].substring(0,30)}…</p><p style="color:rgba(200,190,170,.25);text-align:center">🔒 解锁完整奇遇 + Bug修复指南 + 幸运密码</p></div>`;
     ext+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
     ext+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
-    let ad2=pk(A,r);if(ad2[0]===ad[0])ad2=pk(A,r);
+    var ad2=pk(A,r);if(ad2[0]===ad[0])ad2=pk(A,r);
     ext+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
-    ext+=`<p>⚠️ <b>避坑提醒：</b>${mo}月前后注意财务决策，别冲动消费或投资。</p></div>`;
-    let bs=pks(B,3,r);
+    ext+=`<p>⚠️ <b>避坑提醒：</b>${mo||1}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    var bs=pks(B,3,r);
     ext+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
     ext+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
     ext+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
@@ -419,23 +419,24 @@ function generate(){
     ext+=`</div>`;
   }
 
-  // Build clean full report (sections 1-5, no lock hints)
+  // Build clean full report inside same scope as pl/ts/ad/bs
+  _r={tt,pre,ext};
   if(tp==='life'||tp==='couple'){
     let full='';
     full+=`<div class="rs"><h2>一、前世身份：${pl.t}</h2><p>${pl.d}</p></div>`;
     full+=`<div class="rs"><h2>二、今生隐藏天赋（完整）</h2>`+ts.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
     full+=`<div class="rs"><h2>三、${new Date().getFullYear()}年奇遇剧本</h2>`;
     full+=`<p>✅ <b>${ad[0]}：</b>${ad[1]}</p><p>✅ <b>${ad2[0]}：</b>${ad2[1]}</p>`;
-    full+=`<p>⚠️ <b>避坑提醒：</b>${mo}月前后注意财务决策，别冲动消费或投资。</p></div>`;
+    full+=`<p>⚠️ <b>避坑提醒：</b>${mo||(m1||1)}月前后注意财务决策，别冲动消费或投资。</p></div>`;
     full+=`<div class="rs"><h2>四、人生Bug修复指南</h2>`+bs.map((x,i)=>`<p><b>${i+1}. ${x[0]}：</b>${x[1]}</p>`).join('')+`</div>`;
     full+=`<div class="rs"><h2>五、专属幸运密码</h2><div class="lucky-box">`;
     full+=`<div class="lucky-item"><div class="num">${pk(LC,r)}</div><div class="label">幸运色</div></div>`;
     full+=`<div class="lucky-item"><div class="num">${pk(LN,r)}</div><div class="label">幸运数字</div></div>`;
     full+=`<div class="lucky-item"><div class="num">${pk(LI,r)}</div><div class="label">好运信物</div></div>`;
     full+=`</div><p style="text-align:center;margin-top:12px;color:rgba(200,190,170,.5)">✨ ${pk(LA,r)}</p></div>`;
-    _r={tt,pre,ext,full};
+    _r.full=full;
   }else{
-    _r={tt,pre,ext,full:pre+ext};
+    _r.full=pre+ext;
   }
   document.getElementById('rTitle').textContent=tt;
   document.getElementById('rMeta').textContent=`生日 ${bd} | MBTI ${mb}${mbName?' - '+mbName:''} | 职业 ${jb}`;
