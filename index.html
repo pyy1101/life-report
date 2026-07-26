@@ -249,6 +249,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
     <p style="margin-top:14px;color:rgba(200,190,170,.35);font-size:13px">已为 <span id="uc">13,000</span>+ 人揭示命运剧本</p>
   </div>
   <div class="scroll-hint">向下探索</div>
+  <div style="position:absolute;bottom:80px;z-index:2;color:rgba(200,190,170,.25);font-size:12px;letter-spacing:1px" id="liveClock"></div>
 </section>
 
 <section class="reports" id="reports">
@@ -299,9 +300,10 @@ const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
 
 // ============ POPULATE DROPDOWNS ============
 (function(){
-  // Year
+  // Year (min age 14, max age 66)
+  let now=new Date(),thisYear=now.getFullYear();
   let ys=document.getElementById('fYear');
-  for(let i=2006;i>=1960;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';ys.appendChild(o)}
+  for(let i=thisYear-14;i>=thisYear-66;i--){let o=document.createElement('option');o.value=i;o.textContent=i+'年';ys.appendChild(o)}
   // Month
   let ms=document.getElementById('fMonth');
   for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=i;o.textContent=i+'月';ms.appendChild(o)}
@@ -311,6 +313,15 @@ const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
   // MBTI
   let mbti=document.getElementById('fMbti');
   ['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'].forEach(x=>{let o=document.createElement('option');o.value=x;o.textContent=x;mbti.appendChild(o)});
+})();
+
+// ============ LIVE CLOCK ============
+(function tick(){
+  let n=new Date();
+  document.getElementById('liveClock').textContent=
+    n.getFullYear()+'/'+String(n.getMonth()+1).padStart(2,'0')+'/'+String(n.getDate()).padStart(2,'0')+' '+
+    String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');
+  setTimeout(tick,1000);
 })();
 
 // ============ STARS ============
