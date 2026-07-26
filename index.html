@@ -748,7 +748,7 @@ function verifyCode(){
 	  used.push(code);localStorage.setItem('used_codes',JSON.stringify(used));
 }
 
-function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');window.scrollTo(0,0)}
+function goBack(){document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');document.querySelectorAll('.unlocked').forEach(function(el){el.classList.replace('unlocked','locked')});_r=null;window.scrollTo(0,0)}
 
 // ============ SHARE CARD ============
 function shareIt(){
