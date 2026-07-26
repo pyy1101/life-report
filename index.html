@@ -229,12 +229,38 @@ function goBack(){document.getElementById('landing').style.display='block';docum
 
 // ============ SHARE CARD ============
 function shareIt(){
-  let rpt=document.getElementById('rTitle')?.textContent||'隐藏人生剧本';
+  let el=document.getElementById('rContent'),txt=el?el.innerText:'';
+  // Extract actual report content
+  let pastLife=txt.match(/一、前世身份：(.+)/);
+  let talent1=txt.match(/1\.\s*(.+?：.+?)(?:\n|2\.|$)/);
   let meta=document.getElementById('rMeta')?.textContent||'';
-  let el=document.getElementById('rContent'),talentLine='';if(el){let m=(el.innerText||'').match(/1\.\s*(.+?：)/);if(m)talentLine=m[1]}
+  let rpt=(document.getElementById('rTitle')?.textContent||'隐藏人生剧本').replace(/[🔮💘📅🎭💼]/g,'').trim();
   let h=new Date().getHours(),moon=h>=5&&h<7?'🌅':h>=7&&h<17?'☀️':h>=17&&h<20?'🌆':'🌙';
-  let card=document.createElement('div');card.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(5,5,10,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';card.id='shareCard';card.onclick=function(){this.remove()};
-  card.innerHTML=`<div style="max-width:420px;width:100%;background:linear-gradient(180deg,#0c0a20,#1a1040 40%,#0e0c2a 70%,#0a0a1a);border:1px solid rgba(180,140,220,.2);border-radius:24px;overflow:hidden;text-align:center;box-shadow:0 0 80px rgba(100,60,160,.3)"><div style="padding:32px 24px 0;position:relative"><div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35%35%,#f5e6d3,#d4b896 40%,#8b6c9a 72%,transparent 74%);box-shadow:0 0 40px rgba(200,160,120,.3)"></div><div style="font-size:11px;color:rgba(200,190,170,.4);letter-spacing:4px;margin-bottom:20px;margin-top:52px">DESTINY EXPLORER</div><div style="font-size:28px;font-weight:900;background:linear-gradient(180deg,#f0e0cc,#d4b896 40%,#c4a080 70%,#8b6c9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;letter-spacing:2px">${rpt.replace(/[🔮💘📅🎭💼]/g,'').trim()}</div><div style="font-size:13px;color:rgba(200,190,170,.45);margin-bottom:24px;letter-spacing:1px">${meta}</div><div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.4),transparent);margin:0 auto 24px"></div><div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:16px;margin-bottom:24px"><div style="font-size:12px;color:rgba(200,190,170,.4);letter-spacing:2px;margin-bottom:8px">🔮 命运线索</div><div style="font-size:16px;color:rgba(220,210,190,.8);line-height:1.6">${talentLine||'你拥有连自己都未曾察觉的隐藏天赋'}</div></div><div style="display:flex;justify-content:center;gap:24px;margin-bottom:12px"><div style="text-align:center"><div style="font-size:24px;font-weight:900;background:linear-gradient(135deg,#d4b8f0,#f0c8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${Math.floor(Math.random()*80)+20}%</div><div style="font-size:11px;color:rgba(200,190,170,.3)">命中率</div></div><div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">${moon}</div><div style="font-size:11px;color:rgba(200,190,170,.3)">观测时</div></div><div style="text-align:center"><div style="font-size:24px;font-weight:900;color:rgba(200,190,170,.3)">🔮</div><div style="font-size:11px;color:rgba(200,190,170,.3)">已验证</div></div></div></div><div style="background:rgba(10,5,20,.6);padding:20px;border-top:1px solid rgba(180,140,220,.08)"><div style="font-size:14px;color:#d4b8f0;letter-spacing:2px;margin-bottom:6px">发现你的隐藏人生剧本</div><div style="font-size:12px;color:rgba(200,190,170,.35)">life.devshells.com</div></div></div><div style="margin-top:16px;color:rgba(200,190,170,.35);font-size:13px">📸 长按截图保存 → 分享到朋友圈</div>`;
+
+  let card=document.createElement('div');card.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(5,5,10,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow-y:auto';card.id='shareCard';card.onclick=function(){this.remove()};
+  card.innerHTML=`
+    <div style="max-width:420px;width:100%;background:linear-gradient(180deg,#0c0a20,#1a1040 35%,#0e0c2a 65%,#0a0a1a);border:1px solid rgba(180,140,220,.2);border-radius:24px;overflow:hidden;text-align:center;box-shadow:0 0 80px rgba(100,60,160,.3)">
+      <!-- 顶部 -->
+      <div style="padding:36px 24px 0;position:relative">
+        <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35%35%,#f5e6d3,#d4b896 40%,#8b6c9a 72%,transparent 74%);box-shadow:0 0 40px rgba(200,160,120,.3)"></div>
+        <div style="font-size:10px;color:rgba(200,190,170,.35);letter-spacing:4px;margin-bottom:18px;margin-top:48px">HIDDEN LIFE SCRIPT</div>
+        <div style="font-size:26px;font-weight:900;background:linear-gradient(180deg,#f0e0cc,#d4b896 40%,#c4a080 70%,#8b6c9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;letter-spacing:2px">${rpt}</div>
+        <div style="font-size:12px;color:rgba(200,190,170,.4);margin-bottom:20px;letter-spacing:1px">${meta}</div>
+        <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,220,.4),transparent);margin:0 auto 20px"></div>
+        <!-- 前世身份 -->
+        ${pastLife?`<div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:14px 16px;margin-bottom:14px;text-align:left"><div style="font-size:11px;color:rgba(200,190,170,.35);letter-spacing:2px;margin-bottom:6px">🔮 前世身份</div><div style="font-size:15px;color:rgba(220,210,190,.75);line-height:1.5">${pastLife[1]}</div></div>`:''}
+        <!-- 隐藏天赋 -->
+        ${talent1?`<div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:14px 16px;margin-bottom:16px;text-align:left"><div style="font-size:11px;color:rgba(200,190,170,.35);letter-spacing:2px;margin-bottom:6px">✨ 隐藏天赋</div><div style="font-size:15px;color:rgba(220,210,190,.75);line-height:1.5">${talent1[1]}</div></div>`:'<div style="background:rgba(30,20,50,.5);border:1px solid rgba(180,140,220,.1);border-radius:12px;padding:14px 16px;margin-bottom:16px;text-align:left"><div style="font-size:11px;color:rgba(200,190,170,.35);letter-spacing:2px;margin-bottom:6px">✨ 隐藏天赋</div><div style="font-size:15px;color:rgba(220,210,190,.75);line-height:1.5">你拥有连自己都未曾察觉的隐藏天赋，等待被唤醒</div></div>'}
+      </div>
+      <!-- 底部 -->
+      <div style="background:rgba(10,5,20,.6);padding:18px;border-top:1px solid rgba(180,140,220,.08);display:flex;align-items:center;justify-content:center;gap:10px">
+        <div style="font-size:12px;color:#d4b8f0;letter-spacing:2px">发现你的隐藏人生剧本</div>
+        <div style="width:1px;height:16px;background:rgba(180,140,220,.15)"></div>
+        <div style="font-size:11px;color:rgba(200,190,170,.3)">life.devshells.com</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;color:rgba(200,190,170,.3);font-size:12px">📸 长按截图保存 → 分享到朋友圈</div>
+  `;
   document.body.appendChild(card);
 }
 </script></body></html>
