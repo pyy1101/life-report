@@ -249,7 +249,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
     <p style="margin-top:14px;color:rgba(200,190,170,.35);font-size:13px">已为 <span id="uc">13,000</span>+ 人揭示命运剧本</p>
   </div>
   <div class="scroll-hint">向下探索</div>
-  <div style="position:absolute;bottom:80px;z-index:2;color:rgba(200,190,170,.25);font-size:12px;letter-spacing:1px" id="liveClock"></div>
+  <div style="position:absolute;bottom:80px;z-index:2;display:flex;align-items:center;gap:10px" id="liveClock"></div>
 </section>
 
 <section class="reports" id="reports">
@@ -315,12 +315,22 @@ const MN=MONTHS,REL=RELATIONS,SCS=SCORES,CT=COUPLE_TIPS,CP=CAREER_PATHS;
   ['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'].forEach(x=>{let o=document.createElement('option');o.value=x;o.textContent=x;mbti.appendChild(o)});
 })();
 
-// ============ LIVE CLOCK ============
+// ============ MYSTICAL CLOCK ============
 (function tick(){
   let n=new Date();
-  document.getElementById('liveClock').textContent=
-    n.getFullYear()+'/'+String(n.getMonth()+1).padStart(2,'0')+'/'+String(n.getDate()).padStart(2,'0')+' '+
-    String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');
+  let shichen=['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'];
+  let idx=Math.floor(((n.getHours()+1)%24)/2);
+  let style='color:rgba(180,140,220,.4);font-size:12px;letter-spacing:2px;border:1px solid rgba(180,140,220,.15);border-radius:20px;padding:6px 16px;backdrop-filter:blur(10px)';
+  let s='<span style=\"'+style+'\">'+shichen[idx]+'</span>';
+  s+='<span style=\"color:rgba(200,190,170,.2);font-size:11px\">✦</span>';
+  s+='<span style=\"'+style+'\">'+
+    n.getFullYear()+'年'+String(n.getMonth()+1).padStart(2,'0')+'月'+String(n.getDate()).padStart(2,'0')+'日'+
+    '</span>';
+  s+='<span style=\"color:rgba(200,190,170,.2);font-size:11px\">✦</span>';
+  s+='<span style=\"'+style+'\">'+
+    String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')+
+    '</span>';
+  document.getElementById('liveClock').innerHTML=s;
   setTimeout(tick,1000);
 })();
 
