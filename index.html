@@ -323,7 +323,7 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 let _r=null;
 
 function generate(){
-  let mo=document.getElementById('fMonth').value,da=document.getElementById('fDay').value;
+  let mo=parseInt(document.getElementById('fMonth').value),da=document.getElementById('fDay').value;
   if(!mo||!da){alert('请选择生日');return}
   let bd=mo+'.'+da;
   let gd=document.getElementById('fGender').value;
@@ -340,7 +340,7 @@ function generate(){
     return pool.length>0?pool:arr;
   };
   let PL=filterGender(P), GL=filterGender(G);
-  let mo=parseInt(bd.split(/[.\-/]/)[0])||10,moN=MN[Math.min(11,Math.max(0,mo-1))];
+  let moN=MN[Math.min(11,Math.max(0,mo-1))];
   let pre='',ext='',tt='';
 
   if(tp==='life'||tp==='couple'){
