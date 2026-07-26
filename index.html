@@ -104,12 +104,7 @@ body{font-family:'Noto Serif SC',serif;background:#0a0a0f;color:#e8e0d0;overflow
 <!-- MODAL -->
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 
-<script>
-// ========================================
-// 隐藏人生剧本 - 主脚本
-// 所有功能模块见下方注释
-// ========================================
-/*!
+<script>/*!
  * html2canvas 1.4.1 <https://html2canvas.hertzen.com>
  * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
@@ -622,10 +617,6 @@ const BUGS=[
 ["不要总是自己一个人做所有事","你觉得求别人帮忙是麻烦别人——但其实别人被你需要的时候会感到被重视和信任。人类的大脑会在帮助别人时分泌多巴胺——不要剥夺别人帮助你的快乐。"]
 ];
 
-
-// ========================================
-// [模板数据] 幸运色/数字/信物/动作
-// ========================================
 const COLORS=["松烟绿","暮云紫","深海蓝","琥珀金","月光银","珊瑚粉","雾霭灰","薄雾紫","霜叶红","星夜蓝","苔藓绿","烟熏玫瑰","靛青","麦浪金","雪松灰","月白","檀木棕","晨雾白","孔雀蓝","暮日橙","雨后天青","暮山紫","秋香绿","远山黛","午夜蓝","落日橘","极光绿","烟灰紫","锈铁红","湖光青","蜜桃粉","银杏黄","雾蓝灰","秋枫红"];
 const NUMS=Array.from({length:100},(_,i)=>i+1);
 const ITEMS=["木质小挂件","绿松石手链","银色小铃铛","水晶小摆件","羽毛书签","铜质小镜子","玛瑙小挂坠","檀木小梳子","黑曜石吊坠","贝壳小盒子","紫水晶碎石","红绳手环","陶瓷小茶杯","羊皮小笔记本","黄铜钥匙扣","檀香小香炉","琉璃小珠子","竹编小篮子","黄铜指南针","琉璃小风铃","竹节小毛笔","崖柏小木牌","紫铜小茶匙","星砂小许愿瓶","皮绳小挂坠"];
@@ -642,10 +633,6 @@ const LC=COLORS,LN=NUMS,LI=ITEMS,LA=ACTIONS;
 
 // ============ HELPERS
 // ============ HELPERS ============
-
-// ========================================
-// [工具函数] 随机数生成 & 数组操作
-// ========================================
 function sd(s){let x=0;for(let i=0;i<s.length;i++)x=(x*31+s.charCodeAt(i))%2147483647;return function(){x=(x*1103515245+12345)%2147483647;return x/2147483647}}
 function pk(a,r){return a[Math.floor(r()*a.length)]}
 function pks(a,n,r){let u=new Set(),res=[];while(res.length<n){let x=pk(a,r);if(!u.has(x[0])){u.add(x[0]);res.push(x)}}return res}
@@ -680,11 +667,6 @@ function popMBTI(id){let n={'INTJ':'建筑师','INTP':'逻辑学家','ENTJ':'指
 // ============ MODAL / FLOW ============
 let _type=null;
 
-
-// ========================================
-// [卡片系统] 点击卡片→弹出表单窗口
-// 参数: t = life/yearly/personality/career
-// ========================================
 function start(t){
   _type=t;
   let box=document.getElementById('modalBox'),h='',b='';
@@ -709,7 +691,7 @@ document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;setTimeout(function(){var s=document.querySelectorAll('#rContent .rs');for(var i=2;i<s.length;i++){s[i].style.filter='blur(8px)';s[i].style.pointerEvents='none'}var b=document.querySelector('.unlock-box');if(b){b.style.filter='none';b.style.pointerEvents='auto'}},100);
-}catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
+}catch(e){alert(e.message)}">✨ ${b}</button><br><br><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   else if(t==='couple'){h='💘 双人合盘报告';b='查看你们的羁绊';box.innerHTML=`<h2>${h}</h2><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px">你的信息</p>${bdayHTML('c1Year','c1Month','c1Day')}<select id="c1Gender"><option value="">你的性别</option><option value="female">女性</option><option value="male">男性</option></select><p style="color:rgba(200,190,170,.5);font-size:13px;margin-bottom:8px;margin-top:12px">对方的信息</p>${bdayHTML('c2Year','c2Month','c2Day')}<select id="c2Gender"><option value="">TA的性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="try{
 var xyr=parseInt((document.getElementById('fYear')||{}).value)||2000;
 var xmo=parseInt((document.getElementById('fMonth')||{}).value)||6;
@@ -731,7 +713,7 @@ document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;setTimeout(function(){var s=document.querySelectorAll('#rContent .rs');for(var i=2;i<s.length;i++){s[i].style.filter='blur(8px)';s[i].style.pointerEvents='none'}var b=document.querySelector('.unlock-box');if(b){b.style.filter='none';b.style.pointerEvents='auto'}},100);
-}catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day')}
+}catch(e){alert(e.message)}">✨ ${b}</button><br><br><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('c1Year','c1Month','c1Day');popBday('c2Year','c2Month','c2Day')}
   else if(t==='yearly'){h='📅 年度运势';b='预览你的2026';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><button class="submit-btn" onclick="try{
 var xyr=parseInt((document.getElementById('fYear')||{}).value)||2000;
 var xmo=parseInt((document.getElementById('fMonth')||{}).value)||6;
@@ -753,10 +735,10 @@ document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;setTimeout(function(){var s=document.querySelectorAll('#rContent .rs');for(var i=2;i<s.length;i++){s[i].style.filter='blur(8px)';s[i].style.pointerEvents='none'}var b=document.querySelector('.unlock-box');if(b){b.style.filter='none';b.style.pointerEvents='auto'}},100);
-}catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay')}
+}catch(e){alert(e.message)}">✨ ${b}</button><br><br><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay')}
   else if(t==='personality'){
   h='🎭 隐藏人格解码 - 免费MBTI测试';
-  box.innerHTML='<h2>'+h+'</h2><p style="color:rgba(200,190,170,.5);font-size:14px;margin-bottom:16px">32道题精准测出你的MBTI人格</p><div id="quizBox"><p style="text-align:left;color:rgba(200,190,170,.7);margin-bottom:8px">第 1 / 32 题（3%）</p><button onclick="answerQuiz(0,\'E\')" style="width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px">和朋友出去玩，人多才热闹</button><button onclick="answerQuiz(0,\'I\')" style="width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px">在家待着，一个人或跟最亲近的人</button></div><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>';
+  box.innerHTML='<h2>'+h+'</h2><p style="color:rgba(200,190,170,.5);font-size:14px;margin-bottom:16px">32道题精准测出你的MBTI人格</p><div id="quizBox"><p style="text-align:left;color:rgba(200,190,170,.7);margin-bottom:8px">第 1 / 32 题（3%）</p><button onclick="answerQuiz(0,\'E\')" style="width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px">和朋友出去玩，人多才热闹</button><button onclick="answerQuiz(0,\'I\')" style="width:100%;padding:10px;margin-bottom:6px;background:rgba(255,255,255,.05);border:1px solid rgba(180,140,220,.2);border-radius:8px;color:white;cursor:pointer;text-align:left;font-family:inherit;font-size:14px">在家待着，一个人或跟最亲近的人</button></div><br><br><div class="modal-close" onclick="document.getElementById(\'modal\').classList.remove(\'active\')">先想想</div>';
   window._quizAnswers=[];window._quizStep=0;
 }
   else if(t==='career'){h='💼 职业天命';b='找到你的赛道';box.innerHTML=`<h2>${h}</h2>${bdayHTML('fYear','fMonth','fDay')}<select id="fGender"><option value="">性别</option><option value="female">女性</option><option value="male">男性</option></select><select id="fMbti"><option value="">MBTI (选填)</option></select><button class="submit-btn" onclick="try{
@@ -780,7 +762,7 @@ document.getElementById('modal').classList.remove('active');
 document.getElementById('landing').style.display='none';
 document.getElementById('reportPage').classList.add('active');
 document.getElementById('rContent').innerHTML=xh;setTimeout(function(){var s=document.querySelectorAll('#rContent .rs');for(var i=2;i<s.length;i++){s[i].style.filter='blur(8px)';s[i].style.pointerEvents='none'}var b=document.querySelector('.unlock-box');if(b){b.style.filter='none';b.style.pointerEvents='auto'}},100);
-}catch(e){alert(e.message)}">✨ ${b}</button><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
+}catch(e){alert(e.message)}">✨ ${b}</button><br><br><div class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">先想想</div>`;popBday('fYear','fMonth','fDay');popMBTI('fMbti')}
   document.getElementById('modal').classList.add('active');setTimeout(function(){var b=document.getElementById('genBtn-'+t);if(b)b.onclick=function(){generate()}},100);
 }
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active')});
@@ -851,11 +833,7 @@ function answerQuiz(step,val){
 }
 
 // ============ GENERATE ============
-window.generate=window.generate=
-// ========================================
-// [报告生成] showReport (当前禁用,使用内联onclick)
-// ========================================
-window.showReport=function(){
+window.generate=window.generate=window.showReport=function(){
 var yrEl=document.getElementById("fYear"),moEl=document.getElementById("fMonth"),daEl=document.getElementById("fDay");
 var gdEl=document.getElementById("fGender"),mbEl=document.getElementById("fMbti");
 alert("fYear:"+(yrEl?"found value="+yrEl.value:"NULL")+" fMonth:"+(moEl?"value="+moEl.value:"NULL")+" fDay:"+(daEl?"value="+daEl.value:"NULL"));
@@ -888,11 +866,7 @@ document.getElementById("landing").style.display="none";
 document.getElementById("reportPage").classList.add("active");
 document.getElementById("rContent").innerHTML=h;
 window.scrollTo(0,0);
-};
-// ========================================
-// [报告生成] 隐藏人生剧本(旧版generate)
-// ========================================
-window.generate=function(){
+};window.generate=function(){
   let tp=_type,yr=2000,mo=1,da=1,gd='',bd='2000.1.1',mb='未知',mbName='',r;
   if(tp==='personality_quiz'){mb=window._quizMbti||'未知';mbName=window._quizMbtiName||'';r=sd((mb+'2000').toString())}else if(tp==='couple'){
     let y1=parseInt(document.getElementById('c1Year').value),m1=parseInt(document.getElementById('c1Month').value),d1=document.getElementById('c1Day').value;
@@ -946,10 +920,6 @@ window.generate=function(){
   document.getElementById('modal').classList.remove('active');window.scrollTo(0,0);
 }
 
-
-// ========================================
-// [解锁功能] 去除模糊效果,显示完整内容
-// ========================================
 function unlock(){
   if(!_r)return;
   var mbd='https://mbd.pub/o/bread/YZaUlplxaA==';
@@ -965,17 +935,9 @@ function verifyCode(){
 	  used.push(code);localStorage.setItem('used_codes',JSON.stringify(used));
 }
 
-
-// ========================================
-// [导航] 返回首页
-// ========================================
 function goBack(){if(!confirm("返回首页报告将会重置，确定吗？"))return;document.getElementById('landing').style.display='block';document.getElementById('reportPage').classList.remove('active');document.querySelectorAll('.unlocked').forEach(function(el){el.classList.replace('unlocked','locked')});_r=null;window.scrollTo(0,0)}
 
 // ============ SHARE CARD ============
-
-// ========================================
-// [分享功能] 生成朋友圈分享卡片
-// ========================================
 function shareIt(){
   let el=document.getElementById('rContent'),txt=el?el.innerText:'';
   // Extract actual report content
@@ -1014,10 +976,6 @@ function shareIt(){
 
 
 
-
-// ========================================
-// [下载功能] 下载完整报告图片
-// ========================================
 function downloadShareImg(){var inner=document.querySelector("#shareCard > div");if(!inner)return;html2canvas(inner,{backgroundColor:"#0c0a20",scale:2}).then(function(c){var a=document.createElement("a");a.download="隐藏人生剧本.png";a.href=c.toDataURL("image/png");a.click()})}
 
 function downloadFullReport(){
