@@ -259,7 +259,7 @@ function shareIt(){
         <div style="font-size:11px;color:rgba(200,190,170,.3)">life.devshells.com</div>
       </div>
     </div>
-    <div style="margin-top:20px;display:flex;gap:12px"><button onclick="var w=window.open('','_blank','width=460,height=700');var c=document.querySelector('#shareCard>div');w.document.write('<!DOCTYPE html><html><head><meta charset=UTF-8><style>body{margin:0;padding:0;display:flex;justify-content:center;background:#0a0a0f;font-family:serif}</style></head><body>'+c.outerHTML+'</body></html>');w.document.close()" style="padding:12px 32px;background:linear-gradient(135deg,#6b4c9a,#8b6cb8);color:white;border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">⬇ 下载图片</button><button onclick="document.getElementById('shareCard').remove()" style="padding:12px 32px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:16px;cursor:pointer;font-family:inherit">关闭</button></div><div style="display:none"> → 分享到朋友圈</div>
+    <div style="margin-top:20px;display:flex;gap:12px"><button onclick="document.getElementById('shareCard').remove()" style="padding:12px 32px;background:transparent;color:rgba(200,190,170,.5);border:1px solid rgba(180,140,220,.25);border-radius:50px;font-size:16px;cursor:pointer;font-family:inherit">关闭</button></div><div style="margin-top:12px;color:rgba(200,190,170,.3);font-size:12px">Win+Shift+S 截图 / 手机截屏保存</div>div style="display:none"> → 分享到朋友圈</div>
   `;
   document.body.appendChild(card);
 }
